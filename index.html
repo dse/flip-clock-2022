@@ -41,37 +41,21 @@
             </div>
         </div>
         <script>
-            var $$ = function (n) {
-                n = String(n);
-                while (n.length < 2) {
-                    n = '0' + n;
-                }
-                return n;
-            };
-            var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            var TWELVE_HOURS = [];
-            (function () {
-                var h;
-                var ampm;
-                var str;
-                for (var i = 0; i < 24; i += 1) {
-                    h = (i + 11) % 12 + 1;
-                    ampmClass = i < 12 ? 'am' : 'pm';
-                    ampm      = i < 12 ? 'a'  : 'p';
-                    str = '<span class="clock__hour12">%s</span><span class="clock__ampm clock__ampm--%s">%s</span>';
-                    str = str.replace(/%s/, String(h));
-                    str = str.replace(/%s/, ampmClass);
-                    str = str.replace(/%s/, ampm);
-                    TWELVE_HOURS.push(str);
-                }
-            }());
-            var splitFlap0 = new SplitFlap('splitFlap0', WEEKDAYS);
+            function wkday3(wkday) {
+                return SplitFlap.WEEKDAYS[wkday].slice(0, 3);
+            }
+            function month3(month) {
+                return SplitFlap.MONTHS[month].slice(0, 3);
+            }
+            function hour12(hour24) {
+                return SplitFlap.hour12(hour24, 'a', 'p');
+            }
+            var splitFlap0 = new SplitFlap('splitFlap0', 0, 6, wkday3);
             var splitFlap1 = new SplitFlap('splitFlap1', 1, 31);
-            var splitFlap2 = new SplitFlap('splitFlap2', MONTHS);
-            var splitFlap3 = new SplitFlap('splitFlap3', TWELVE_HOURS);
-            var splitFlap4 = new SplitFlap('splitFlap4', 0, 59, $$);
-            var splitFlap5 = new SplitFlap('splitFlap5', 0, 59, $$);
+            var splitFlap2 = new SplitFlap('splitFlap2', 0, 11, month3);
+            var splitFlap3 = new SplitFlap('splitFlap3', 0, 23, hour12);
+            var splitFlap4 = new SplitFlap('splitFlap4', 0, 59, SplitFlap.pad00);
+            var splitFlap5 = new SplitFlap('splitFlap5', 0, 59, SplitFlap.pad00);
             splitFlap0.goTo(5);
             splitFlap1.goTo(29);
             splitFlap2.goTo(11);
