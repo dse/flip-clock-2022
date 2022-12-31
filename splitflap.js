@@ -37,7 +37,7 @@ function SplitFlap() {
         this.element = document.getElementById(this.element);
     }
     if (!this.element) {
-        return;
+        return;                 // in case called without `new`
     }
     if (Array.isArray(args[0])) {
         this.strings = args.shift();
@@ -85,6 +85,7 @@ function SplitFlap() {
     this.flapA.innerHTML = this.strings[0];
     this.flapB.innerHTML = this.strings[0];
     this.delay = 40;
+    return this;                // in case called without `new`
 }
 SplitFlap.prototype.goTo = function (state) {
     this.targetState = state;
