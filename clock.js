@@ -2,7 +2,9 @@
 /*global SplitFlap */
 
 function FlipClock2022(element, options) {
-    Object.assign(this, options);
+    if (Object.prototype.toString.call(options) === '[object Object]') {
+        Object.assign(this, options);
+    }
     this.element = element;
     if (typeof this.element === 'string') {
         this.element = document.getElementById(this.element);
