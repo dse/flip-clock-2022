@@ -23,10 +23,10 @@
  *
  *     x => x.padStart(2, '0')
  *
- *     function (x) {
- *         const hr = (x + 11) % 12 + 1;
- *         const ampm = hr < 12 ? 'am' : 'pm';
- *         return `${hr} <span class="ampm ${ampm}">${ampm}</span>`;
+ *     function (hour24) {
+ *         const hour12 = (hour24 + 11) % 12 + 1;
+ *         const ampm = hour24 < 12 ? 'am' : 'pm';
+ *         return `${hour12} <span class="ampm ${ampm}">${ampm}</span>`;
  *     }
  */
 function SplitFlap() {
@@ -123,4 +123,66 @@ SplitFlap.prototype.step3 = function () {
     this.flapB.innerHTML = this.strings[this.nextState - this.startValue];
     this.state = this.nextState;
     setTimeout(this.step1.bind(this), this.delay);
+};
+SplitFlap.WEEKDAYS = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+];
+SplitFlap.MONTHS = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
+SplitFlap.MONTHS_ABBR_2 = [
+    'Ja',
+    'Fe',
+    'Mr',
+    'Ap',
+    'My',
+    'Jn',
+    'Jl',
+    'Au',
+    'Se',
+    'Oc',
+    'No',
+    'De',
+];
+SplitFlap.pad00 = function (str) {
+    while (str.length < 2) {
+        str = '0' + str;
+    }
+    return str;
+};
+SplitFlap.pad0000 = function (str) {
+    while (str.length < 4) {
+        str = '0' + str;
+    }
+    return str;
+};
+SplitFlap.hour12 = function (hour24, amString, pmString) {
+    if (amString == null) { amString = 'am'; }
+    if (pmString == null) { pmString = 'pm'; }
+    var hour12 = (hour24 + 11) % 12 + 1;
+    var ampmClass = hour24 < 12 ? 'am' : 'pm';
+    var ampmString = hour24 < 12 ? amString : pmString;
+    var str = '<span class="clock__hour12">{hour12}</span>' +
+              '<span class="clock__ampm clock__ampm--{ampmClass}">{ampmString}</span>';
+    str = str.replace(/{hour12}/, String(hour12));
+    str = str.replace(/{ampmClass}/, ampmClass);
+    str = str.replace(/{ampmString}/, ampmString);
+    return str;
 };
