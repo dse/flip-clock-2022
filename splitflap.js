@@ -160,7 +160,6 @@ SplitFlap.prototype.setStrings = function (arg) {
     } else {
         throw new Error('invalid argument');
     }
-    console.log('this.strings = ' + JSON.stringify(this.strings));
 };
 SplitFlap.prototype.updateStrings = function () {
     if (this.flapC != null) { this.flapC.innerHTML = this.strings[this.stateC]; }

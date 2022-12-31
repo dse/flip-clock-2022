@@ -47,7 +47,6 @@ FlipClock2022.prototype.set24Hour = function (flag) {
         flag = true;
     }
     this.is24Hour = flag;
-    console.log('this.is24Hour = ' + flag);
     if (!this.splitFlaps.hour) {
         return;
     }
