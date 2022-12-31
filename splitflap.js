@@ -1,10 +1,10 @@
 'use strict';
 /**
- * const splitFlap = new SplitFlap(<element>, <arrayOfString>, <stringFn>);
- * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>);
+ * const splitFlap = new SplitFlap(<element>, <arrayOfString>, <stringFn>, <options>);
+ * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, <options>);
  *
- * <element> is a reference to a DOM element.  It can be a string or
- * an HTMLElement object.
+ * <element> is a reference to a DOM element.  It can be a string id
+ * or an HTMLElement object.
  *
  * <startValue> and <endValue> specifies a range of numeric values.
  * The range includes both the <startValue> and the <endValue>.
@@ -28,6 +28,9 @@
  *         const ampm = hour24 < 12 ? 'am' : 'pm';
  *         return `${hour12} <span class="ampm ${ampm}">${ampm}</span>`;
  *     }
+ *
+ * <options> is an optional object argument from which additional
+ * properties are assigned.
  */
 function SplitFlap() {
     var args = Array.from(arguments);
@@ -51,6 +54,10 @@ function SplitFlap() {
     }
     if (typeof args[0] === 'function') {
         this.stringFn = args.shift();
+    }
+    if (Object.prototype.toString.call(args[0]) === '[object Object]') {
+        // plain object
+        Object.assign({}, args.shift());
     }
     if (!this.strings) {
         this.strings = [];
