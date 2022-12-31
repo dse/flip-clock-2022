@@ -32,10 +32,32 @@ function FlipClock2022(element, options) {
     if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   0, 11, FlipClock2022.month3);  this.splitFlapArray.push(this.splitFlaps.month);   }
     if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     1, 31);                        this.splitFlapArray.push(this.splitFlaps.day);     }
     if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 0, 6, FlipClock2022.weekday3); this.splitFlapArray.push(this.splitFlaps.weekday); }
-    if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    0, 59, FlipClock2022.h12);     this.splitFlapArray.push(this.splitFlaps.hour);    }
+    if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    0, 23, FlipClock2022.h12);     this.splitFlapArray.push(this.splitFlaps.hour);    }
     if (this.elements.minute)  { this.splitFlaps.minute  = new SplitFlap(this.elements.minute,  0, 59, SplitFlap.pad00);       this.splitFlapArray.push(this.splitFlaps.minute);  }
     if (this.elements.second)  { this.splitFlaps.second  = new SplitFlap(this.elements.second,  0, 59, SplitFlap.pad00);       this.splitFlapArray.push(this.splitFlaps.second);  }
+
+    if (this.is24Hour) {
+        this.splitFlaps.hour.setStrings(SplitFlap.pad00);
+        this.splitFlaps.updateStrings();
+    }
 }
+
+FlipClock2022.prototype.set24Hour = function (flag) {
+    if (flag == null) {
+        flag = true;
+    }
+    this.is24Hour = flag;
+    console.log('this.is24Hour = ' + flag);
+    if (!this.splitFlaps.hour) {
+        return;
+    }
+    if (this.is24Hour) {
+        this.splitFlaps.hour.setStrings(SplitFlap.pad00);
+    } else {
+        this.splitFlaps.hour.setStrings(FlipClock2022.h12);
+    }
+    this.splitFlaps.hour.updateStrings();
+};
 
 FlipClock2022.prototype.start = function () {
     if (this.isRunning) {
@@ -65,7 +87,6 @@ FlipClock2022.prototype.run = function () {
     var hour    = this.date.getHours();
     var minute  = this.date.getMinutes();
     var second  = this.date.getSeconds();
-    console.log(year, month, day, weekday, hour, minute, second);
     if (this.splitFlaps.year)    { this.splitFlaps.year   .goTo(year);    }
     if (this.splitFlaps.month)   { this.splitFlaps.month  .goTo(month);   }
     if (this.splitFlaps.day)     { this.splitFlaps.day    .goTo(day);     }

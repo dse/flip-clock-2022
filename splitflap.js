@@ -143,19 +143,24 @@ SplitFlap.prototype.step3 = function () {
 SplitFlap.prototype.setStrings = function (arg) {
     var i;
     if (arg == null) {
+        delete this.stringFn;
         this.strings = [];
         for (i = this.startValue; i <= this.endValue; i += 1) {
             this.strings.push(String(i));
         }
     } else if (typeof arg === 'function') {
+        this.stringFn = arg;
+        this.strings = [];
         for (i = this.startValue; i <= this.endValue; i += 1) {
             this.strings.push(arg.call(null, i));
         }
     } else if (Array.isArray(arg)) {
+        delete this.stringFn;
         this.strings = arg;
     } else {
         throw new Error('invalid argument');
     }
+    console.log('this.strings = ' + JSON.stringify(this.strings));
 };
 SplitFlap.prototype.updateStrings = function () {
     if (this.flapC != null) { this.flapC.innerHTML = this.strings[this.stateC]; }
