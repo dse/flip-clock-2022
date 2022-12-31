@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);
  * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, [<options>]);
