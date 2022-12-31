@@ -66,13 +66,9 @@ function SplitFlap() {
     if (!this.strings) {
         this.strings = [];
         if (this.stringFn) {
-            for (i = this.startValue; i <= this.endValue; i += 1) {
-                this.strings.push(this.stringFn.call(null, i));
-            }
+            this.setStrings(this.stringFn);
         } else {
-            for (i = this.startValue; i <= this.endValue; i += 1) {
-                this.strings.push(String(i));
-            }
+            this.setStrings();
         }
     }
     this.element.innerHTML = '';
@@ -93,6 +89,10 @@ function SplitFlap() {
     this.state       = this.startValue;
     this.nextstate   = this.startValue;
     this.targetState = this.startValue;
+    this.stateA = 0;
+    this.stateB = 0;
+    this.stateC = null;
+    this.stateD = null;
     this.flapA.innerHTML = this.strings[0];
     this.flapB.innerHTML = this.strings[0];
     this.delay = 40;
@@ -117,22 +117,49 @@ SplitFlap.prototype.step1 = function () {
     }
     this.flapC.style.display = '';
     this.flapC.style.transform = 'scaleY(0.8)';
-    this.flapC.innerHTML = this.strings[this.state - this.startValue];
-    this.flapA.innerHTML = this.strings[this.nextState - this.startValue];
+    this.flapC.innerHTML = this.strings[this.stateC = this.state - this.startValue];
+    this.flapA.innerHTML = this.strings[this.stateA = this.nextState - this.startValue];
     setTimeout(this.step2.bind(this), this.delay);
 };
 SplitFlap.prototype.step2 = function () {
+    this.stateC = null;
+    this.flapC.innerHTML = '';
     this.flapC.style.display = 'none';
     this.flapC.style.transform = '';
     this.flapD.style.display = '';
     this.flapD.style.transform = 'scaleY(0.5)';
-    this.flapD.innerHTML = this.strings[this.nextState - this.startValue];
+    this.flapD.innerHTML = this.strings[this.stateD = this.nextState - this.startValue];
     setTimeout(this.step3.bind(this), this.delay);
 };
 SplitFlap.prototype.step3 = function () {
+    this.stateD = null;
+    this.flapD.innerHTML = '';
     this.flapD.style.display = 'none';
     this.flapD.style.transform = '';
-    this.flapB.innerHTML = this.strings[this.nextState - this.startValue];
+    this.flapB.innerHTML = this.strings[this.stateB = this.nextState - this.startValue];
     this.state = this.nextState;
     setTimeout(this.step1.bind(this), this.delay);
+};
+SplitFlap.prototype.setStrings = function (arg) {
+    var i;
+    if (arg == null) {
+        this.strings = [];
+        for (i = this.startValue; i <= this.endValue; i += 1) {
+            this.strings.push(String(i));
+        }
+    } else if (typeof arg === 'function') {
+        for (i = this.startValue; i <= this.endValue; i += 1) {
+            this.strings.push(arg.call(null, i));
+        }
+    } else if (Array.isArray(arg)) {
+        this.strings = arg;
+    } else {
+        throw new Error('invalid argument');
+    }
+};
+SplitFlap.prototype.updateStrings = function () {
+    if (this.flapC != null) { this.flapC.innerHTML = this.strings[this.stateC]; }
+    if (this.flapA != null) { this.flapA.innerHTML = this.strings[this.stateA]; }
+    if (this.flapD != null) { this.flapD.innerHTML = this.strings[this.stateD]; }
+    if (this.flapB != null) { this.flapB.innerHTML = this.strings[this.stateB]; }
 };
