@@ -6,62 +6,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
         <title>Page Title</title>
-        <script src="splitflap.js"></script>
-        <script src="splitflap-utils.js"></script>
         <link rel="stylesheet" href="./normalize.css">
         <link rel="stylesheet" href="./clock.css">
         <link rel="stylesheet" href="./clock-patterns.css">
         <link rel="stylesheet" href="./clock-noto-sans.css">
+
+        <script src="splitflap.js"></script>
+        <script src="splitflap-utils.js"></script>
+        <script src="clock.js"></script>
     </head>
     <body>
         <div class="clock carbon-fiber-texture">
-            <div class="clock__panel">
+            <div class="clock__panel" id="clock">
                 <div class="clock__line clock__line--date">
                     <span class="clock__view-master">
-                        <span id="splitFlap0" class="clock__split-flap"></span>
+                        <span id="splitFlap0" class="clock__split-flap" data-clock-weekday></span>
                     </span>
                     <span class="clock__view-master">
-                        <span id="splitFlap1" class="clock__split-flap"></span>
+                        <span id="splitFlap1" class="clock__split-flap" data-clock-day></span>
                     </span>
                     <span class="clock__view-master">
-                        <span id="splitFlap2" class="clock__split-flap"></span>
+                        <span id="splitFlap2" class="clock__split-flap" data-clock-month></span>
                     </span>
                 </div>
                 <div class="clock__line clock__line--time">
                     <span class="clock__view-master">
-                        <span id="splitFlap3" class="clock__split-flap"></span>
+                        <span id="splitFlap3" class="clock__split-flap" data-clock-hour></span>
                     </span>
                     <span class="clock__view-master">
-                        <span id="splitFlap4" class="clock__split-flap"></span>
+                        <span id="splitFlap4" class="clock__split-flap" data-clock-minute></span>
                     </span>
                     <span class="clock__view-master">
-                        <span id="splitFlap5" class="clock__split-flap"></span>
+                        <span id="splitFlap5" class="clock__split-flap" data-clock-second></span>
                     </span>
                 </div>
             </div>
         </div>
         <script>
-            function wkday3(wkday) {
-                return SplitFlap.WEEKDAYS[wkday].slice(0, 3);
-            }
-            function month3(month) {
-                return SplitFlap.MONTHS[month].slice(0, 3);
-            }
-            function hour12(hour24) {
-                return SplitFlap.hour12(hour24, 'a', 'p');
-            }
-            var splitFlap0 = new SplitFlap('splitFlap0', 0, 6, wkday3);
-            var splitFlap1 = new SplitFlap('splitFlap1', 1, 31);
-            var splitFlap2 = new SplitFlap('splitFlap2', 0, 11, month3);
-            var splitFlap3 = new SplitFlap('splitFlap3', 0, 23, hour12);
-            var splitFlap4 = new SplitFlap('splitFlap4', 0, 59, SplitFlap.pad00);
-            var splitFlap5 = new SplitFlap('splitFlap5', 0, 59, SplitFlap.pad00);
-            splitFlap0.goTo(5);
-            splitFlap1.goTo(29);
-            splitFlap2.goTo(11);
-            splitFlap3.goTo(23);
-            splitFlap4.goTo(20);
-            splitFlap5.goTo(42);
+            var clock = new FlipClock2022('clock');
         </script>
     </body>
 </html>
