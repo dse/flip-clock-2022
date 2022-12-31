@@ -97,7 +97,7 @@ SplitFlap.prototype.goTo = function (state) {
 };
 SplitFlap.prototype.step1 = function () {
     if (this.state === this.targetState) {
-        delete this.running;
+        delete this.isRunning;
         return;
     }
     this.nextState = this.state + 1;
