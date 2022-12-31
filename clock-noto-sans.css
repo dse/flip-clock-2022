@@ -8,3 +8,9 @@ body {
 .clock__line--time {
     font-weight: 300;
 }
+.clock__ampm--am.clock__ampm--am {
+    top: 12%;
+}
+.clock__ampm--pm.clock__ampm--pm {
+    bottom: 10%;
+}
