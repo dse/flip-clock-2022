@@ -2,6 +2,9 @@
 body {
     font-family: 'Noto Sans', sans-serif;
 }
+.clock.clock {
+    font-size: 17vw;
+}
 .clock__line--date {
     font-weight: 600;
 }
