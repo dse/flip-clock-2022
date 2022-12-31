@@ -1,4 +1,34 @@
 'use strict';
+/**
+ * const splitFlap = new SplitFlap(<element>, <arrayOfString>, <stringFn>);
+ * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>);
+ *
+ * <element> is a reference to a DOM element.  It can be a string or
+ * an HTMLElement object.
+ *
+ * <startValue> and <endValue> specifies a range of numeric values.
+ * The range includes both the <startValue> and the <endValue>.
+ * Examples:
+ *
+ *     0, 23
+ *     1, 12
+ *     1970, 2030
+ *
+ * <arrayOfStrings> specifies a series of HTML strings to display.
+ * Their corresponding numeric state values start at 0 and are indices
+ * into this array.
+ *
+ * <stringFn> is an optional function that transforms a numeric value
+ * into an HTML string to display.  Examples:
+ *
+ *     x => x.padStart(2, '0')
+ *
+ *     function (x) {
+ *         const hr = (x + 11) % 12 + 1;
+ *         const ampm = hr < 12 ? 'am' : 'pm';
+ *         return `${hr} <span class="ampm ${ampm}">${ampm}</span>`;
+ *     }
+ */
 function SplitFlap() {
     var args = Array.from(arguments);
     var i;
