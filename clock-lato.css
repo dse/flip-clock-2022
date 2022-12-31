@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+body {
+    font-family: 'Lato', sans-serif;
+}
+.clock__line--date {
+    font-weight: 700;
+}
+.clock__line--time {
+    font-weight: 400;
+}

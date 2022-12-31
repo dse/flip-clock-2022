@@ -1,0 +1,35 @@
+.pattern1.pattern1 {
+    /* https://stackoverflow.com/a/72300152 */
+    background-image: repeating-linear-gradient(36deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 1px, transparent 0px, transparent 2px);
+}
+.pattern2.pattern2 {
+    /* https://stackoverflow.com/a/72300152 */
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 1px, transparent 1px, transparent 6px);
+    background-size: 4px 4px;
+}
+.carbon-texture.carbon-texture {
+    /* https://projects.verou.me/css3patterns/ */
+    background:
+        linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+        linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+        linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+        linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+        linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+        linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+}
+.carbon-fiber-texture.carbon-fiber-texture {
+    /* https://projects.verou.me/css3patterns/ */
+    background:
+        radial-gradient(black 15%, transparent 16%) 0 0,
+        radial-gradient(black 15%, transparent 16%) 8px 8px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    /* background-color: #282828; */
+    background-size: 16px 16px;
+}
+.grit.grit {
+    /* https://www.viget.com/articles/easy-textures-with-css-masks/ */
+    mask-image: url("./grit.png");
+}
