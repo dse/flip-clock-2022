@@ -21,8 +21,6 @@ function FlipClock2022(element, options) {
     this.elements.minute  = this.element.querySelector('[data-clock-minute]');
     this.elements.second  = this.element.querySelector('[data-clock-second]');
 
-    console.log(this.elements.year);
-
     var startYear = 1970;
 
     // 2020 ... 2029 => 2039, 2030 ... 2039 => 2049, etc.
