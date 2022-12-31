@@ -1,7 +1,7 @@
 'use strict';
 /**
- * const splitFlap = new SplitFlap(<element>, <arrayOfString>, <stringFn>, <options>);
- * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, <options>);
+ * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);
+ * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, [<options>]);
  *
  * <element> is a reference to a DOM element.  It can be a string id
  * or an HTMLElement object.
