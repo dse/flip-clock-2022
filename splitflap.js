@@ -6,9 +6,8 @@
  * <element> is a reference to a DOM element.  It can be a string id
  * or an HTMLElement object.
  *
- * <startValue> and <endValue> specifies a range of numeric values.
- * The range includes both the <startValue> and the <endValue>.
- * Examples:
+ * <startValue> and <endValue> specify a range of numeric values.  The
+ * range includes both the <startValue> and the <endValue>.  Examples:
  *
  *     0, 23
  *     1, 12
@@ -40,7 +39,11 @@ function SplitFlap() {
         this.element = document.getElementById(this.element);
     }
     if (!this.element) {
-        return;
+        if (typeof arguments[0] === 'string') {
+            throw new Error('element not found: #' + arguments[0]);
+        } else {
+            throw new Error('element not found');
+        }
     }
     if (Array.isArray(args[0])) {
         this.strings = args.shift();
