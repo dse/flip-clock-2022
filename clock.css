@@ -15,7 +15,10 @@ body {
 }
 .clock__panel {
     text-align: center;
-    padding: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 .clock__view-master {
     display: inline-block;
@@ -50,6 +53,7 @@ body {
 }
 .clock__split-flap {
     display: inline-block;
+    width: 100%;
     position: relative;
 }
 .clock__split-flap + .clock__split-flap {
@@ -62,18 +66,16 @@ body {
     content: '\0000a0';
 }
 .clock__line--date {
-    font-size: 5vw;
     line-height: 1.3;
 }
 .clock__line--time {
-    font-size: 15vw;
     line-height: 1.1;
 }
 .clock__line + .clock__line {
     margin-top: 1rem;
 }
 .clock__split-flap {
-    width: 25vw;
+    /* width: 15vw; */
 }
 .clock__line {
     display: flex;
@@ -91,7 +93,6 @@ body {
     justify-content: center;
 }
 .clock__ampm {
-    font-size: 25%;
     position: absolute;
     left: 8%;
 }
@@ -101,6 +102,29 @@ body {
 .clock__ampm--pm {
     bottom: 16%;
 }
-/* .clock__hour12 { */
-/*     padding-left: 0.25em; */
-/* } */
+
+/**
+ * Layout dimension styles
+ */
+.clock__panel {
+    width: 90%;
+}
+.clock__view-master {
+    width: 30%;
+}
+
+/**
+ * Font size styles
+ */
+.clock {
+    font-size: 15vw;
+}
+.clock__line--date {
+    font-size: 33.3333%;
+}
+.clock__line--time {
+    font-size: 100%;
+}
+.clock__ampm {
+    font-size: 25%;
+}

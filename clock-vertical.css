@@ -1,0 +1,12 @@
+@media (orientation: portrait), not (max-aspect-ratio: 1) {
+    .clock__view-master--second.clock__view-master--second,
+    .clock__view-master--month.clock__view-master--month {
+        display: none;
+    }
+    .clock__view-master {
+        width: 45%;
+    }
+    .clock__font-size-adjust {
+        font-size: 150%;
+    }
+}
