@@ -99,6 +99,7 @@ function SplitFlap() {
     this.randomness = 2;
     this.animation = 2;
 }
+
 SplitFlap.prototype.goTo = function (state) {
     this.targetState = state;
     if (this.isRunning) {
@@ -110,22 +111,6 @@ SplitFlap.prototype.goTo = function (state) {
     } else if (this.animation === 2) {
         this.animation2();
     }
-};
-SplitFlap.prototype.animation1step1 = function () {
-    if (!this.beforeAnimationStart()) {
-        return;
-    }
-    this.step(0.2 + (Math.random() - 0.5) * 0.02 * this.randomness);
-    setTimeout(this.animation1step2.bind(this), this.delay);
-};
-SplitFlap.prototype.animation1step2 = function () {
-    this.step(4/6 + (Math.random() - 0.5) * 0.04 * this.randomness);
-    setTimeout(this.animation1step3.bind(this), this.delay);
-};
-SplitFlap.prototype.animation1step3 = function () {
-    this.beforeAnimationEnd();
-    this.step(1);
-    setTimeout(this.animation1step1.bind(this), this.delay);
 };
 
 SplitFlap.prototype.animation1 = function () {
@@ -186,10 +171,12 @@ SplitFlap.prototype.beforeAnimationStart = function () {
     }
     return true;
 };
+
 SplitFlap.prototype.beforeAnimationEnd = function () {
     this.state = this.nextState;
 };
 
+// view an animation frame, with a real number from 0 to 1 specified.
 SplitFlap.prototype.step = function (x) {
     function clamp(y, a, b) {
         return (y < a) ? a : (y > b) ? b : y;
@@ -251,6 +238,7 @@ SplitFlap.prototype.setStrings = function (arg) {
         throw new Error('invalid argument');
     }
 };
+
 SplitFlap.prototype.updateStrings = function () {
     if (this.flapC != null) { this.flapC.innerHTML = this.strings[this.stateC]; }
     if (this.flapA != null) { this.flapA.innerHTML = this.strings[this.stateA]; }
