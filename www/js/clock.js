@@ -42,6 +42,15 @@ function FlipClock2022(element, options) {
     if (this.elements.minute)  { this.splitFlaps.minute  = new SplitFlap(this.elements.minute,  0, 59, SplitFlap.pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.minute });  }
     if (this.elements.second)  { this.splitFlaps.second  = new SplitFlap(this.elements.second,  0, 59, SplitFlap.pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.second });  }
 
+    this.interSplitFlapDelay = 20;
+
+    var i;
+    var delay;
+    for (i = 0; i < this.splitFlapArray.length; i += 1) {
+        delay = 1 + this.interSplitFlapDelay * (this.splitFlapArray.length - i - 1);
+        this.splitFlapArray[i].splitFlap.delay = delay;
+    }
+
     if (this.is24Hour) {
         this.splitFlaps.hour.setStrings(SplitFlap.pad00);
         this.splitFlaps.hour.updateStrings();
@@ -93,13 +102,45 @@ FlipClock2022.prototype.run = function () {
     var hour    = this.date.getHours();
     var minute  = this.date.getMinutes();
     var second  = this.date.getSeconds();
-    if (this.splitFlaps.year)    { this.splitFlaps.year   .goTo(year);    }
-    if (this.splitFlaps.month)   { this.splitFlaps.month  .goTo(month);   }
-    if (this.splitFlaps.day)     { this.splitFlaps.day    .goTo(day);     }
-    if (this.splitFlaps.weekday) { this.splitFlaps.weekday.goTo(weekday); }
-    if (this.splitFlaps.hour)    { this.splitFlaps.hour   .goTo(hour);    }
-    if (this.splitFlaps.minute)  { this.splitFlaps.minute .goTo(minute);  }
-    if (this.splitFlaps.second)  { this.splitFlaps.second .goTo(second);  }
+
+    if (this.interSplitFlapDelay) {
+        if (this.splitFlaps.year) {
+            setTimeout(function () { this.splitFlaps.year.goTo(year); }.bind(this),
+                       this.splitFlaps.year.delay);
+        }
+        if (this.splitFlaps.month) {
+            setTimeout(function () { this.splitFlaps.month.goTo(month); }.bind(this),
+                       this.splitFlaps.month.delay);
+        }
+        if (this.splitFlaps.day) {
+            setTimeout(function () { this.splitFlaps.day.goTo(day); }.bind(this),
+                       this.splitFlaps.day.delay);
+        }
+        if (this.splitFlaps.weekday) {
+            setTimeout(function () { this.splitFlaps.weekday.goTo(weekday); }.bind(this),
+                       this.splitFlaps.weekday.delay);
+        }
+        if (this.splitFlaps.hour) {
+            setTimeout(function () { this.splitFlaps.hour.goTo(hour); }.bind(this),
+                       this.splitFlaps.hour.delay);
+        }
+        if (this.splitFlaps.minute) {
+            setTimeout(function () { this.splitFlaps.minute.goTo(minute); }.bind(this),
+                       this.splitFlaps.minute.delay);
+        }
+        if (this.splitFlaps.second) {
+            setTimeout(function () { this.splitFlaps.second.goTo(second); }.bind(this),
+                       this.splitFlaps.second.delay);
+        }
+    } else {
+        if (this.splitFlaps.year)    { this.splitFlaps.year   .goTo(year);    }
+        if (this.splitFlaps.month)   { this.splitFlaps.month  .goTo(month);   }
+        if (this.splitFlaps.day)     { this.splitFlaps.day    .goTo(day);     }
+        if (this.splitFlaps.weekday) { this.splitFlaps.weekday.goTo(weekday); }
+        if (this.splitFlaps.hour)    { this.splitFlaps.hour   .goTo(hour);    }
+        if (this.splitFlaps.minute)  { this.splitFlaps.minute .goTo(minute);  }
+        if (this.splitFlaps.second)  { this.splitFlaps.second .goTo(second);  }
+    }
     var msecs = 1000 - this.date.getMilliseconds() % 1000;
     this.timeout = setTimeout(this.run.bind(this), msecs);
 };
