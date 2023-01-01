@@ -9,4 +9,8 @@
     .clock__font-size-adjust {
         font-size: 150%;
     }
+    :root {
+        --border-radius: 1.5vw;
+        --split-flap-view-master-spacing: 1.5vw;
+    }
 }
