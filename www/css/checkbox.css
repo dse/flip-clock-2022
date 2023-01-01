@@ -1,0 +1,21 @@
+[type="checkbox"].checkbox {
+    display: none;
+}
+[type="checkbox"].checkbox + .checkbox__icon::before {
+    font-weight: 900;           /* .fa-solid */
+    text-align: center;         /* .fa-fw */
+    width: 1.25em;              /* .fa-fw */
+    font-family: "Font Awesome 6 Free";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display,inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+
+    content: '\f204';           /*fa-toggle-off*/
+}
+[type="checkbox"].checkbox:checked + .checkbox__icon::before {
+    content: '\f205';           /*fa-toggle-on*/
+}

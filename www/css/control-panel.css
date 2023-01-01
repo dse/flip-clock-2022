@@ -1,0 +1,70 @@
+/**
+ * Control panel toggle
+ */
+:root {
+    --control-panel-font-size: 200%;
+    --control-panel-padding: 0.5rem;
+    --control-panel-line-height: 1.5;
+}
+.control-panel__toggle {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: var(--control-panel-font-size);
+    opacity: 0.25;
+    color: #999;
+    line-height: var(--control-panel-line-height);
+}
+.control-panel__more-toggles {
+    position: fixed;
+    bottom: 0;
+    right: 2em;
+    opacity: 0.25;
+    color: #999;
+}
+.control-panel__toggle__control {
+    box-sizing: content-box;
+    min-width: calc(1em * var(--control-panel-line-height));
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    text-shadow: 0 1px white, 0 -1px black;
+    padding: var(--control-panel-padding);
+}
+.control-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid var(--hiborder);
+    font-size: var(--control-panel-font-size);
+    line-height: var(--control-panel-line-height);
+    min-height: calc(1em * var(--control-panel-line-height));
+    padding-top: var(--control-panel-padding);
+    padding-bottom: var(--control-panel-padding);
+    padding-left: calc(var(--control-panel-padding) + 1em * (var(--control-panel-line-height) - 1));
+    padding-right: 4em;
+}
+.control-panel label {
+    white-space: nowrap;
+    margin-right: 0.666666em;
+}
+.control-panel label:last-of-type {
+    margin-right: 0;
+}
+.control-panel__logs {
+    position: fixed;
+    top: 1px;
+    left: 0;
+    right: 0;
+    bottom: 4rem;
+    background-color: black;
+    color: #55ff55;
+    font-family: 'Courier New', 'Courier', monospace;
+    font-size: 14px;
+    white-space: pre;
+    padding: 0.5rem;
+    border: 1px solid #55ff55;
+    overflow-x: auto;
+}
