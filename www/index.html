@@ -7,13 +7,25 @@
 
         <title>Flip Clock 2022</title>
 
-        <link rel="stylesheet" href="css/main.css">
-
-        <script src="js/splitflap.js"></script>
-        <script src="js/splitflap-utils.js"></script>
-        <script src="js/clock.js"></script>
-        <script src="js/audio.js"></script>
-        <script src="js/clock-page.js"></script>
+        <script>
+            var resources = [
+                ('<link rel="stylesheet" href="css/main.css{cacheBuster}">'),
+                ('<script src="js/splitflap.js{cacheBuster}"><' + '/script>'),
+                ('<script src="js/splitflap-utils.js{cacheBuster}"><' + '/script>'),
+                ('<script src="js/clock.js{cacheBuster}"><' + '/script>'),
+                ('<script src="js/audio.js{cacheBuster}"><' + '/script>'),
+                ('<script src="js/clock-page.js{cacheBuster}"><' + '/script>'),
+            ];
+            (function () {
+                var cacheBuster = /\b(?:ipad|iphone)\b/i.test(navigator.userAgent);
+                var ms = Date.now();
+                if (cacheBuster) {
+                    document.write(resources.join("\n").replace(/\{cacheBuster\}/g, '?v=' + ms));
+                } else {
+                    document.write(resources.join("\n").replace(/\{cacheBuster\}/g, ''));
+                }
+            }());
+        </script>
     </head>
     <body>
         <div class="clock carbon-fiber-texture" id="clock">
