@@ -146,7 +146,7 @@ body {
     --control-panel-padding: 0.5rem;
     --control-panel-line-height: 1.5;
 }
-.control-panel-toggle {
+.control-panel__toggle {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -155,7 +155,14 @@ body {
     color: #999;
     line-height: var(--control-panel-line-height);
 }
-.control-panel-toggle__control {
+.control-panel__more-toggles {
+    position: fixed;
+    bottom: 0;
+    right: 2em;
+    opacity: 0.25;
+    color: #999;
+}
+.control-panel__toggle__control {
     box-sizing: content-box;
     min-width: calc(1em * var(--control-panel-line-height));
     display: inline-block;
@@ -176,7 +183,7 @@ body {
     min-height: calc(1em * var(--control-panel-line-height));
     padding: var(--control-panel-padding) calc(var(--control-panel-padding) + 1em * (var(--control-panel-line-height) - 1));
 }
-.control-panel.hide {
+.hide {
     display: none;
 }
 
@@ -200,4 +207,21 @@ body {
 }
 [type="checkbox"].checkbox:checked + .checkbox__icon::before {
     content: '\f205';           /*fa-toggle-on*/
+}
+
+.control-panel__logs {
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 4em);
+    background-color: black;
+    color: #55ff55;
+    font-family: 'Courier New', 'Courier', monospace;
+    font-size: 14px;
+    white-space: pre;
+    padding: 0.5rem;
+    border: 1px solid #55ff55;
+    overflow-x: auto;
 }

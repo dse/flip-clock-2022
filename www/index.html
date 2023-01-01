@@ -53,18 +53,39 @@
                 <input class="checkbox" type="checkbox" name="is24Hour" id="is24Hour" value="1"><span class="checkbox__icon"></span>
                 24HR
             </label>
+            <div class="control-panel__more-toggles">
+                <a id="logsToggle" href="javascript:void 0;" class="control-panel__toggle__control"><i class="fa-solid fa-toilet-paper fa-fw"></i></a>
+            </div>
         </div>
-        <div class="control-panel-toggle" id="controlPanelToggle">
-            <a href="javascript:void 0;" class="control-panel-toggle__control"><i class="fa-solid fa-gears fa-fw"></i></a>
+        <div class="control-panel__toggle">
+            <a id="controlPanelToggle" href="javascript:void 0;" class="control-panel__toggle__control"><i class="fa-solid fa-gears fa-fw"></i></a>
         </div>
+        <div class="control-panel__logs hide" id="logs"></div>
         <script>
+            var logs = document.getElementById('logs');
+            if (/\b(?:iPhone|iPad|mac os x)\b/i.test(navigator.userAgent)) {
+                ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
+                    var fn = console[level];
+                    console[level] = function () {
+                        fn.apply(console, arguments);
+                        logs.innerHTML = logs.innerHTML + level.toUpperCase() + ': ' + Array.from(arguments).join(' ') + '\n';
+                    };
+                });
+            }
             var tick;
             var clock;
             function initEvents() {
                 var toggle = document.getElementById('controlPanelToggle');
+                var logsToggle = document.getElementById('logsToggle');
                 var panel = document.getElementById('controlPanel');
                 toggle.addEventListener('click', function () {
                     panel.classList.toggle('hide');
+                    if (panel.classList.contains('hide')) {
+                        logs.classList.add('hide');
+                    }
+                });
+                logsToggle.addEventListener('click', function () {
+                    logs.classList.toggle('hide');
                 });
                 var is24Hour = document.getElementById('is24Hour');
                 is24Hour.checked = clock.is24Hour;
