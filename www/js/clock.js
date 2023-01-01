@@ -119,4 +119,11 @@ FlipClock2022.h12 = function (hour24) {
     return SplitFlap.hour12(hour24, 'a', 'p');
 };
 
+FlipClock2022.prototype.setTicker = function (ticker) {
+    var i;
+    for (i = 0; i < this.splitFlapArray.length; i += 1) {
+        this.splitFlapArray[i].setTicker(ticker);
+    }
+};
+
 // https://cldr.unicode.org/translation/date-time/date-time-names

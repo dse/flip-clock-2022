@@ -134,6 +134,7 @@ SplitFlap.prototype.animation1 = function () {
         this.step(1);
         setTimeout(this.animation1.bind(this), duration / 3);
     }.bind(this));
+    this.tick();
     step1();
 };
 
@@ -157,6 +158,7 @@ SplitFlap.prototype.animation2 = function () {
             setTimeout(frame, 10);
         }
     }.bind(this));
+    this.tick();
     frame();
 };
 
@@ -244,4 +246,27 @@ SplitFlap.prototype.updateStrings = function () {
     if (this.flapA != null) { this.flapA.innerHTML = this.strings[this.stateA]; }
     if (this.flapD != null) { this.flapD.innerHTML = this.strings[this.stateD]; }
     if (this.flapB != null) { this.flapB.innerHTML = this.strings[this.stateB]; }
+};
+
+SplitFlap.prototype.tick = function () {
+    if (!this.ticker) {
+        return;
+    }
+    if (this.ticker instanceof HTMLMediaElement) {
+        this.ticker.volume = 1;
+        this.ticker.currentTime = 0;
+        this.ticker.play();
+        return;
+    }
+    if (typeof this.ticker === 'function') {
+        this.ticker.apply(null);
+        return;
+    }
+    if (typeof this.ticker.play === 'function') {
+        this.ticker.play();
+    }
+};
+
+SplitFlap.prototype.setTicker = function (ticker) {
+    this.ticker = ticker;
 };
