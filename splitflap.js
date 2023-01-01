@@ -96,7 +96,8 @@ function SplitFlap() {
     this.flapA.innerHTML = this.strings[0];
     this.flapB.innerHTML = this.strings[0];
     this.delay = 40;
-    return this;
+    this.randomness = 2;
+    this.animation = 1;
 }
 SplitFlap.prototype.goTo = function (state) {
     this.targetState = state;
@@ -104,9 +105,11 @@ SplitFlap.prototype.goTo = function (state) {
         return;
     }
     this.isRunning = true;
-    this.step1();
+    if (this.animation === 1) {
+        this.animation1step1();
+    }
 };
-SplitFlap.prototype.step1 = function () {
+SplitFlap.prototype.animation1step1 = function () {
     if (this.state === this.targetState) {
         delete this.isRunning;
         return;
@@ -115,31 +118,61 @@ SplitFlap.prototype.step1 = function () {
     if (this.nextState > this.endValue) {
         this.nextState = this.startValue;
     }
-    this.flapC.style.display = '';
-    this.flapC.style.transform = 'scaleY(0.8)';
-    this.flapC.innerHTML = this.strings[this.stateC = this.state - this.startValue];
-    this.flapA.innerHTML = this.strings[this.stateA = this.nextState - this.startValue];
-    setTimeout(this.step2.bind(this), this.delay);
+    this.step(0.2 + (Math.random() - 0.5) * 0.02 * this.randomness);
+    setTimeout(this.animation1step2.bind(this), this.delay);
 };
-SplitFlap.prototype.step2 = function () {
-    this.stateC = null;
-    this.flapC.innerHTML = '';
-    this.flapC.style.display = 'none';
-    this.flapC.style.transform = '';
-    this.flapD.style.display = '';
-    this.flapD.style.transform = 'scaleY(0.5)';
-    this.flapD.innerHTML = this.strings[this.stateD = this.nextState - this.startValue];
-    setTimeout(this.step3.bind(this), this.delay);
+SplitFlap.prototype.animation1step2 = function () {
+    this.step(4/6 + (Math.random() - 0.5) * 0.04 * this.randomness);
+    setTimeout(this.animation1step3.bind(this), this.delay);
 };
-SplitFlap.prototype.step3 = function () {
-    this.stateD = null;
-    this.flapD.innerHTML = '';
-    this.flapD.style.display = 'none';
-    this.flapD.style.transform = '';
-    this.flapB.innerHTML = this.strings[this.stateB = this.nextState - this.startValue];
+SplitFlap.prototype.animation1step3 = function () {
     this.state = this.nextState;
-    setTimeout(this.step1.bind(this), this.delay);
+    this.step(1);
+    setTimeout(this.animation1step1.bind(this), this.delay);
 };
+
+
+SplitFlap.prototype.step = function (x) {
+    function clamp(y, a, b) {
+        return (y < a) ? a : (y > b) ? b : y;
+    }
+    x = clamp(x, 0, 1);
+    var angle = x * Math.PI;
+    var scaleY = Math.abs(Math.cos(angle));
+    console.log(x, scaleY);
+
+    // C then A then D then B seemed to be the best order.
+
+    if (x > 0 && x < 0.5) {
+        this.flapC.style.display = '';
+        this.flapC.style.transform = 'scaleY(' + scaleY + ')';
+        this.flapC.innerHTML = this.strings[this.stateC = this.state - this.startValue];
+    } else {
+        this.stateC = null;
+        this.flapC.innerHTML = '';
+        this.flapC.style.display = 'none';
+        this.flapC.style.transform = '';
+    }
+    if (x > 0 && x < 1) {
+        this.flapA.innerHTML = this.strings[this.stateA = this.nextState - this.startValue];
+    } else {
+        this.flapA.innerHTML = this.strings[this.stateA = this.state - this.startValue];
+    }
+    if (x > 0.5 && x < 1) {
+        this.flapD.style.display = '';
+        this.flapD.style.transform = 'scaleY(' + scaleY + ')';
+        this.flapD.innerHTML = this.strings[this.stateD = this.nextState - this.startValue];
+    } else {
+        this.stateD = null;
+        this.flapD.innerHTML = '';
+        this.flapD.style.display = 'none';
+        this.flapD.style.transform = '';
+    }
+    if (x === 1) {
+        this.flapB.innerHTML = this.strings[this.stateB = this.state - this.startValue];
+    }
+};
+
 SplitFlap.prototype.setStrings = function (arg) {
     var i;
     if (arg == null) {
