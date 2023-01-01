@@ -258,6 +258,9 @@ SplitFlap.prototype.updateStrings = function () {
 };
 
 SplitFlap.prototype.tick = function () {
+    if (document.visibilityState !== 'visible') {
+        return;
+    }
     if (!this.ticker || !this.enableTicking) {
         return;
     }
