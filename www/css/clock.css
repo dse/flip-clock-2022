@@ -30,7 +30,7 @@ body {
 }
 .clock__flap {
     border-top:    1px solid transparent;
-    border-bottom: 3px solid transparent;
+    border-bottom: 1px solid transparent;
     position: absolute;
     display: inline-block;
     top: 0;
@@ -135,6 +135,16 @@ body {
 }
 .clock__ampm {
     font-size: 25%;
+}
+
+/**
+ * Font styles
+ */
+.clock__line--date {
+    font-weight: 700;
+}
+.clock__line--time {
+    font-weight: 400;
 }
 
 /**
