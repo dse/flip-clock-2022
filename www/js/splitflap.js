@@ -34,7 +34,6 @@
  */
 function SplitFlap() {
     var args = Array.from(arguments);
-    var i;
     this.element = args.shift();
     if (typeof this.element === 'string') {
         this.element = document.getElementById(this.element);
@@ -46,22 +45,31 @@ function SplitFlap() {
             throw new Error('element not found');
         }
     }
-    if (Array.isArray(args[0])) {
-        this.strings = args.shift();
-        this.startValue = 0;
-        this.endValue = this.strings.length - 1;
-    } else if (args.length >= 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
-        this.startValue = args.shift();
-        this.endValue = args.shift();
-    } else {
-        throw new Error('incorrect arguments');
+    while (args.length) {
+        if (Array.isArray(args[0])) {
+            this.strings = args.shift();
+            this.startValue = 0;
+            this.endValue = this.strings.length - 1;
+        } else if (args.length >= 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
+            this.startValue = args.shift();
+            this.endValue = args.shift();
+        } else if (typeof args[0] === 'function') {
+            this.stringFn = args.shift();
+        } else if (Object.prototype.toString.call(args[0]) === '[object Object]') {
+            // plain object
+            Object.assign({}, args.shift());
+        } else if (typeof args[0] === 'string') {
+            this.name = args[0];
+            args.shift();
+        } else {
+            break;
+        }
     }
-    if (typeof args[0] === 'function') {
-        this.stringFn = args.shift();
+    if (this.name != null) {
+        this.element.setAttribute('data-name', this.name);
     }
-    if (Object.prototype.toString.call(args[0]) === '[object Object]') {
-        // plain object
-        Object.assign({}, args.shift());
+    if (this.startValue == null && this.endValue == null && this.strings == null) {
+        throw new Error('string array or numeric range must be specified');
     }
     if (!this.strings) {
         this.strings = [];
@@ -98,6 +106,7 @@ function SplitFlap() {
     this.delay = 40;
     this.randomness = 2;
     this.animation = 2;
+    this.enableTicking = true;
 }
 
 SplitFlap.prototype.goTo = function (state) {
@@ -249,7 +258,10 @@ SplitFlap.prototype.updateStrings = function () {
 };
 
 SplitFlap.prototype.tick = function () {
-    if (!this.ticker) {
+    if (!this.ticker || !this.enableTicking) {
+        return;
+    }
+    if (isHidden(this.element)) {
         return;
     }
     if (this.ticker instanceof HTMLMediaElement) {
@@ -269,4 +281,24 @@ SplitFlap.prototype.tick = function () {
 
 SplitFlap.prototype.setTicker = function (ticker) {
     this.ticker = ticker;
+};
+
+function isHidden(element) {
+    var name = element.getAttribute('data-name');
+    var style;
+    if (!element) {
+        return;
+    }
+    for (; element && element.style; element = element.parentNode) {
+        style = window.getComputedStyle(element);
+        if (name === 'second') {
+            console.log(element, element.style.display);
+        }
+        if (style.display === 'none' ||
+            style.visibility === 'hidden' ||
+            style.opacity === 0) {
+            return true;
+        }
+    }
+    return false;
 };

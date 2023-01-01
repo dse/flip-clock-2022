@@ -13,10 +13,12 @@ function FlipClock2022(element, options) {
         throw new Error(`element not specified or not found`);
     }
 
-    this.is24Hour = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour'));
-    if (this.is24Hour == null) {
-        this.is24Hour = false;
-    }
+    this.is24Hour             = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour'));
+    this.enableTicking        = JSON.parse(localStorage.getItem('FlipClock2022.enableTicking'));
+    this.enableSecondsTicking = JSON.parse(localStorage.getItem('FlipClock2022.enableSecondsTicking'));
+    if (this.is24Hour == null)             { this.is24Hour = false; }
+    if (this.enableTicking == null)        { this.enableTicking = false; }
+    if (this.enableSecondsTicking == null) { this.enableSecondsTicking = false; }
 
     this.elements = {};
     this.elements.year    = this.element.querySelector('[data-clock-year]');
@@ -34,13 +36,13 @@ function FlipClock2022(element, options) {
 
     this.splitFlaps = {};
     this.splitFlapArray = [];
-    if (this.elements.year)    { this.splitFlaps.year    = new SplitFlap(this.elements.year,    startYear, endYear);           this.splitFlapArray.push({ splitFlap: this.splitFlaps.year });    }
-    if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   0, 11, FlipClock2022.month3);  this.splitFlapArray.push({ splitFlap: this.splitFlaps.month });   }
-    if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     1, 31);                        this.splitFlapArray.push({ splitFlap: this.splitFlaps.day });     }
-    if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 0, 6, FlipClock2022.weekday3); this.splitFlapArray.push({ splitFlap: this.splitFlaps.weekday }); }
-    if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    0, 23, FlipClock2022.h12);     this.splitFlapArray.push({ splitFlap: this.splitFlaps.hour });    }
-    if (this.elements.minute)  { this.splitFlaps.minute  = new SplitFlap(this.elements.minute,  0, 59, SplitFlap.pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.minute });  }
-    if (this.elements.second)  { this.splitFlaps.second  = new SplitFlap(this.elements.second,  0, 59, SplitFlap.pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.second });  }
+    if (this.elements.year)    { this.splitFlaps.year    = new SplitFlap(this.elements.year,    'year',    startYear, endYear);           this.splitFlapArray.push({ splitFlap: this.splitFlaps.year });    }
+    if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   'month',   0, 11, FlipClock2022.month3);  this.splitFlapArray.push({ splitFlap: this.splitFlaps.month });   }
+    if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     'day',     1, 31);                        this.splitFlapArray.push({ splitFlap: this.splitFlaps.day });     }
+    if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 'weekday', 0, 6, FlipClock2022.weekday3); this.splitFlapArray.push({ splitFlap: this.splitFlaps.weekday }); }
+    if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    'hour',    0, 23, FlipClock2022.h12);     this.splitFlapArray.push({ splitFlap: this.splitFlaps.hour });    }
+    if (this.elements.minute)  { this.splitFlaps.minute  = new SplitFlap(this.elements.minute,  'minute',  0, 59, SplitFlap.pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.minute });  }
+    if (this.elements.second)  { this.splitFlaps.second  = new SplitFlap(this.elements.second,  'second',  0, 59, SplitFlap.pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.second });  }
 
     this.interSplitFlapDelay = 20;
 
@@ -51,27 +53,49 @@ function FlipClock2022(element, options) {
         this.splitFlapArray[i].splitFlap.delay = delay;
     }
 
-    if (this.is24Hour) {
-        this.splitFlaps.hour.setStrings(SplitFlap.pad00);
-        this.splitFlaps.hour.updateStrings();
-    }
+    this.updateFromPreferences();
 }
 
 FlipClock2022.prototype.set24Hour = function (flag) {
-    if (flag == null) {
-        flag = true;
-    }
+    if (flag == null) { flag = true; }
     this.is24Hour = flag;
     localStorage.setItem('FlipClock2022.is24Hour', JSON.stringify(this.is24Hour));
     if (!this.splitFlaps.hour) {
         return;
     }
+    this.updateFromPreferences();
+};
+
+FlipClock2022.prototype.setTicking = function (flag) {
+    if (flag == null) { flag = true; }
+    this.enableTicking = flag;
+    localStorage.setItem('FlipClock2022.enableTicking', JSON.stringify(this.enableTicking));
+    this.updateFromPreferences();
+};
+
+FlipClock2022.prototype.setSecondsTicking = function (flag) {
+    if (flag == null) { flag = true; }
+    this.enableSecondsTicking = flag;
+    localStorage.setItem('FlipClock2022.enableSecondsTicking',
+                         JSON.stringify(this.enableSecondsTicking));
+    this.updateFromPreferences();
+};
+
+FlipClock2022.prototype.updateFromPreferences = function () {
     if (this.is24Hour) {
         this.splitFlaps.hour.setStrings(SplitFlap.pad00);
     } else {
         this.splitFlaps.hour.setStrings(FlipClock2022.h12);
     }
     this.splitFlaps.hour.updateStrings();
+
+    if (this.splitFlaps.year)    { this.splitFlaps.year   .enableTicking = this.enableTicking; }
+    if (this.splitFlaps.month)   { this.splitFlaps.month  .enableTicking = this.enableTicking; }
+    if (this.splitFlaps.day)     { this.splitFlaps.day    .enableTicking = this.enableTicking; }
+    if (this.splitFlaps.weekday) { this.splitFlaps.weekday.enableTicking = this.enableTicking; }
+    if (this.splitFlaps.hour)    { this.splitFlaps.hour   .enableTicking = this.enableTicking; }
+    if (this.splitFlaps.minute)  { this.splitFlaps.minute .enableTicking = this.enableTicking; }
+    if (this.splitFlaps.second)  { this.splitFlaps.second .enableTicking = this.enableSecondsTicking; }
 };
 
 FlipClock2022.prototype.start = function () {
@@ -158,6 +182,17 @@ FlipClock2022.month3 = function (month) {
 FlipClock2022.h12 = function (hour24) {
     // 0 = January ... 11 = December
     return SplitFlap.hour12(hour24, 'a', 'p');
+};
+
+FlipClock2022.isHidden = function (element) {
+    for (; element; element = element.parentNode) {
+        if (element.style.display === 'none' ||
+            element.style.visibility === 'hidden' ||
+            element.style.opacity === 0) {
+            return true;
+        }
+    }
+    return false;
 };
 
 FlipClock2022.prototype.setTicker = function (ticker) {
