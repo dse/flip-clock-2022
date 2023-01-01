@@ -156,7 +156,21 @@ SplitFlap.prototype.animation2 = function () {
     if (!this.beforeAnimationStart()) {
         return;
     }
-    var duration = 100;         // milliseconds
+
+    var duration = this.duration || 100; // milliseconds
+
+    // unless next state is the target state, flick faster.
+    var targetState = this.targetState;
+    if (this.flickTargetState != null) {
+        targetState = this.flickTargetState;
+    }
+    var a = targetState - this.startValue;
+    var b = this.nextState - this.startValue;
+    var modulo = this.endValue - this.startValue + 1;
+    if (a % modulo !== b % modulo) {
+        duration = duration * 0.75;
+    }
+
     var start = Date.now();
     var end = start + duration;
     var frame = (function () {
