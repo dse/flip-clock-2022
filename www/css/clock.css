@@ -7,6 +7,9 @@
     --hiborder: rgba(100%,100%,100%,0.5);
     --shborder: rgba(0%,0%,0%,0.8);
 }
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 body {
     background-color: var(--bg);
     color: white;
@@ -92,7 +95,7 @@ body {
 }
 .clock__ampm {
     position: absolute;
-    left: 8%;
+    left: 4%;
 }
 .clock__ampm--am {
     top: 8%;
@@ -105,7 +108,7 @@ body {
  * Layout dimension styles
  */
 .clock__panel {
-    width: 90%;
+    width: 95%;
 }
 .clock__view-master {
     width: 30%;
@@ -181,7 +184,10 @@ body {
     font-size: var(--control-panel-font-size);
     line-height: var(--control-panel-line-height);
     min-height: calc(1em * var(--control-panel-line-height));
-    padding: var(--control-panel-padding) calc(var(--control-panel-padding) + 1em * (var(--control-panel-line-height) - 1));
+    padding-top: var(--control-panel-padding);
+    padding-bottom: var(--control-panel-padding);
+    padding-left: calc(var(--control-panel-padding) + 1em * (var(--control-panel-line-height) - 1));
+    padding-right: 4em;
 }
 .hide {
     display: none;
@@ -210,7 +216,6 @@ body {
 }
 
 .control-panel__logs {
-    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
