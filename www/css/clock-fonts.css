@@ -38,3 +38,14 @@
 .font--times body {
     font-family: 'Times New Roman', 'Times Roman', sans-serif;
 }
+
+.font--arial-black body {
+    font-family: 'Arial Black', sans-serif;
+}
+
+.font--arial body {
+    font-family: 'Arial', sans-serif;
+}
+.font--arial .clock.clock {
+    font-size: 17vw;
+}
