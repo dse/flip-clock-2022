@@ -31,13 +31,13 @@
 }
 .grit.grit {
     /* https://www.viget.com/articles/easy-textures-with-css-masks/ */
-    mask-image: url("./grit.png");
+    mask-image: url("../images/grit.png");
 }
 
 /* https://www.deviantart.com/sweetsoulsister/art/Brushed-Metal-Silver-Texture-145936387 */
 .brushed-metal-silver.brushed-metal-silver {
     background-color: #333333;
-    background-image: url("./brushed-metal-50-100.jpg");
+    background-image: url("../images/brushed-metal-50-100.jpg");
     background-blend-mode: multiply;
     background-size: cover;
     background-position: center;
