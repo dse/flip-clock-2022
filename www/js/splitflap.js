@@ -268,16 +268,25 @@ SplitFlap.prototype.tick = function () {
         return;
     }
     if (this.ticker instanceof HTMLMediaElement) {
-        this.ticker.volume = 1;
+        if (this.tickVolume == null || typeof this.tickVolume !== 'number') {
+            this.ticker.volume = 1;
+        } else if (this.tickVolume < 0) {
+            this.ticker.volume = 0;
+        } else if (this.tickVolume > 1) {
+            this.ticker.volume = 1;
+        } else {
+            this.ticker.volume = this.tickVolume;
+        }
         this.ticker.currentTime = 0;
         this.ticker.play();
         return;
     }
     if (typeof this.ticker === 'function') {
-        this.ticker.apply(null);
+        this.ticker.apply(null, this.tickVolume);
         return;
     }
     if (typeof this.ticker.play === 'function') {
+        this.ticker.setTickVolume(this.tickVolume);
         this.ticker.play();
     }
 };
@@ -287,16 +296,12 @@ SplitFlap.prototype.setTicker = function (ticker) {
 };
 
 function isHidden(element) {
-    var name = element.getAttribute('data-name');
     var style;
     if (!element) {
         return;
     }
     for (; element && element.style; element = element.parentNode) {
         style = window.getComputedStyle(element);
-        if (name === 'second') {
-            console.log(element, element.style.display);
-        }
         if (style.display === 'none' ||
             style.visibility === 'hidden' ||
             style.opacity === 0) {

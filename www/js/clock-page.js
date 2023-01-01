@@ -19,11 +19,11 @@ function init() {
     initEvents();
     initLogs();
     initCheckboxEvents();
+    initVolumeSlider();
 }
 
 function initLogs() {
     logs = document.getElementById('logs');
-    console.log('logs:', logs);
     if (/\b(?:iPhone|iPad|mac os x)\b/i.test(navigator.userAgent)) {
         ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
             var fn = console[level];
@@ -73,4 +73,15 @@ function initCheckboxEvents() {
             clock.setSecondsTicking(enableSecondsTicking.checked);
         });
     }
+}
+
+function initVolumeSlider() {
+    var tickVolume = document.getElementById('tickVolume');
+    if (!tickVolume) {
+        return;
+    }
+    tickVolume.value = clock.tickVolume;
+    tickVolume.addEventListener('change', function () {
+        clock.setTickVolume(tickVolume.value);
+    });
 }

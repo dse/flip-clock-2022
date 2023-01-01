@@ -41,6 +41,25 @@ ClockTicker.prototype.workAroundNoAutoPlay = function () {
     document.body.addEventListener('touchstart', tempHandler);
 };
 
+ClockTicker.prototype.setTickVolume = function (value) {
+    if (typeof value === 'string') {
+        value = Number(value);
+        if (isNaN(value)) {
+            this.tickVolume = 1;
+            return;
+        }
+    }
+    if (typeof value !== 'number') {
+        this.tickVolume = 1;
+    } else if (value < 0) {
+        this.tickVolume = 0;
+    } else if (value > 1) {
+        this.tickVolume = 1;
+    } else {
+        this.tickVolume = value;
+    }
+};
+
 ClockTicker.prototype.play = function () {
     var source;
     if (this.element) {
@@ -49,9 +68,15 @@ ClockTicker.prototype.play = function () {
         if (!this.context) { return; }
         if (this.context.suspended) { return; }
         if (!this.buffer) { return; }
+
         source = this.context.createBufferSource();
+        this.gainNode = this.context.createGain();
+        source.connect(this.gainNode);
         source.buffer = this.buffer;
-        source.connect(this.context.destination);
+        // this.gainNode.value = this.tickVolume;
+        this.gainNode.gain.setValueAtTime(this.tickVolume, this.context.currentTime);
+        this.gainNode.connect(this.context.destination);
+        console.log('gain volume ' + this.tickVolume);
         source.start(0);
     }
 };

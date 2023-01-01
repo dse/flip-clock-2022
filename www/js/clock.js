@@ -16,9 +16,11 @@ function FlipClock2022(element, options) {
     this.is24Hour             = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour'));
     this.enableTicking        = JSON.parse(localStorage.getItem('FlipClock2022.enableTicking'));
     this.enableSecondsTicking = JSON.parse(localStorage.getItem('FlipClock2022.enableSecondsTicking'));
+    this.tickVolume           = JSON.parse(localStorage.getItem('FlipClock2022.tickVolume'));
     if (this.is24Hour == null)             { this.is24Hour = false; }
     if (this.enableTicking == null)        { this.enableTicking = false; }
     if (this.enableSecondsTicking == null) { this.enableSecondsTicking = false; }
+    if (this.tickVolume == null)           { this.tickVolume = 1; }
 
     this.elements = {};
     this.elements.year    = this.element.querySelector('[data-clock-year]');
@@ -81,6 +83,20 @@ FlipClock2022.prototype.setSecondsTicking = function (flag) {
     this.updateFromPreferences();
 };
 
+FlipClock2022.prototype.setTickVolume = function (value) {
+    if (value == null) { value = 1; }
+    if (value > 1) {
+        this.tickVolume = 1;
+    } else if (value < 0) {
+        this.tickVolume = 0;
+    } else {
+        this.tickVolume = value;
+    }
+    localStorage.setItem('FlipClock2022.tickVolume',
+                         JSON.stringify(this.tickVolume));
+    this.updateFromPreferences();
+};
+
 FlipClock2022.prototype.updateFromPreferences = function () {
     if (this.is24Hour) {
         this.splitFlaps.hour.setStrings(SplitFlap.pad00);
@@ -89,13 +105,13 @@ FlipClock2022.prototype.updateFromPreferences = function () {
     }
     this.splitFlaps.hour.updateStrings();
 
-    if (this.splitFlaps.year)    { this.splitFlaps.year   .enableTicking = this.enableTicking; }
-    if (this.splitFlaps.month)   { this.splitFlaps.month  .enableTicking = this.enableTicking; }
-    if (this.splitFlaps.day)     { this.splitFlaps.day    .enableTicking = this.enableTicking; }
-    if (this.splitFlaps.weekday) { this.splitFlaps.weekday.enableTicking = this.enableTicking; }
-    if (this.splitFlaps.hour)    { this.splitFlaps.hour   .enableTicking = this.enableTicking; }
-    if (this.splitFlaps.minute)  { this.splitFlaps.minute .enableTicking = this.enableTicking; }
-    if (this.splitFlaps.second)  { this.splitFlaps.second .enableTicking = this.enableSecondsTicking; }
+    if (this.splitFlaps.year)    { this.splitFlaps.year   .enableTicking = this.enableTicking;        this.splitFlaps.year   .tickVolume = this.tickVolume; }
+    if (this.splitFlaps.month)   { this.splitFlaps.month  .enableTicking = this.enableTicking;        this.splitFlaps.month  .tickVolume = this.tickVolume; }
+    if (this.splitFlaps.day)     { this.splitFlaps.day    .enableTicking = this.enableTicking;        this.splitFlaps.day    .tickVolume = this.tickVolume; }
+    if (this.splitFlaps.weekday) { this.splitFlaps.weekday.enableTicking = this.enableTicking;        this.splitFlaps.weekday.tickVolume = this.tickVolume; }
+    if (this.splitFlaps.hour)    { this.splitFlaps.hour   .enableTicking = this.enableTicking;        this.splitFlaps.hour   .tickVolume = this.tickVolume; }
+    if (this.splitFlaps.minute)  { this.splitFlaps.minute .enableTicking = this.enableTicking;        this.splitFlaps.minute .tickVolume = this.tickVolume; }
+    if (this.splitFlaps.second)  { this.splitFlaps.second .enableTicking = this.enableSecondsTicking; this.splitFlaps.second .tickVolume = this.tickVolume; }
 };
 
 FlipClock2022.prototype.start = function () {
