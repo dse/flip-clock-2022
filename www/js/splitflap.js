@@ -107,10 +107,15 @@ function SplitFlap() {
     this.randomness = 2;
     this.animation = 2;
     this.enableTicking = true;
+    this.setupFlicking();
 }
 
 SplitFlap.prototype.goTo = function (state) {
     this.targetState = state;
+    this.run();
+};
+
+SplitFlap.prototype.run = function () {
     if (this.isRunning) {
         return;
     }
@@ -172,7 +177,12 @@ SplitFlap.prototype.animation2 = function () {
 };
 
 SplitFlap.prototype.beforeAnimationStart = function () {
-    if (this.state === this.targetState) {
+    var targetState = this.targetState;
+    if (this.flickTargetState != null) {
+        targetState = this.flickTargetState;
+    }
+
+    if (this.state === targetState) {
         delete this.isRunning;
         return false;
     }
@@ -293,6 +303,34 @@ SplitFlap.prototype.tick = function () {
 
 SplitFlap.prototype.setTicker = function (ticker) {
     this.ticker = ticker;
+};
+
+SplitFlap.prototype.setupFlicking = function () {
+    if (this.hasFlicking) {
+        return;
+    }
+    this.hasFlicking = true;
+    this.element.addEventListener('click', this.flick.bind(this));
+};
+
+SplitFlap.prototype.flick = function () {
+    if (this.flickTargetState == null) {
+        this.flickTargetState = this.targetState;
+    }
+    this.flickTargetState = this.flickTargetState + 1;
+    if (this.flickTargetState > this.endValue) {
+        this.flickTargetState = this.startValue;
+    }
+    if (this.flickTimeout) {
+        clearTimeout(this.flickTimeout);
+    }
+    this.flickTimeout = setTimeout(this.flickReset.bind(this), 2000);
+    this.run();
+};
+
+SplitFlap.prototype.flickReset = function () {
+    delete this.flickTargetState;
+    this.run();
 };
 
 function isHidden(element) {
