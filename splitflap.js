@@ -97,7 +97,7 @@ function SplitFlap() {
     this.flapB.innerHTML = this.strings[0];
     this.delay = 40;
     this.randomness = 2;
-    this.animation = 1;
+    this.animation = 2;
 }
 SplitFlap.prototype.goTo = function (state) {
     this.targetState = state;
@@ -106,17 +106,14 @@ SplitFlap.prototype.goTo = function (state) {
     }
     this.isRunning = true;
     if (this.animation === 1) {
-        this.animation1step1();
+        this.animation1();
+    } else if (this.animation === 2) {
+        this.animation2();
     }
 };
 SplitFlap.prototype.animation1step1 = function () {
-    if (this.state === this.targetState) {
-        delete this.isRunning;
+    if (!this.beforeAnimationStart()) {
         return;
-    }
-    this.nextState = this.state + 1;
-    if (this.nextState > this.endValue) {
-        this.nextState = this.startValue;
     }
     this.step(0.2 + (Math.random() - 0.5) * 0.02 * this.randomness);
     setTimeout(this.animation1step2.bind(this), this.delay);
@@ -126,11 +123,72 @@ SplitFlap.prototype.animation1step2 = function () {
     setTimeout(this.animation1step3.bind(this), this.delay);
 };
 SplitFlap.prototype.animation1step3 = function () {
-    this.state = this.nextState;
+    this.beforeAnimationEnd();
     this.step(1);
     setTimeout(this.animation1step1.bind(this), this.delay);
 };
 
+SplitFlap.prototype.animation1 = function () {
+    if (!this.beforeAnimationStart()) {
+        return;
+    }
+    var duration = 100;         // milliseconds
+    var step1;
+    var step2;
+    var step3;
+    step1 = (function () {
+        this.step(0.2 + (Math.random() - 0.5) * 0.02 * this.randomness);
+        setTimeout(step2, duration / 3);
+    }.bind(this));
+    step2 = (function () {
+        this.step(4/6 + (Math.random() - 0.5) * 0.04 * this.randomness);
+        setTimeout(step3, duration / 3);
+    }.bind(this));
+    step3 = (function () {
+        this.beforeAnimationEnd();
+        this.step(1);
+        setTimeout(this.animation1.bind(this), duration / 3);
+    }.bind(this));
+    step1();
+};
+
+SplitFlap.prototype.animation2 = function () {
+    if (!this.beforeAnimationStart()) {
+        return;
+    }
+    var duration = 100;         // milliseconds
+    var start = Date.now();
+    var end = start + duration;
+    var frame = (function () {
+        var time = Date.now();
+        var x = (time - start) / (end - start);
+        x = Math.pow(x, 1.5);
+        if (x >= 1) {
+            this.beforeAnimationEnd();
+            this.step(1);
+            this.animation2();
+        } else {
+            this.step(x);
+            setTimeout(frame, 10);
+        }
+    }.bind(this));
+    frame();
+};
+
+SplitFlap.prototype.beforeAnimationStart = function () {
+    if (this.state === this.targetState) {
+        delete this.isRunning;
+        return false;
+    }
+    this.nextState = this.state + 1;
+    if (this.nextState > this.endValue) {
+        this.nextState = this.startValue;
+    }
+    return true;
+};
+SplitFlap.prototype.beforeAnimationEnd = function () {
+    this.state = this.nextState;
+};
 
 SplitFlap.prototype.step = function (x) {
     function clamp(y, a, b) {
@@ -139,7 +197,6 @@ SplitFlap.prototype.step = function (x) {
     x = clamp(x, 0, 1);
     var angle = x * Math.PI;
     var scaleY = Math.abs(Math.cos(angle));
-    console.log(x, scaleY);
 
     // C then A then D then B seemed to be the best order.
 
