@@ -8,7 +8,7 @@
     "freeze":           true,
     "futurehostile":    true,
     "globals":          {},
-    "latedef":          true,
+    "latedef":          "nofunc",
     "leanswitch":       true,
     "maxcomplexity":    null,
     "maxdepth":         null,
@@ -26,8 +26,8 @@
     "singleGroups":     false,  // sometimes they make things clearer
     "strict":           "global",
     "trailingcomma":    false,
-    "undef":            "vars",
-    "unused":           true,
+    "undef":            true,
+    "unused":           "vars",
     "varstmt":          false,
 
     // Relaxing options
