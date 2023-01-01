@@ -1,4 +1,4 @@
-@media (orientation: portrait), not (max-aspect-ratio: 1) {
+@media (orientation: portrait), (max-aspect-ratio: 1/1) {
     .clock__view-master--second.clock__view-master--second,
     .clock__view-master--month.clock__view-master--month {
         display: none;
@@ -14,3 +14,11 @@
         --split-flap-view-master-spacing: 1.5vw;
     }
 }
+
+/*
+ * NOTES:
+ *
+ * All modern browsers support @media (orientation: portrait).
+ *
+ * Chrome does not support @media (max-aspect-ratio: 1); must use 1/1.
+ */
