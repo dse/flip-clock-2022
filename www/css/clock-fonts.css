@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,300;1,500&display=swap');
+
+.font--noto-sans body {
+    font-family: 'Noto Sans', sans-serif;
+}
+.font--noto-sans .clock.clock {
+    font-size: 17vw;
+}
+.font--noto-sans .clock__line--date {
+    font-weight: 600;
+}
+.font--noto-sans .clock__line--time {
+    font-weight: 300;
+}
+.font--noto-sans .clock__ampm--am.clock__ampm--am {
+    top: 12%;
+}
+.font--noto-sans .clock__ampm--pm.clock__ampm--pm {
+    bottom: 10%;
+}
+
+.font--lato body {
+    font-family: 'Lato', sans-serif;
+}
+.font--lato .clock__line--date {
+    font-weight: 700;
+}
+.font--lato .clock__line--time {
+    font-weight: 400;
+}
+
+.font--poppins body {
+    font-family: 'Poppins', sans-serif;
+}
+.font--poppins .clock__line--date {
+    font-weight: 500;
+}
+.font--poppins .clock__line--time {
+    font-weight: 300;
+}
