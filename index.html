@@ -12,12 +12,14 @@
         <link rel="stylesheet" href="./clock-noto-sans.css">
         <link rel="stylesheet" href="./clock-vertical.css">
 
+        <link rel="stylesheet" href="fontawesome/css/all.min.css">
+
         <script src="splitflap.js"></script>
         <script src="splitflap-utils.js"></script>
         <script src="clock.js"></script>
     </head>
     <body>
-        <div class="clock brushed-metal-silver" id="clock">
+        <div class="clock carbon-fiber-texture" id="clock">
             <div class="clock__font-size-adjust">
                 <div class="clock__panel">
                     <div class="clock__line clock__line--date">
@@ -45,9 +47,30 @@
                 </div>
             </div>
         </div>
+        <div class="control-panel brushed-metal-silver hide" id="controlPanel">
+            <label>
+                <input class="checkbox" type="checkbox" name="is24Hour" id="is24Hour" value="1"><span class="checkbox__icon"></span>
+                24HR
+            </label>
+        </div>
+        <div class="control-panel-toggle" id="controlPanelToggle">
+            <a href="javascript:void 0;" class="control-panel-toggle__control"><i class="fa-solid fa-gears fa-fw"></i></a>
+        </div>
         <script>
             var clock = new FlipClock2022('clock');
             clock.start();
+            (function () {
+                var toggle = document.getElementById('controlPanelToggle');
+                var panel = document.getElementById('controlPanel');
+                toggle.addEventListener('click', function () {
+                    panel.classList.toggle('hide');
+                });
+                var is24Hour = document.getElementById('is24Hour');
+                is24Hour.checked = clock.is24Hour;
+                is24Hour.addEventListener('change', function () {
+                    clock.set24Hour(is24Hour.checked);
+                });
+            }());
         </script>
     </body>
 </html>

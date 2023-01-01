@@ -12,6 +12,12 @@ function FlipClock2022(element, options) {
     if (!this.element) {
         throw new Error(`element not specified or not found`);
     }
+
+    this.is24Hour = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour'));
+    if (this.is24Hour == null) {
+        this.is24Hour = false;
+    }
+
     this.elements = {};
     this.elements.year    = this.element.querySelector('[data-clock-year]');
     this.elements.month   = this.element.querySelector('[data-clock-month]');
@@ -38,7 +44,7 @@ function FlipClock2022(element, options) {
 
     if (this.is24Hour) {
         this.splitFlaps.hour.setStrings(SplitFlap.pad00);
-        this.splitFlaps.updateStrings();
+        this.splitFlaps.hour.updateStrings();
     }
 }
 
@@ -47,6 +53,7 @@ FlipClock2022.prototype.set24Hour = function (flag) {
         flag = true;
     }
     this.is24Hour = flag;
+    localStorage.setItem('FlipClock2022.is24Hour', JSON.stringify(this.is24Hour));
     if (!this.splitFlaps.hour) {
         return;
     }
