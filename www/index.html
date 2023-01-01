@@ -17,6 +17,7 @@
         <script src="js/splitflap.js"></script>
         <script src="js/splitflap-utils.js"></script>
         <script src="js/clock.js"></script>
+        <script src="js/audio.js"></script>
     </head>
     <body>
         <div class="clock carbon-fiber-texture" id="clock">
@@ -57,9 +58,9 @@
             <a href="javascript:void 0;" class="control-panel-toggle__control"><i class="fa-solid fa-gears fa-fw"></i></a>
         </div>
         <script>
-            var clock = new FlipClock2022('clock');
-            clock.start();
-            (function () {
+            var tick;
+            var clock;
+            function initEvents() {
                 var toggle = document.getElementById('controlPanelToggle');
                 var panel = document.getElementById('controlPanel');
                 toggle.addEventListener('click', function () {
@@ -70,7 +71,19 @@
                 is24Hour.addEventListener('change', function () {
                     clock.set24Hour(is24Hour.checked);
                 });
-            }());
+            }
+            function init() {
+                tick = new ClockTicker('sounds/tick2.wav');
+                clock = new FlipClock2022(document.getElementById('clock'));
+                clock.setTicker(tick);
+                clock.start();
+                initEvents();
+            }
+            if (document.readyState === 'complete') {
+                init();
+            } else {
+                window.addEventListener('load', init);
+            }
         </script>
     </body>
 </html>
