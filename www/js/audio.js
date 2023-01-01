@@ -15,6 +15,9 @@ function ClockTicker(audio) {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         if (!window.AudioContext) { return; }
         this.context = new AudioContext();
+        this.gainNode = this.context.createGain();
+        this.gainNode.gain.value = 1;
+        this.gainNode.connect(this.context.destination);
         var request = new XMLHttpRequest();
         request.open('GET', this.url, true);
         request.responseType = 'arraybuffer';
@@ -46,6 +49,7 @@ ClockTicker.prototype.setTickVolume = function (value) {
         value = Number(value);
         if (isNaN(value)) {
             this.tickVolume = 1;
+            this.gainNode.gain.value = this.tickVolume;
             return;
         }
     }
@@ -57,6 +61,9 @@ ClockTicker.prototype.setTickVolume = function (value) {
         this.tickVolume = 1;
     } else {
         this.tickVolume = value;
+    }
+    if (this.gainNode) {
+        this.gainNode.gain.value = this.tickVolume;
     }
 };
 
@@ -70,13 +77,8 @@ ClockTicker.prototype.play = function () {
         if (!this.buffer) { return; }
 
         source = this.context.createBufferSource();
-        this.gainNode = this.context.createGain();
         source.connect(this.gainNode);
         source.buffer = this.buffer;
-        // this.gainNode.value = this.tickVolume;
-        this.gainNode.gain.setValueAtTime(this.tickVolume, this.context.currentTime);
-        this.gainNode.connect(this.context.destination);
-        console.log('gain volume ' + this.tickVolume);
         source.start(0);
     }
 };
