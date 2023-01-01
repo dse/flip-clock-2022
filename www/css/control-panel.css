@@ -14,6 +14,9 @@
     opacity: 0.25;
     color: #999;
     line-height: var(--control-panel-line-height);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .control-panel__more-toggles {
     position: fixed;
@@ -21,6 +24,9 @@
     right: 2em;
     opacity: 0.25;
     color: #999;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .control-panel__toggle__control {
     box-sizing: content-box;
@@ -49,6 +55,9 @@
 .control-panel label {
     white-space: nowrap;
     margin-right: 0.666666em;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .control-panel label:last-of-type {
     margin-right: 0;

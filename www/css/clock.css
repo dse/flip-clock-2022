@@ -24,6 +24,9 @@ body {
     border-radius: calc(var(--split-flap-view-master-spacing) + var(--border-radius) - 2px);
     background-color: black;
     border-bottom: 1px solid var(--hiborder);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .clock__flap {
     border-top:    1px solid transparent;
@@ -53,6 +56,9 @@ body {
     display: inline-block;
     width: 100%;
     position: relative;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .clock__split-flap + .clock__split-flap {
     margin-left: 1rem;
