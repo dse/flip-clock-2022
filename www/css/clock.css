@@ -7,9 +7,6 @@
     --hiborder: rgba(100%,100%,100%,0.5);
     --shborder: rgba(0%,0%,0%,0.8);
 }
-*, *::before, *::after {
-    box-sizing: border-box;
-}
 body {
     background-color: var(--bg);
     color: white;
