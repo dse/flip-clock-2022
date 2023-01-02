@@ -157,10 +157,10 @@ SplitFlap.prototype.goToNow = function (state, options) {
         }
         this.flickTimeout = setTimeout(this.flickReset.bind(this), this.flickTimeoutMs);
         this.run();
-        return;
+    } else {
+        this.targetState = state;
+        this.run();
     }
-    this.targetState = state;
-    this.run();
 };
 
 SplitFlap.prototype.run = function () {
