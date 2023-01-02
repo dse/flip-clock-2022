@@ -53,13 +53,8 @@ ClockTicker.prototype.workAroundNoAutoPlay = function () {
 ClockTicker.prototype.setTickVolume = function (value) {
     if (typeof value === 'string') {
         value = Number(value);
-        if (isNaN(value)) {
-            this.tickVolume = 1;
-            this.gainNode.gain.value = this.tickVolume;
-            return;
-        }
     }
-    if (typeof value !== 'number') {
+    if (typeof value !== 'number' || isNaN(value)) {
         this.tickVolume = 1;
     } else {
         this.tickVolume = clamp(value, 0, 1);
