@@ -47,7 +47,8 @@ h1 {
  * 2. Show the overflow in Edge and IE.
  */
 hr {
-  box-sizing: content-box; /* 1 */
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box; /* 1 */
   height: 0; /* 1 */
   overflow: visible; /* 2 */
 }
@@ -216,7 +217,8 @@ fieldset {
  *    `fieldset` elements in all browsers.
  */
 legend {
-  box-sizing: border-box; /* 1 */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 1 */
   color: inherit; /* 2 */
   display: table; /* 1 */
   max-width: 100%; /* 1 */
@@ -244,7 +246,8 @@ textarea {
  */
 [type=checkbox],
 [type=radio] {
-  box-sizing: border-box; /* 1 */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
 }
 
@@ -318,7 +321,8 @@ template {
 }
 
 *, *::before, *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 :root {
@@ -352,7 +356,8 @@ body {
   border-radius: calc(var(--split-flap-view-master-spacing) + var(--border-radius) - 2px);
   background-color: black;
   border-bottom: 1px solid var(--hiborder);
-  -webkit-user-select: none; /* Safari */ /* IE 10 and IE 11 */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
   -moz-user-select: none;
        user-select: none; /* Standard syntax */
 }
@@ -390,7 +395,8 @@ body {
   display: inline-block;
   width: 100%;
   position: relative;
-  -webkit-user-select: none; /* Safari */ /* IE 10 and IE 11 */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
   -moz-user-select: none;
        user-select: none; /* Standard syntax */
 }
@@ -432,9 +438,16 @@ body {
 }
 
 .clock__line {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .clock {
@@ -443,9 +456,16 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .clock__ampm {
@@ -532,9 +552,16 @@ body {
  */
 @supports (display: flex) {
   .clock__line {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     gap: var(--inter-margin);
   }
   .clock__line--calendar {
@@ -556,10 +583,12 @@ body {
     margin-left: 0;
   }
   .clock__line--calendar-month-year > .clock__view-master--calendar-month {
-    flex-basis: 66.6666666667%;
+    -ms-flex-preferred-size: 66.6666666667%;
+        flex-basis: 66.6666666667%;
   }
   .clock__line--calendar-month-year > .clock__view-master--calendar-year {
-    flex-basis: 33.3333333333%;
+    -ms-flex-preferred-size: 33.3333333333%;
+        flex-basis: 33.3333333333%;
   }
 }
 [type=checkbox].checkbox--fa {
@@ -631,7 +660,8 @@ body {
   width: var(--awesome-diam);
   height: var(--awesome-diam);
   border-radius: 1em;
-  box-shadow: 0 0 0.5em 0 black;
+  -webkit-box-shadow: 0 0 0.5em 0 black;
+          box-shadow: 0 0 0.5em 0 black;
   content: "";
   background-color: var(--awesome-background-color);
   border: 1px solid var(--awesome-border-color);
@@ -639,13 +669,21 @@ body {
 
 .checkbox--awesome + .checkbox__icon::before,
 .checkbox--awesome + .checkbox__icon::after {
-  transform: translateX(calc(-1 * var(--awesome-transform)));
+  -webkit-transform: translateX(calc(-1 * var(--awesome-transform)));
+      -ms-transform: translateX(calc(-1 * var(--awesome-transform)));
+          transform: translateX(calc(-1 * var(--awesome-transform)));
+  -webkit-transition: -webkit-transform 150ms;
+  transition: -webkit-transform 150ms;
+  -o-transition: transform 150ms;
   transition: transform 150ms;
+  transition: transform 150ms, -webkit-transform 150ms;
 }
 
 .checkbox--awesome:checked + .checkbox__icon::before,
 .checkbox--awesome:checked + .checkbox__icon::after {
-  transform: translateX(0);
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
 }
 
 .range--awesome {
