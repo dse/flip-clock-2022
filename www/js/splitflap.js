@@ -127,7 +127,10 @@ function SplitFlap() {
         this.enableTicking = true;
     }
     if (this.duration == null) {
-        this.duration = 100;    // milliseconds
+        this.duration = 150;    // milliseconds
+    }
+    if (this.hurryFactor == null) {
+        this.hurryFactor = 0.75;
     }
 
     this.setupFlicking();
@@ -169,8 +172,8 @@ SplitFlap.prototype.noAnimation = function () {
     this.state = this.targetState;
     this.nextState = this.targetState;
     this.targetState = this.targetState;
-    this.flapA.innerHTML = this.strings[this.stateA = this.state];
-    this.flapB.innerHTML = this.strings[this.stateB = this.state];
+    this.flapA.innerHTML = this.strings[this.stateA = this.state - this.startValue];
+    this.flapB.innerHTML = this.strings[this.stateB = this.state - this.startValue];
     this.stateC = null;
     this.flapC.innerHTML = '';
     this.flapC.style.display = 'none';
@@ -187,7 +190,7 @@ SplitFlap.prototype.animation1 = function () {
     }
     var duration = this.duration;
     if (this.hurry()) {
-        duration = duration * 0.75;
+        duration = duration * this.hurryFactor;
     }
 
     var step1;
@@ -216,7 +219,7 @@ SplitFlap.prototype.animation2 = function () {
     }
     var duration = this.duration;
     if (this.hurry()) {
-        duration = duration * 0.75;
+        duration = duration * this.hurryFactor;
     }
 
     var start = Date.now();

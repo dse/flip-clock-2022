@@ -10,8 +10,13 @@
         font-size: 150%;
     }
     :root {
-        --border-radius: 1.5vw;
-        --split-flap-view-master-spacing: 1.5vw;
+        --border-radius: 2vw;
+        --split-flap-view-master-spacing: 2vw;
+    }
+}
+@media (min-aspect-ratio: 10/16) {
+    .clock__line--calendar {
+        display: none;
     }
 }
 

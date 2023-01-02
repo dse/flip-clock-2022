@@ -38,6 +38,7 @@ function FlipClock2022(element, options) {
 
     this.splitFlaps = {};
     this.splitFlapArray = [];
+
     if (this.elements.year)    { this.splitFlaps.year    = new SplitFlap(this.elements.year,    'year',    startYear, endYear);           this.splitFlapArray.push({ splitFlap: this.splitFlaps.year });    }
     if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   'month',   0, 11, FlipClock2022.month3);  this.splitFlapArray.push({ splitFlap: this.splitFlaps.month });   }
     if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     'day',     1, 31);                        this.splitFlapArray.push({ splitFlap: this.splitFlaps.day });     }
@@ -54,6 +55,8 @@ function FlipClock2022(element, options) {
         delay = 1 + this.interSplitFlapDelay * (this.splitFlapArray.length - i - 1);
         this.splitFlapArray[i].splitFlap.delay = delay;
     }
+
+    this.initCalendar();
 
     this.updateFromPreferences();
 }
@@ -92,8 +95,7 @@ FlipClock2022.prototype.setTickVolume = function (value) {
     } else {
         this.tickVolume = value;
     }
-    localStorage.setItem('FlipClock2022.tickVolume',
-                         JSON.stringify(this.tickVolume));
+    localStorage.setItem('FlipClock2022.tickVolume', JSON.stringify(this.tickVolume));
     this.updateFromPreferences();
 };
 
@@ -183,6 +185,8 @@ FlipClock2022.prototype.run = function () {
     }
     var msecs = 1000 - this.date.getMilliseconds() % 1000;
     this.timeout = setTimeout(this.run.bind(this), msecs);
+
+    this.runCalendar();
 };
 
 FlipClock2022.weekday3 = function (weekday) {
@@ -215,6 +219,88 @@ FlipClock2022.prototype.setTicker = function (ticker) {
     var i;
     for (i = 0; i < this.splitFlapArray.length; i += 1) {
         this.splitFlapArray[i].splitFlap.setTicker(ticker);
+    }
+};
+
+FlipClock2022.prototype.initCalendar = function () {
+    this.elements.calendarMonth = this.element.querySelector('[data-clock-calendar-month]');
+    this.elements.calendarYear  = this.element.querySelector('[data-clock-calendar-year]');
+
+    var startYear = 1970;
+
+    // 2020 ... 2029 => 2039, 2030 ... 2039 => 2049, etc.
+    var endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
+
+    this.calendarSplitFlaps = {};
+    this.calendarSplitFlapArray = [];
+
+    if (this.elements.calendarMonth) {
+        this.splitFlaps.calendarMonth = new SplitFlap(this.elements.calendarMonth, 'calendarMonth', 0, 11, SplitFlap.MONTHS);
+        this.calendarSplitFlapArray.push({ splitFlap: this.splitFlaps.calendarMonth });
+    }
+    if (this.elements.calendarYear) {
+        this.splitFlaps.calendarYear = new SplitFlap(this.elements.calendarYear, 'calendarYear', startYear, endYear);
+        this.calendarSplitFlapArray.push({ splitFlap: this.splitFlaps.calendarYear });
+    }
+
+    var calendarDayElements = Array.from(document.querySelectorAll('[data-clock-calendar-day]'));
+    var i;
+    var elt;
+    var sf;
+
+    this.elements.calendarDays = [];
+    this.splitFlaps.calendarDays = [];
+    for (i = 0; i < calendarDayElements.length; i += 1) {
+        elt = calendarDayElements[i];
+        this.elements.calendarDays.push(elt);
+        sf = new SplitFlap(elt, 0, 31, function (state) { return state ? state : ''; });
+        this.splitFlaps.calendarDays.push(sf);
+        this.calendarSplitFlapArray.push({ splitFlap: sf });
+    }
+
+    this.calendarInterSplitFlapDelay = 5;
+
+    var delay;
+    for (i = 0; i < this.calendarSplitFlapArray.length; i += 1) {
+        delay = 1 + this.calendarInterSplitFlapDelay * i;
+        this.calendarSplitFlapArray[i].splitFlap.delay = delay;
+    }
+};
+
+FlipClock2022.prototype.runCalendar = function () {
+    if (this.splitFlaps.calendarMonth) {
+        this.splitFlaps.calendarMonth.goTo(this.date.getMonth());
+    }
+    if (this.splitFlaps.calendarYear) {
+        this.splitFlaps.calendarYear.goTo(this.date.getFullYear());
+    }
+
+    var startMonth = new Date();
+    startMonth.setDate(1);
+    var endMonth = new Date(startMonth);
+    endMonth.setMonth(endMonth.getMonth() + 1);
+    endMonth.setDate(0);
+
+    var i;
+    var sf;
+    for (i = 0; i < startMonth.getDay(); i += 1) {
+        sf = this.splitFlaps.calendarDays[i];
+        if (sf) {
+            sf.goTo(0);
+        }
+    }
+    for (i = 0; i < endMonth.getDate(); i += 1) {
+        sf = this.splitFlaps.calendarDays[i + startMonth.getDay()];
+        if (sf) {
+            sf.goTo(i + 1);
+        }
+    }
+    for (i = i + endMonth.getDate() + 1;
+         i < this.splitFlaps.calendarDays.length; i += 1) {
+        sf = this.splitFlaps.calendarDays[i];
+        if (sf) {
+            sf.goTo(0);
+        }
     }
 };
 
