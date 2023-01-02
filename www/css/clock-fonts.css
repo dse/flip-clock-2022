@@ -49,3 +49,25 @@
 .font--arial .clock.clock {
     font-size: 17vw;
 }
+
+.font--helvetica-bold-condensed--apple body {
+    font-family: 'Helvetica Neue';
+    font-stretch: condensed;
+}
+.font--helvetica-bold-condensed--apple .clock.clock {
+    font-size: 20vw;
+}
+.font--helvetica-bold-condensed--apple .clock__line--date {
+    font-weight: 900;
+    line-height: 1.2;
+}
+.font--helvetica-bold-condensed--apple .clock__line--time {
+    font-weight: 700;
+    line-height: 1.0;
+}
+.font--helvetica-bold-condensed--apple .clock__ampm--am.clock__ampm--am {
+    top: 9%;
+}
+.font--helvetica-bold-condensed--apple .clock__ampm--pm.clock__ampm--pm {
+    bottom: 9%;
+}
