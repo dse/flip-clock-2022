@@ -182,7 +182,7 @@ body {
         gap: var(--inter-margin);
     }
     .clock__line--calendar {
-        gap: var(--inter-margin * 0.5);
+        gap: calc(var(--inter-margin) * 0.5);
     }
     .clock__panel {
         width: 90%;
