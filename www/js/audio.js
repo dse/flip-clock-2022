@@ -78,10 +78,9 @@ ClockTicker.prototype.play = function () {
     if (this.element) {
         // do nothing
     } else if (this.url) {
-        if (!this.context) { return; }
-        if (this.context.suspended) { return; }
-        if (!this.buffer) { return; }
-
+        if (!this.context || this.context.suspended || !this.buffer) {
+            return;
+        }
         source = this.context.createBufferSource();
         source.connect(this.gainNode);
         source.buffer = this.buffer;
