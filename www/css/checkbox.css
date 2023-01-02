@@ -1,7 +1,7 @@
-[type="checkbox"].checkbox {
+[type="checkbox"].checkbox--fa {
     display: none;
 }
-[type="checkbox"].checkbox + .checkbox__icon::before {
+[type="checkbox"].checkbox--fa + .checkbox__icon::before {
     font-weight: 900;           /* .fa-solid */
     text-align: center;         /* .fa-fw */
     width: 1.25em;              /* .fa-fw */
@@ -16,6 +16,60 @@
 
     content: '\f204';           /*fa-toggle-off*/
 }
-[type="checkbox"].checkbox:checked + .checkbox__icon::before {
+[type="checkbox"].checkbox--fa:checked + .checkbox__icon::before {
     content: '\f205';           /*fa-toggle-on*/
+}
+
+:root {
+    --checkbox-awesome-height: 0.75em;
+    --checkbox-awesome-width: 1.5em;
+    --checkbox-awesome-border: 2px;
+    --checkbox-awesome-diam: calc(var(--checkbox-awesome-height) - var(--checkbox-awesome-border) * 2);
+    --checkbox-awesome-transform: calc(var(--checkbox-awesome-width) - var(--checkbox-awesome-diam) - var(--checkbox-awesome-border) * 2);
+}
+.checkbox--awesome {
+    display: none;
+}
+.checkbox--awesome + .checkbox__icon {
+    vertical-align: baseline;
+    border-radius: 1em;
+    background-color: black;
+    display: inline-block;
+    width: var(--checkbox-awesome-width);
+    height: var(--checkbox-awesome-height);
+    position: relative;
+    overflow: hidden;
+    will-change: transform; /* fixes an issue where the border-radius intermittently disappears while an animated transform is taking place */
+    border: var(--checkbox-awesome-border) solid black;
+}
+.checkbox--awesome + .checkbox__icon::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1em;
+    background-color: #ff9900;
+    content: '';
+}
+.checkbox--awesome + .checkbox__icon::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--checkbox-awesome-diam);
+    height: var(--checkbox-awesome-diam);
+    border-radius: 1em;
+    background-color: #ccc;
+    box-shadow: 0 0 0.5em 0 black;
+    content: '';
+    border: 1px solid #eee;
+}
+.checkbox--awesome + .checkbox__icon::before,
+.checkbox--awesome + .checkbox__icon::after {
+    transform: translateX(calc(-1 * var(--checkbox-awesome-transform)));
+    transition: transform 150ms;
+}
+.checkbox--awesome:checked + .checkbox__icon::before,
+.checkbox--awesome:checked + .checkbox__icon::after {
+    transform: translateX(0);
 }
