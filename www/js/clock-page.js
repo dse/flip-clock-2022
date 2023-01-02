@@ -20,12 +20,27 @@ function init() {
     initLogs();
     initCheckboxEvents();
     initVolumeSlider();
-    if (/(?:^|[?&])apple(?:$|[?&=])/.test(location.search)) {
-        useAppleHelveticaBoldCondensed();
+    if (/(?:^|[?&])apple(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--helvetica-bold-condensed--apple');
+    }
+    if (/(?:^|[?&])arial(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--arial');
+    }
+    if (/(?:^|[?&])arial-?black(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--arial-black');
+    }
+    if (/(?:^|[?&])poppins(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--poppins');
+    }
+    if (/(?:^|[?&])poppins(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--lato');
+    }
+    if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--times');
     }
 }
 
-function useAppleHelveticaBoldCondensed() {
+function useFontClass(className) {
     var classList = document.documentElement.classList;
     var i;
     var classes = [];
@@ -37,7 +52,7 @@ function useAppleHelveticaBoldCondensed() {
             classList.remove(classes[i]);
         }
     }
-    classList.add('font--helvetica-bold-condensed--apple');
+    classList.add(className);
 }
 
 function initLogs() {
