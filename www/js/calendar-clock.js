@@ -48,10 +48,10 @@ CalendarClock2022.prototype.initSplitFlaps = function () {
 };
 CalendarClock2022.prototype.initInterSplitFlapDelay = function () {
     var i;
-    this.calendarInterSplitFlapDelay = 5;
+    this.interSplitFlapDelay = 5;
     var delay;
     for (i = 0; i < this.calendarSplitFlapArray.length; i += 1) {
-        delay = 1 + this.calendarInterSplitFlapDelay * i;
+        delay = 1 + this.interSplitFlapDelay * i;
         this.calendarSplitFlapArray[i].splitFlap.delay = delay;
     }
 };
