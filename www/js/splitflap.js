@@ -33,6 +33,9 @@
  * properties are assigned.
  */
 function SplitFlap() {
+    /**
+     * Process command line arguments.
+     */
     var args = Array.from(arguments);
     this.element = args.shift();
     if (typeof this.element === 'string') {
@@ -65,11 +68,16 @@ function SplitFlap() {
             break;
         }
     }
-    if (this.name != null) {
-        this.element.setAttribute('data-name', this.name);
-    }
+
+    /**
+     * Sanity check: make sure required arguments are specified.
+     */
     if (this.startValue == null && this.endValue == null && this.strings == null) {
         throw new Error('string array or numeric range must be specified');
+    }
+
+    if (this.name != null) {
+        this.element.setAttribute('data-name', this.name);
     }
     if (!this.strings) {
         this.strings = [];
@@ -79,6 +87,7 @@ function SplitFlap() {
             this.setStrings();
         }
     }
+
     this.element.innerHTML = '';
     this.flapA = document.createElement('span');
     this.flapB = document.createElement('span');
@@ -94,6 +103,9 @@ function SplitFlap() {
     this.element.appendChild(this.flapD);
     this.flapC.style.display = 'none';
     this.flapD.style.display = 'none';
+    this.flapA.innerHTML = this.strings[0];
+    this.flapB.innerHTML = this.strings[0];
+
     this.state       = this.startValue;
     this.nextstate   = this.startValue;
     this.targetState = this.startValue;
@@ -101,12 +113,23 @@ function SplitFlap() {
     this.stateB = 0;
     this.stateC = null;
     this.stateD = null;
-    this.flapA.innerHTML = this.strings[0];
-    this.flapB.innerHTML = this.strings[0];
-    this.delay = 40;
-    this.randomness = 2;
-    this.animation = 2;
-    this.enableTicking = true;
+
+    if (this.delay == null) {
+        this.delay = 40;        // milliseconds
+    }
+    if (this.randomness == null) {
+        this.randomness = 2;
+    }
+    if (this.animation == null) {
+        this.animation = 2;
+    }
+    if (this.enableTicking == null) {
+        this.enableTicking = true;
+    }
+    if (this.duration == null) {
+        this.duration = 100;    // milliseconds
+    }
+
     this.setupFlicking();
 }
 
@@ -120,18 +143,45 @@ SplitFlap.prototype.run = function () {
         return;
     }
     this.isRunning = true;
-    if (this.animation === 1) {
+    this.runAnimation();
+};
+
+SplitFlap.prototype.runAnimation = function () {
+    if (this.animation === 0) {
+        this.noAnimation();
+    } else if (this.animation === 1) {
         this.animation1();
     } else if (this.animation === 2) {
         this.animation2();
     }
 };
 
+SplitFlap.prototype.noAnimation = function () {
+    delete this.isRunning;
+    this.state = this.targetState;
+    this.nextState = this.targetState;
+    this.targetState = this.targetState;
+    this.flapA.innerHTML = this.strings[this.stateA = this.state];
+    this.flapB.innerHTML = this.strings[this.stateB = this.state];
+    this.stateC = null;
+    this.flapC.innerHTML = '';
+    this.flapC.style.display = 'none';
+    this.flapC.style.transform = '';
+    this.stateD = null;
+    this.flapD.innerHTML = '';
+    this.flapD.style.display = 'none';
+    this.flapD.style.transform = '';
+};
+
 SplitFlap.prototype.animation1 = function () {
     if (!this.beforeAnimationStart()) {
         return;
     }
-    var duration = 100;         // milliseconds
+    var duration = this.duration;
+    if (this.hurry()) {
+        duration = duration * 0.75;
+    }
+
     var step1;
     var step2;
     var step3;
@@ -156,18 +206,8 @@ SplitFlap.prototype.animation2 = function () {
     if (!this.beforeAnimationStart()) {
         return;
     }
-
-    var duration = this.duration || 100; // milliseconds
-
-    // unless next state is the target state, flick faster.
-    var targetState = this.targetState;
-    if (this.flickTargetState != null) {
-        targetState = this.flickTargetState;
-    }
-    var a = targetState - this.startValue;
-    var b = this.nextState - this.startValue;
-    var modulo = this.endValue - this.startValue + 1;
-    if (a % modulo !== b % modulo) {
+    var duration = this.duration;
+    if (this.hurry()) {
         duration = duration * 0.75;
     }
 
@@ -345,6 +385,20 @@ SplitFlap.prototype.flick = function () {
 SplitFlap.prototype.flickReset = function () {
     delete this.flickTargetState;
     this.run();
+};
+
+SplitFlap.prototype.hurry = function () {
+    // unless next state is the target state, flick faster.
+    var targetState = this.targetState;
+    if (this.flickTargetState != null) {
+        targetState = this.flickTargetState;
+    }
+    var a = targetState - this.startValue;
+    var b = this.nextState - this.startValue;
+    var modulo = this.endValue - this.startValue + 1;
+    var hurry = a % modulo !== b % modulo;
+    console.log(hurry);
+    return hurry;
 };
 
 function isHidden(element) {
