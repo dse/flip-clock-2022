@@ -1,0 +1,30 @@
+{
+  "name": "flip-clock-2022",
+  "version": "1.0.0",
+  "description": "It's a flip clock.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dse/flip-clock-2022.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dse/flip-clock-2022/issues"
+  },
+  "homepage": "https://github.com/dse/flip-clock-2022#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.13",
+    "browser-sync": "^2.27.11",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-webpack": "^1.5.0",
+    "sass": "^1.57.1",
+    "webpack": "^5.75.0"
+  }
+}
