@@ -87,7 +87,7 @@ body {
     margin-top: var(--inter-margin);
 }
 .clock__line--calendar-week + .clock__line--calendar-week {
-    margin-left: calc(var(--inter-margin) * 0.5);
+    margin-top: calc(var(--inter-margin) * 0.5);
 }
 .clock__line {
     display: flex;
