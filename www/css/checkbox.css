@@ -23,18 +23,23 @@
 :root {
     --awesome-height: 0.75em;
     --awesome-checkbox-width: 1.5em;
+    --awesome-range-width: 6em;
     --awesome-border: 2px;
     --awesome-diam: calc(var(--awesome-height) - var(--awesome-border) * 2);
     --awesome-transform: calc(var(--awesome-checkbox-width) - var(--awesome-diam) - var(--awesome-border) * 2);
+
+    --awesome-background-color: #bbb;
+    --awesome-border-color: #eee;
 }
 .checkbox--awesome {
     display: none;
 }
 .checkbox--awesome + .checkbox__icon {
-    vertical-align: baseline;
+    display: inline-block;
+    vertical-align: middle;
+
     border-radius: 1em;
     background-color: black;
-    display: inline-block;
     width: var(--awesome-checkbox-width);
     height: var(--awesome-height);
     position: relative;
@@ -59,10 +64,10 @@
     width: var(--awesome-diam);
     height: var(--awesome-diam);
     border-radius: 1em;
-    background-color: #ccc;
     box-shadow: 0 0 0.5em 0 black;
     content: '';
-    border: 1px solid #eee;
+    background-color: var(--awesome-background-color);
+    border: 1px solid var(--awesome-border-color);
 }
 .checkbox--awesome + .checkbox__icon::before,
 .checkbox--awesome + .checkbox__icon::after {
@@ -72,4 +77,52 @@
 .checkbox--awesome:checked + .checkbox__icon::before,
 .checkbox--awesome:checked + .checkbox__icon::after {
     transform: translateX(0);
+}
+
+.range--awesome {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    display: inline-block;
+    vertical-align: middle;
+
+    border-radius: 1em;
+    background-color: black;
+    width: var(--awesome-checkbox-width);
+    height: var(--awesome-height);
+    border: var(--awesome-border) solid black;
+}
+
+.range--awesome::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.range--awesome::-moz-range-track {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.range--awesome::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: var(--awesome-diam);
+    height: var(--awesome-diam);
+    border-radius: 1em;
+    background-color: var(--awesome-background-color);
+    border: 1px solid var(--awesome-border-color);
+}
+.range--awesome::-moz-range-thumb {
+    font-size: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: var(--awesome-diam);
+    height: var(--awesome-diam);
+    border-radius: 1em;
+    background-color: var(--awesome-background-color);
+    border: 1px solid var(--awesome-border-color);
 }
