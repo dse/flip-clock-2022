@@ -6,6 +6,7 @@
     --shwhite: rgb(82%,82%,82%);
     --hiborder: rgba(100%,100%,100%,0.5);
     --shborder: rgba(0%,0%,0%,0.8);
+    --inter-margin: 1.5vw;
 }
 body {
     background-color: var(--bg);
@@ -62,13 +63,13 @@ body {
     user-select: none; /* Standard syntax */
 }
 .clock__split-flap + .clock__split-flap {
-    margin-left: 1rem;
+    margin-left: var(--inter-margin);
 }
 .clock__view-master + .clock__view-master {
-    margin-left: 1rem;
+    margin-left: var(--inter-margin);
 }
 .clock__line--calendar .clock__view-master + .clock__view-master {
-    margin-left: 0.5rem;
+    margin-left: calc(var(--inter-margin) * 0.5);
 }
 .clock__split-flap::before {
     content: '\0000a0';
@@ -83,13 +84,10 @@ body {
     line-height: 1.3;
 }
 .clock__line + .clock__line {
-    margin-top: 1rem;
+    margin-top: var(--inter-margin);
 }
 .clock__line--calendar-week + .clock__line--calendar-week {
-    margin-top: 0.5rem;
-}
-.clock__split-flap {
-    /* width: 15vw; */
+    margin-left: calc(var(--inter-margin) * 0.5);
 }
 .clock__line {
     display: flex;
@@ -142,7 +140,7 @@ body {
 }
 
 /**
- * Font size styles
+ * Font styles
  */
 .clock {
     font-size: 15vw;
@@ -167,14 +165,6 @@ body {
 }
 
 /**
- * Font styles
- */
-.clock__line--date {
-}
-.clock__line--time {
-}
-
-/**
  * Miscellaneous
  */
 [data-clock-weekday], [data-clock-month] {
@@ -189,10 +179,10 @@ body {
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
-        gap: 1rem;
+        gap: var(--inter-margin);
     }
     .clock__line--calendar {
-        gap: 0.75rem;
+        gap: var(--inter-margin * 0.5);
     }
     .clock__panel {
         width: 90%;
