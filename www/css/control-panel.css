@@ -59,6 +59,10 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
 }
+.control-panel input[type="range"] {
+    vertical-align: middle;
+    width: 6em;
+}
 .control-panel label:last-of-type {
     margin-right: 0;
 }
