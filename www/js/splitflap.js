@@ -115,7 +115,7 @@ function SplitFlap() {
     this.stateD = null;
 
     if (this.delay == null) {
-        this.delay = 40;        // milliseconds
+        this.delay = 0;         // milliseconds
     }
     if (this.randomness == null) {
         this.randomness = 2;
