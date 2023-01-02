@@ -261,27 +261,40 @@ FlipClock2022.prototype.runCalendar = function () {
         this.splitFlaps.calendarYear.goTo(this.date.getFullYear());
     }
 
+    if (!this.splitFlaps.calendarDays) {
+        return;
+    }
+
     var startMonth = new Date(this.date);
-    startMonth.setDate(1);
+    startMonth.setDate(1);      // first of this month
     var endMonth = new Date(startMonth);
-    endMonth.setMonth(endMonth.getMonth() + 1);
-    endMonth.setDate(0);
+    endMonth.setMonth(endMonth.getMonth() + 1); // first of next month
+    endMonth.setDate(0);        // last day of prev month
+
+    var startWeekday = startMonth.getDay(); // from 0 to 6 inclusive
+    var dayCount = endMonth.getDate();      // from 28 to 31 inclusive
 
     var i;
     var sf;
-    for (i = 0; i < startMonth.getDay(); i += 1) {
+
+    // blank out some of the splitflaps on the first line
+    for (i = 0; i < startWeekday; i += 1) {
         sf = this.splitFlaps.calendarDays[i];
         if (sf) {
             sf.goTo(0);
         }
     }
-    for (i = 0; i < endMonth.getDate(); i += 1) {
-        sf = this.splitFlaps.calendarDays[i + startMonth.getDay()];
+
+    // fill out the calendar days (from 0 to (27..30) inclusive)
+    for (i = 0; i < dayCount; i += 1) {
+        sf = this.splitFlaps.calendarDays[i + startWeekday];
         if (sf) {
-            sf.goTo(i + 1);
+            sf.goTo(i + 1); // from 1 to (28..31) inclusive
         }
     }
-    for (i = i + endMonth.getDate() + 1;
+
+    // blank out remaining splitflaps
+    for (i = startWeekday + dayCount;
          i < this.splitFlaps.calendarDays.length; i += 1) {
         sf = this.splitFlaps.calendarDays[i];
         if (sf) {
