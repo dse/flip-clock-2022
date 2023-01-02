@@ -4,9 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
         <title>Flip Clock 2022</title>
-
         <script>
             var resources = [
                 ('<link rel="stylesheet" href="css/main.css{cacheBuster}">'),
@@ -17,10 +15,8 @@
                 ('<script src="js/clock-page.js{cacheBuster}"><' + '/script>'),
             ];
             (function () {
-                var cacheBuster = /\b(?:ipad|iphone)\b/i.test(navigator.userAgent);
-                var ms = Date.now();
-                if (cacheBuster) {
-                    document.write(resources.join("\n").replace(/\{cacheBuster\}/g, '?v=' + ms));
+                if (/(?:^|[?&])cacheBuster(?:$|[?&=])/.test(location.search)) {
+                    document.write(resources.join("\n").replace(/\{cacheBuster\}/g, '?v=' + Date.now()));
                 } else {
                     document.write(resources.join("\n").replace(/\{cacheBuster\}/g, ''));
                 }
