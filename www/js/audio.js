@@ -1,7 +1,13 @@
 'use strict';
-/*global webkitAudioContext, AudioContext */
+/*global AudioContext */
 
-// NOTES: Safari delays audio when using file:// and <audio> element
+// SAFARI NOTES
+//
+// - When using file:// protocol and <audio> element there is lag.
+//
+// - When using file:// protocol, XMLHttpRequests will not work
+//   so we can't do the Web Audio API unless we can find a way
+//   to get an audio buffer from an <audio> element.
 
 function ClockTicker(audio) {
     if (audio && audio instanceof HTMLMediaElement) {
@@ -12,7 +18,7 @@ function ClockTicker(audio) {
     if (this.element) {
         // do nothing for now
     } else if (this.url) {
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!window.AudioContext) { window.AudioContext = window.webkitAudioContext; }
         if (!window.AudioContext) { return; }
         this.context = new AudioContext();
         this.gainNode = this.context.createGain();
