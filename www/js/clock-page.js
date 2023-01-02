@@ -20,7 +20,7 @@ function init() {
     initLogs();
     initCheckboxEvents();
     initVolumeSlider();
-    if (/(?:^|[?&])apple(?:$|[?&=])/i.test(location.search)) {
+    if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
         useFontClass('font--helvetica-bold-condensed--apple');
     }
     if (/(?:^|[?&])arial(?:$|[?&=])/i.test(location.search)) {

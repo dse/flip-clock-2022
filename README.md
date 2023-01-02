@@ -14,7 +14,7 @@ Try one of a few different fonts:
 
 **If you have an Apple device**, you can use the best flip clock font:
 
--   [Helvetica Bold Condensed](https://webonastick.com/c2/?apple=1)
+-   [Helvetica Bold Condensed](https://webonastick.com/c2/?helvboldcond=1)
 
 Add it to your home screen!
 
