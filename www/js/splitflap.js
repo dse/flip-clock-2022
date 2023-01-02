@@ -147,6 +147,14 @@ SplitFlap.prototype.run = function () {
 };
 
 SplitFlap.prototype.runAnimation = function () {
+    if (document.visibilityState !== 'visible') {
+        this.noAnimation();
+        return;
+    }
+    if (isHidden(this.element)) {
+        this.noAnimation();
+        return;
+    }
     if (this.animation === 0) {
         this.noAnimation();
     } else if (this.animation === 1) {
@@ -322,10 +330,10 @@ SplitFlap.prototype.updateStrings = function () {
 };
 
 SplitFlap.prototype.tick = function () {
-    if (document.visibilityState !== 'visible') {
+    if (!this.ticker || !this.enableTicking) {
         return;
     }
-    if (!this.ticker || !this.enableTicking) {
+    if (document.visibilityState !== 'visible') {
         return;
     }
     if (isHidden(this.element)) {
@@ -397,7 +405,6 @@ SplitFlap.prototype.hurry = function () {
     var b = this.nextState - this.startValue;
     var modulo = this.endValue - this.startValue + 1;
     var hurry = a % modulo !== b % modulo;
-    console.log(hurry);
     return hurry;
 };
 
