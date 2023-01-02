@@ -121,3 +121,11 @@ CalendarClock2022.prototype.updateSplitFlaps = function () {
         }
     }
 };
+CalendarClock2022.prototype.setTicker = function (ticker) {
+    if (this.splitFlaps.calendarMonth) {
+        this.splitFlaps.calendarMonth.setTicker(ticker);
+    }
+    if (this.splitFlaps.calendarYear) {
+        this.splitFlaps.calendarYear.setTicker(ticker);
+    }
+};

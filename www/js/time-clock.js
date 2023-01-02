@@ -93,3 +93,9 @@ TimeClock2022.prototype.updateSplitFlaps = function () {
     if (this.splitFlaps.minute)  { this.splitFlaps.minute .goTo(minute);  }
     if (this.splitFlaps.second)  { this.splitFlaps.second .goTo(second);  }
 };
+TimeClock2022.prototype.setTicker = function (ticker) {
+    var i;
+    for (i = 0; i < this.splitFlapArray.length; i += 1) {
+        this.splitFlapArray[i].splitFlap.setTicker(ticker);
+    }
+};

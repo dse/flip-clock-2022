@@ -353,15 +353,12 @@ SplitFlap.prototype.updateStrings = function () {
 
 SplitFlap.prototype.tick = function () {
     if (!this.ticker || !this.enableTicking) {
-        console.log('A');
         return;
     }
     if (document.visibilityState !== 'visible') {
-        console.log('B');
         return;
     }
     if (isHidden(this.element)) {
-        console.log('C');
         return;
     }
     if (this.ticker instanceof HTMLMediaElement) {
