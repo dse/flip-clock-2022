@@ -12,7 +12,8 @@ function FlipClock2022(element, options) {
     if (!this.element) {
         throw new Error('element not specified or not found');
     }
-    this.updateEveryMs = 1000;
+
+    this.initOptions();
     this.initPreferences();
     this.elements = {};
     this.initElements();
@@ -22,6 +23,11 @@ function FlipClock2022(element, options) {
     this.initInterSplitFlapDelay();
     this.updateFromPreferences();
 }
+
+FlipClock2022.prototype.initOptions = function () {
+    this.updateEveryMs = 1000;
+    this.flickTimeoutMs = 2000;
+};
 
 FlipClock2022.prototype.initPreferences = function () {
     this.enableTicking        = JSON.parse(localStorage.getItem('FlipClock2022.enableTicking'));

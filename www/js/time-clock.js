@@ -7,6 +7,8 @@ function TimeClock2022(element, options) {
 TimeClock2022.prototype = Object.create(FlipClock2022.prototype);
 TimeClock2022.prototype.constructor = TimeClock2022;
 
+TimeClock2022.prototype.initOptions = function () {
+};
 TimeClock2022.prototype.initPreferences = function () {
     FlipClock2022.prototype.initPreferences.apply(this);
     this.is24Hour             = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour'));

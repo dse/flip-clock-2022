@@ -61,7 +61,7 @@ function SplitFlap() {
             this.stringFn = args.shift();
         } else if (Object.prototype.toString.call(args[0]) === '[object Object]') {
             // plain object
-            Object.assign({}, args.shift());
+            Object.assign(this, args.shift());
         } else if (typeof args[0] === 'string') {
             this.name = args[0];
             args.shift();
@@ -353,12 +353,15 @@ SplitFlap.prototype.updateStrings = function () {
 
 SplitFlap.prototype.tick = function () {
     if (!this.ticker || !this.enableTicking) {
+        console.log('A');
         return;
     }
     if (document.visibilityState !== 'visible') {
+        console.log('B');
         return;
     }
     if (isHidden(this.element)) {
+        console.log('C');
         return;
     }
     if (this.ticker instanceof HTMLMediaElement) {

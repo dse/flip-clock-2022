@@ -7,6 +7,10 @@ function CalendarClock2022(element, options) {
 CalendarClock2022.prototype = Object.create(FlipClock2022.prototype);
 CalendarClock2022.prototype.constructor = CalendarClock2022;
 
+CalendarClock2022.prototype.initOptions = function () {
+    FlipClock2022.prototype.initOptions.apply(this);
+    this.flickTimeoutMs = 5000;
+};
 CalendarClock2022.prototype.initPreferences = function () {
     FlipClock2022.prototype.initPreferences.apply(this);
 };
@@ -24,11 +28,13 @@ CalendarClock2022.prototype.initSplitFlaps = function () {
     this.calendarSplitFlapArray = [];
 
     if (this.elements.calendarMonth) {
-        this.splitFlaps.calendarMonth = new SplitFlap(this.elements.calendarMonth, 'calendarMonth', 0, 11, SplitFlap.MONTHS);
+        this.splitFlaps.calendarMonth = new SplitFlap(this.elements.calendarMonth, 'calendarMonth', 0, 11, SplitFlap.MONTHS,
+                                                      { flickTimeoutMs: this.flickTimeoutMs });
         this.calendarSplitFlapArray.push({ splitFlap: this.splitFlaps.calendarMonth });
     }
     if (this.elements.calendarYear) {
-        this.splitFlaps.calendarYear = new SplitFlap(this.elements.calendarYear, 'calendarYear', startYear, endYear);
+        this.splitFlaps.calendarYear = new SplitFlap(this.elements.calendarYear, 'calendarYear', startYear, endYear,
+                                                     { flickTimeoutMs: this.flickTimeoutMs });
         this.calendarSplitFlapArray.push({ splitFlap: this.splitFlaps.calendarYear });
     }
 
@@ -41,7 +47,7 @@ CalendarClock2022.prototype.initSplitFlaps = function () {
     for (i = 0; i < calendarDayElements.length; i += 1) {
         elt = calendarDayElements[i];
         this.elements.calendarDays.push(elt);
-        sf = new SplitFlap(elt, 0, 31, function (state) { return state ? state : ''; });
+        sf = new SplitFlap(elt, 0, 31, function (state) { return state ? state : ''; }, { flickTimeoutMs: this.flickTimeoutMs });
         this.splitFlaps.calendarDays.push(sf);
         this.calendarSplitFlapArray.push({ splitFlap: sf });
     }
@@ -56,6 +62,14 @@ CalendarClock2022.prototype.initInterSplitFlapDelay = function () {
     }
 };
 CalendarClock2022.prototype.updateFromPreferences = function () {
+    if (this.splitFlaps.calendarMonth) {
+        this.splitFlaps.calendarMonth.enableTicking = this.enableTicking;
+        this.splitFlaps.calendarMonth.tickVolume = this.tickVolume;
+    }
+    if (this.splitFlaps.calendarYear) {
+        this.splitFlaps.calendarYear.enableTicking = this.enableTicking;
+        this.splitFlaps.calendarYear.tickVolume = this.tickVolume;
+    }
 };
 CalendarClock2022.prototype.updateSplitFlaps = function () {
     this.date = new Date();
