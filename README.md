@@ -18,6 +18,12 @@ Try one of a few different fonts:
 
 Add it to your home screen!
 
+## Work in Progress
+
+Not all features may work on all devices, though I'm making an effort
+to have this work on as many old iOS devices as possible.  As far back
+as iOS 9.
+
 ## Credits
 
 The iOS [FlipTime app](https://www.youtube.com/watch?v=y3yhzvPZkhA) by
