@@ -10,7 +10,7 @@ function FlipClock2022(element, options) {
         this.element = document.getElementById(this.element);
     }
     if (!this.element) {
-        throw new Error(`element not specified or not found`);
+        throw new Error('element not specified or not found');
     }
 
     this.is24Hour             = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour'));
