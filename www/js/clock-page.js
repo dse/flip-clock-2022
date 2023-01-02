@@ -1,8 +1,9 @@
 'use strict';
-/*global ClockTicker, FlipClock2022 */
+/*global ClockTicker, TimeClock2022, CalendarClock2022 */
 
 var tick;
 var clock;
+var calendarClock;
 var logs;
 
 if (document.readyState === 'complete') {
@@ -13,9 +14,15 @@ if (document.readyState === 'complete') {
 
 function init() {
     tick = new ClockTicker('sounds/tick2.wav');
-    clock = new FlipClock2022(document.getElementById('clock'));
+
+    clock = new TimeClock2022(document.getElementById('clock'));
     clock.setTicker(tick);
     clock.start();
+
+    calendarClock = new CalendarClock2022(document.getElementById('clock'));
+    calendarClock.setTicker(tick);
+    calendarClock.start();
+
     initEvents();
     initLogs();
     initCheckboxEvents();
@@ -97,6 +104,7 @@ function initCheckboxEvents() {
         enableTicking.checked = clock.enableTicking;
         enableTicking.addEventListener('change', function () {
             clock.setTicking(enableTicking.checked);
+            calendarClock.setTicking(enableTicking.checked);
         });
     }
     var enableSecondsTicking = document.getElementById('enableSecondsTicking');
@@ -104,6 +112,7 @@ function initCheckboxEvents() {
         enableSecondsTicking.checked = clock.enableSecondsTicking;
         enableSecondsTicking.addEventListener('change', function () {
             clock.setSecondsTicking(enableSecondsTicking.checked);
+            calendarClock.setSecondsTicking(enableSecondsTicking.checked);
         });
     }
 }
@@ -116,5 +125,6 @@ function initVolumeSlider() {
     tickVolume.value = clock.tickVolume;
     tickVolume.addEventListener('change', function () {
         clock.setTickVolume(tickVolume.value);
+        calendarClock.setTickVolume(tickVolume.value);
     });
 }

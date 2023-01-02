@@ -133,11 +133,32 @@ function SplitFlap() {
     if (this.hurryFactor == null) {
         this.hurryFactor = 0.75;
     }
+    if (this.flickTimeoutMs == null) {
+        this.flickTimeoutMs = 2000;
+    }
 
     this.setupFlicking();
 }
 
-SplitFlap.prototype.goTo = function (state) {
+SplitFlap.prototype.goTo = function (state, options) {
+    if (this.delay) {
+        setTimeout(this.goToNow.bind(this, state, options), this.delay);
+    } else {
+        this.goToNow(state, options);
+    }
+};
+
+SplitFlap.prototype.goToNow = function (state, options) {
+    if (options && options.flick) {
+        this.hasFlicking = true;
+        this.flickTargetState = state;
+        if (this.flickTimeout) {
+            clearTimeout(this.flickTimeout);
+        }
+        this.flickTimeout = setTimeout(this.flickReset.bind(this), this.flickTimeoutMs);
+        this.run();
+        return;
+    }
     this.targetState = state;
     this.run();
 };
@@ -383,7 +404,7 @@ SplitFlap.prototype.flick = function () {
     if (this.flickTimeout) {
         clearTimeout(this.flickTimeout);
     }
-    this.flickTimeout = setTimeout(this.flickReset.bind(this), 2000);
+    this.flickTimeout = setTimeout(this.flickReset.bind(this), this.flickTimeoutMs);
     this.run();
 };
 
