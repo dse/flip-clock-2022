@@ -21,11 +21,11 @@
 }
 
 :root {
-    --checkbox-awesome-height: 0.75em;
-    --checkbox-awesome-width: 1.5em;
-    --checkbox-awesome-border: 2px;
-    --checkbox-awesome-diam: calc(var(--checkbox-awesome-height) - var(--checkbox-awesome-border) * 2);
-    --checkbox-awesome-transform: calc(var(--checkbox-awesome-width) - var(--checkbox-awesome-diam) - var(--checkbox-awesome-border) * 2);
+    --awesome-height: 0.75em;
+    --awesome-checkbox-width: 1.5em;
+    --awesome-border: 2px;
+    --awesome-diam: calc(var(--awesome-height) - var(--awesome-border) * 2);
+    --awesome-transform: calc(var(--awesome-checkbox-width) - var(--awesome-diam) - var(--awesome-border) * 2);
 }
 .checkbox--awesome {
     display: none;
@@ -35,12 +35,12 @@
     border-radius: 1em;
     background-color: black;
     display: inline-block;
-    width: var(--checkbox-awesome-width);
-    height: var(--checkbox-awesome-height);
+    width: var(--awesome-checkbox-width);
+    height: var(--awesome-height);
     position: relative;
     overflow: hidden;
     will-change: transform; /* fixes an issue where the border-radius intermittently disappears while an animated transform is taking place */
-    border: var(--checkbox-awesome-border) solid black;
+    border: var(--awesome-border) solid black;
 }
 .checkbox--awesome + .checkbox__icon::before {
     position: absolute;
@@ -56,8 +56,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: var(--checkbox-awesome-diam);
-    height: var(--checkbox-awesome-diam);
+    width: var(--awesome-diam);
+    height: var(--awesome-diam);
     border-radius: 1em;
     background-color: #ccc;
     box-shadow: 0 0 0.5em 0 black;
@@ -66,7 +66,7 @@
 }
 .checkbox--awesome + .checkbox__icon::before,
 .checkbox--awesome + .checkbox__icon::after {
-    transform: translateX(calc(-1 * var(--checkbox-awesome-transform)));
+    transform: translateX(calc(-1 * var(--awesome-transform)));
     transition: transform 150ms;
 }
 .checkbox--awesome:checked + .checkbox__icon::before,
