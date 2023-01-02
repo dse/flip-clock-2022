@@ -1,4 +1,5 @@
 'use strict';
+/*global clamp */
 
 /**
  * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);
@@ -264,9 +265,6 @@ SplitFlap.prototype.beforeAnimationEnd = function () {
 
 // view an animation frame, with a real number from 0 to 1 specified.
 SplitFlap.prototype.step = function (x) {
-    function clamp(y, a, b) {
-        return (y < a) ? a : (y > b) ? b : y;
-    }
     x = clamp(x, 0, 1);
     var angle = x * Math.PI;
     var scaleY = Math.abs(Math.cos(angle));
@@ -345,12 +343,8 @@ SplitFlap.prototype.tick = function () {
     if (this.ticker instanceof HTMLMediaElement) {
         if (this.tickVolume == null || typeof this.tickVolume !== 'number') {
             this.ticker.volume = 1;
-        } else if (this.tickVolume < 0) {
-            this.ticker.volume = 0;
-        } else if (this.tickVolume > 1) {
-            this.ticker.volume = 1;
         } else {
-            this.ticker.volume = this.tickVolume;
+            this.ticker.volume = clamp(this.tickVolume, 0, 1);
         }
         this.ticker.currentTime = 0;
         this.ticker.play();

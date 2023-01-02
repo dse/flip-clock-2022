@@ -1,5 +1,5 @@
 'use strict';
-/*global SplitFlap */
+/*global SplitFlap, clamp */
 
 function FlipClock2022(element, options) {
     if (Object.prototype.toString.call(options) === '[object Object]') {
@@ -87,13 +87,10 @@ FlipClock2022.prototype.setSecondsTicking = function (flag) {
 };
 
 FlipClock2022.prototype.setTickVolume = function (value) {
-    if (value == null) { value = 1; }
-    if (value > 1) {
+    if (value == null) {
         this.tickVolume = 1;
-    } else if (value < 0) {
-        this.tickVolume = 0;
     } else {
-        this.tickVolume = value;
+        this.tickVolume = clamp(value, 0, 1);
     }
     localStorage.setItem('FlipClock2022.tickVolume', JSON.stringify(this.tickVolume));
     this.updateFromPreferences();

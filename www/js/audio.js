@@ -1,5 +1,5 @@
 'use strict';
-/*global AudioContext */
+/*global AudioContext, clamp */
 
 // SAFARI NOTES
 //
@@ -61,12 +61,8 @@ ClockTicker.prototype.setTickVolume = function (value) {
     }
     if (typeof value !== 'number') {
         this.tickVolume = 1;
-    } else if (value < 0) {
-        this.tickVolume = 0;
-    } else if (value > 1) {
-        this.tickVolume = 1;
     } else {
-        this.tickVolume = value;
+        this.tickVolume = clamp(value, 0, 1);
     }
     if (this.gainNode) {
         this.gainNode.gain.value = this.tickVolume;
