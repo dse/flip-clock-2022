@@ -261,7 +261,7 @@ FlipClock2022.prototype.runCalendar = function () {
         this.splitFlaps.calendarYear.goTo(this.date.getFullYear());
     }
 
-    var startMonth = new Date();
+    var startMonth = new Date(this.date);
     startMonth.setDate(1);
     var endMonth = new Date(startMonth);
     endMonth.setMonth(endMonth.getMonth() + 1);
