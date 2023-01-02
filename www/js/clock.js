@@ -201,17 +201,6 @@ FlipClock2022.h12 = function (hour24) {
     return SplitFlap.hour12(hour24, 'a', 'p');
 };
 
-FlipClock2022.isHidden = function (element) {
-    for (; element; element = element.parentNode) {
-        if (element.style.display === 'none' ||
-            element.style.visibility === 'hidden' ||
-            element.style.opacity === 0) {
-            return true;
-        }
-    }
-    return false;
-};
-
 FlipClock2022.prototype.setTicker = function (ticker) {
     var i;
     for (i = 0; i < this.splitFlapArray.length; i += 1) {

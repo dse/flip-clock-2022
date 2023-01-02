@@ -1,5 +1,5 @@
 'use strict';
-/*global clamp */
+/*global clamp, isHidden */
 
 /**
  * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);
@@ -403,20 +403,4 @@ SplitFlap.prototype.hurry = function () {
     var modulo = this.endValue - this.startValue + 1;
     var hurry = a % modulo !== b % modulo;
     return hurry;
-};
-
-function isHidden(element) {
-    var style;
-    if (!element) {
-        return;
-    }
-    for (; element && element.style; element = element.parentNode) {
-        style = window.getComputedStyle(element);
-        if (style.display === 'none' ||
-            style.visibility === 'hidden' ||
-            style.opacity === 0) {
-            return true;
-        }
-    }
-    return false;
 };
