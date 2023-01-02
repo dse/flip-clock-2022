@@ -12,6 +12,7 @@ function FlipClock2022(element, options) {
     if (!this.element) {
         throw new Error('element not specified or not found');
     }
+    this.updateEveryMs = 1000;
     this.initPreferences();
     this.elements = {};
     this.initElements();
@@ -67,7 +68,7 @@ FlipClock2022.prototype.stop = function () {
 
 FlipClock2022.prototype.run = function () {
     this.updateSplitFlaps();
-    var msecs = 1000 - this.date.getMilliseconds() % 1000;
+    var msecs = this.updateEveryMs - this.date.getMilliseconds() % this.updateEveryMs;
     this.timeout = setTimeout(this.run.bind(this), msecs);
 };
 
