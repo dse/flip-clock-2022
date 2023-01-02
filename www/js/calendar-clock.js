@@ -58,6 +58,7 @@ CalendarClock2022.prototype.initInterSplitFlapDelay = function () {
     var delay;
     for (i = 0; i < this.calendarSplitFlapArray.length; i += 1) {
         delay = 1 + this.interSplitFlapDelay * i;
+        console.log(delay);
         this.calendarSplitFlapArray[i].splitFlap.delay = delay;
     }
 };
@@ -73,23 +74,55 @@ CalendarClock2022.prototype.updateFromPreferences = function () {
 };
 CalendarClock2022.prototype.updateSplitFlaps = function () {
     this.date = new Date();
+    var month;
+    var year;
+    var flick;
     if (this.splitFlaps.calendarMonth) {
         this.splitFlaps.calendarMonth.goTo(this.date.getMonth());
+        month = this.splitFlaps.calendarMonth.flickTargetState;
+        if (month == null) {
+            month = this.splitFlaps.calendarMonth.targetState;
+        } else {
+            flick = true;
+        }
     }
     if (this.splitFlaps.calendarYear) {
         this.splitFlaps.calendarYear.goTo(this.date.getFullYear());
+        year = this.splitFlaps.calendarYear.flickTargetState;
+        if (year == null) {
+            year = this.splitFlaps.calendarYear.targetState;
+        } else {
+            flick = true;
+        }
     }
-
+    this.updateCalendarSplitFlaps(year, month, flick);
+};
+CalendarClock2022.prototype.setTicker = function (ticker) {
+    if (this.splitFlaps.calendarMonth) {
+        this.splitFlaps.calendarMonth.setTicker(ticker);
+    }
+    if (this.splitFlaps.calendarYear) {
+        this.splitFlaps.calendarYear.setTicker(ticker);
+    }
+};
+CalendarClock2022.prototype.updateCalendarSplitFlaps = function (year, month, flick) {
     if (!this.splitFlaps.calendarDays) {
         return;
     }
 
-    var startMonth = new Date(this.date);
-    startMonth.setDate(1);      // first of this month
-    var endMonth = new Date(startMonth);
-    endMonth.setMonth(endMonth.getMonth() + 1); // first of next month
-    endMonth.setDate(0);        // last day of prev month
+    if (flick == null) {
+        flick = false;
+    }
 
+    var date = new Date();
+    if (year == null) {
+        year = date.getFullYear();
+    }
+    if (month == null) {
+        month = date.getMonth();
+    }
+    var startMonth = new Date(year, month, 1);   // first day of the month
+    var endMonth = new Date(year, month + 1, 0); // last day of the month
     var startWeekday = startMonth.getDay(); // from 0 to 6 inclusive
     var dayCount = endMonth.getDate();      // from 28 to 31 inclusive
 
@@ -119,13 +152,5 @@ CalendarClock2022.prototype.updateSplitFlaps = function () {
         if (sf) {
             sf.goTo(0);
         }
-    }
-};
-CalendarClock2022.prototype.setTicker = function (ticker) {
-    if (this.splitFlaps.calendarMonth) {
-        this.splitFlaps.calendarMonth.setTicker(ticker);
-    }
-    if (this.splitFlaps.calendarYear) {
-        this.splitFlaps.calendarYear.setTicker(ticker);
     }
 };
