@@ -20,6 +20,24 @@ function init() {
     initLogs();
     initCheckboxEvents();
     initVolumeSlider();
+    if (/(?:^|[?&])apple(?:$|[?&=])/.test(location.search)) {
+        useAppleHelveticaBoldCondensed();
+    }
+}
+
+function useAppleHelveticaBoldCondensed() {
+    var classList = document.documentElement.classList;
+    var i;
+    var classes = [];
+    for (i = 0; i < classList.length; i += 1) {
+        classes.push(classList.item(i));
+    }
+    for (i = 0; i < classes.length; i += 1) {
+        if (/^font--/.test(classes[i])) {
+            classList.remove(classes[i]);
+        }
+    }
+    classList.add('font--helvetica-bold-condensed--apple');
 }
 
 function initLogs() {
