@@ -15,13 +15,11 @@
                 ('<link rel="stylesheet" href="css/main.css{cacheBuster}">'),
                 ('<script src="js/main.bundle.js{cacheBuster}"><' + '/script>'),
             ];
-            (function () {
-                if (/(?:^|[?&])cacheBuster(?:$|[?&=])/.test(location.search)) {
-                    document.write(resources.join("\n").replace(/\{cacheBuster\}/g, '?v=' + Date.now()));
-                } else {
-                    document.write(resources.join("\n").replace(/\{cacheBuster\}/g, ''));
-                }
-            }());
+            if (/(?:^|[?&])cacheBuster(?:$|[?&=])/.test(location.search)) {
+                document.write(resources.join("\n").replace(/\{cacheBuster\}/g, '?v=' + Date.now()));
+            } else {
+                document.write(resources.join("\n").replace(/\{cacheBuster\}/g, ''));
+            }
         </script>
     </head>
     <body>
