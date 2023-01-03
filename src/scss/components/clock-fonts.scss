@@ -21,10 +21,6 @@
 }
 .font--arial-black {
     body { font-family: 'Arial Black', sans-serif; }
-    .clock { font-size: 14vw; }
-    .clock__line--date                { line-height: 1.4; }
-    .clock__line--calendar-month-year { line-height: 1.5; }
-    .clock__line--calendar-week       { line-height: 1.6; }
 }
 .font--inter {
     body { font-family: 'Inter', sans-serif; }
@@ -34,16 +30,19 @@
 }
 .font--times {
     body { font-family: 'Times New Roman', 'Times Roman', serif; }
-    .clock { font-size: 18vw; }
 }
 
 .font--helvetica-bold-condensed--apple {
     body { font-family: 'Helvetica Neue'; font-stretch: condensed; }
     .clock { font-size: 20vw; }
-    .clock__line--date                { font-weight: 900; }
+    .clock__line--date                { font-weight: 700; }
     .clock__line--time                { font-weight: 700; }
-    .clock__line--calendar-month-year { font-weight: 900; }
+    .clock__line--calendar-month-year { font-weight: 700; }
     .clock__line--calendar-week       { font-weight: 700; }
+    .clock__line--date                { line-height: 1.1; }
+    .clock__line--time                { line-height: 0.95; }
+    .clock__line--calendar-month-year { line-height: 1.1; }
+    .clock__line--calendar-week       { line-height: 1.2; }
 }
 
 .font--futura {
