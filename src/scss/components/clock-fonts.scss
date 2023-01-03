@@ -3,85 +3,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,300;1,500&display=swap');
 
 .font--noto-sans {
-    body {
-        font-family: 'Noto Sans', sans-serif;
-    }
-    .clock.clock {
-        font-size: 17vw;
-    }
-    .clock__line--date {
-        font-weight: 600;
-    }
-    .clock__line--time {
-        font-weight: 300;
-    }
-    .clock__ampm--am.clock__ampm--am {
-        top: 12%;
-    }
-    .clock__ampm--pm.clock__ampm--pm {
-        bottom: 10%;
-    }
+    body { font-family: 'Noto Sans', sans-serif; }
 }
 
 .font--lato {
-    body {
-        font-family: 'Lato', sans-serif;
-    }
+    body { font-family: 'Lato', sans-serif; }
+    .clock__line--date                { line-height: 1.4; }
+    .clock__line--time                { line-height: 1.2; }
+    .clock__line--calendar-month-year { line-height: 1.4; }
+    .clock__line--calendar-week       { line-height: 1.4; }
 }
 
 .font--poppins {
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
-    .clock__line--date {
-        font-weight: 500;
-    }
-    .clock__line--time {
-        font-weight: 300;
-    }
+    body { font-family: 'Poppins', sans-serif; }
+    .clock__line--date                { line-height: 1.4; }
+    .clock__line--time                { line-height: 1.2; }
+    .clock__line--calendar-month-year { line-height: 1.4; }
+    .clock__line--calendar-week       { line-height: 1.4; }
 }
 
 .font--times {
-    body {
-        font-family: 'Times New Roman', 'Times Roman', sans-serif;
-    }
+    body { font-family: 'Times New Roman', 'Times Roman', sans-serif; }
+    .clock { font-size: 18vw; }
 }
 
 .font--arial-black {
-    body {
-        font-family: 'Arial Black', sans-serif;
-    }
+    body { font-family: 'Arial Black', sans-serif; }
+    .clock { font-size: 14vw; }
+    .clock__line--date                { line-height: 1.4; }
+    .clock__line--calendar-month-year { line-height: 1.5; }
+    .clock__line--calendar-week       { line-height: 1.6; }
 }
 
 .font--arial {
-    body {
-        font-family: 'Arial', sans-serif;
-    }
-    .clock.clock {
-        font-size: 17vw;
-    }
+    body { font-family: 'Arial', sans-serif; }
+    .clock__line--calendar-month-year { line-height: 1.4; }
+    .clock__line--calendar-week       { line-height: 1.4; }
 }
 
 .font--helvetica-bold-condensed--apple {
-    body {
-        font-family: 'Helvetica Neue';
-        font-stretch: condensed;
-    }
-    .clock.clock {
-        font-size: 20vw;
-    }
-    .clock__line--date {
-        font-weight: 900;
-        line-height: 1.2;
-    }
-    .clock__line--time {
-        font-weight: 700;
-        line-height: 1.0;
-    }
-    .clock__ampm--am.clock__ampm--am {
-        top: 9%;
-    }
-    .clock__ampm--pm.clock__ampm--pm {
-        bottom: 9%;
-    }
+    body { font-family: 'Helvetica Neue'; font-stretch: condensed; }
+    .clock { font-size: 20vw; }
+    .clock__line--date                { font-weight: 900; }
+    .clock__line--time                { font-weight: 700; }
+    .clock__line--calendar-month-year { font-weight: 900; }
+    .clock__line--calendar-week       { font-weight: 700; }
+    .clock__line--date                { line-height: 1.2; }
+    .clock__line--time                { line-height: 1.0; }
+    .clock__line--calendar-month-year { line-height: 1.3; }
+    .clock__line--calendar-week       { line-height: 1.3; }
 }
