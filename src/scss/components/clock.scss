@@ -6,7 +6,9 @@
     --shwhite: rgb(82%,82%,82%);
     --hiborder: rgba(100%,100%,100%,0.5);
     --shborder: rgba(0%,0%,0%,0.8);
+}
 
+:root {
     --inter-margin: 1.5vw;
     --border-radius: 1.5vw;
     --split-flap-view-master-spacing: 1.5vw;
@@ -49,17 +51,22 @@ body {
     justify-content: space-between;
     gap: var(--inter-margin);
     > * {
-        flex: 1 0 auto;
+        flex: 1 1 auto;
     }
-}
-.clock__line + .clock__line {
-    margin-top: var(--inter-margin);
-}
-.clock__line--calendar-week + .clock__line--calendar-week {
-    margin-top: calc(var(--inter-margin) * 0.5);
-}
-.clock__view-master {
-    width: 100%;
+    & + & {
+        margin-top: var(--inter-margin);
+    }
+    &--calendar-month-year {
+        > .clock__view-master--calendar-month {
+            flex: 0 1 calc(100% * 2/3);
+        }
+        > .clock__view-master--calendar-year {
+            flex: 0 1 calc(100% * 1/3);
+        }
+    }
+    &--calendar-week > * {
+        flex: 0 1 14.2857%;
+    }
 }
 
 /**
@@ -108,46 +115,6 @@ body {
     content: '\0000a0';
 }
 
-.clock__ampm {
-    position: absolute;
-    left: 4%;
-}
-.clock__ampm--am {
-    top: 8%;
-}
-.clock__ampm--pm {
-    bottom: 16%;
-}
-
-/**
- * Layout dimension styles
- */
-:root {
-}
-.clock__line--calendar {
-}
-
-/**
- * Font styles
- */
-.clock__line--date {
-}
-.clock__line--time {
-}
-
-/**
- * Flexbox
- */
-.clock__line--calendar-month-year > .clock__view-master--calendar-month {
-    flex: 0 1 calc(100% * 2/3);
-}
-.clock__line--calendar-month-year > .clock__view-master--calendar-year {
-    flex: 0 1 calc(100% * 1/3);
-}
-.clock__line--calendar-week > * {
-    flex: 0 1 14.2857%;
-}
-
 /**
  * Typography
  */
@@ -182,4 +149,14 @@ body {
  */
 [data-clock-weekday], [data-clock-month] {
     text-transform: uppercase;
+}
+.clock__ampm {
+    position: absolute;
+    left: 4%;
+}
+.clock__ampm--am {
+    top: 8%;
+}
+.clock__ampm--pm {
+    bottom: 16%;
 }
