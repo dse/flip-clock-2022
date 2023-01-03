@@ -1427,6 +1427,12 @@ function initLogs() {
   }
   if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
     console.debug(navigator.userAgent);
+    Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(function (stylesheet) {
+      return console.log(stylesheet.getAttribute('href'));
+    });
+    Array.from(document.head.querySelectorAll('script')).forEach(function (stylesheet) {
+      return console.log(stylesheet.getAttribute('src'));
+    });
   }
 }
 function initEvents() {
