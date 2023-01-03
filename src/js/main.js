@@ -30,23 +30,44 @@ function init() {
     initLogs();
     initCheckboxEvents();
     initVolumeSlider();
-    if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
-        useFontClass('font--helvetica-bold-condensed--apple');
-    }
+
     if (/(?:^|[?&])arial(?:$|[?&=])/i.test(location.search)) {
         useFontClass('font--arial');
     }
     if (/(?:^|[?&])arial-?black(?:$|[?&=])/i.test(location.search)) {
         useFontClass('font--arial-black');
     }
-    if (/(?:^|[?&])lato(?:$|[?&=])/i.test(location.search)) {
-        useFontClass('font--lato');
-    }
-    if (/(?:^|[?&])poppins(?:$|[?&=])/i.test(location.search)) {
-        useFontClass('font--poppins');
+    if (/(?:^|[?&])inter(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--inter');
     }
     if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
         useFontClass('font--times');
+    }
+    if (/(?:^|[?&])noto-?sans(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--noto-sans');
+    }
+
+    if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--helvetica-bold-condensed--apple');
+    }
+
+    if (/(?:^|[?&])futura(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--futura');
+    }
+    if (/(?:^|[?&])gill-?sans(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--gill-sans');
+    }
+    if (/(?:^|[?&])optima(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--optima');
+    }
+    if (/(?:^|[?&])palatino(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--palatino');
+    }
+    if (/(?:^|[?&])rockwell(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--rockwell');
+    }
+    if (/(?:^|[?&])verdana(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--verdana');
     }
 }
 
