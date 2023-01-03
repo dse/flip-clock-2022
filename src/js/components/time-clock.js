@@ -1,14 +1,14 @@
 'use strict';
 
 import FlipClock2022 from './clock';
-import SplitFlap from './split-flap';
+import SplitFlap from './splitflap';
 import { month3, weekday3, h12, pad00 } from './utils';
 
 export default class TimeClock2022 extends FlipClock2022 {
     initOptions() {
     }
     initPreferences() {
-        this.super();
+        super.initPreferences();
         this.is24Hour             = JSON.parse(localStorage.getItem('FlipClock2022.is24Hour')) ?? false;
         this.enableSecondsTicking = JSON.parse(localStorage.getItem('FlipClock2022.enableSecondsTicking')) ?? false;
     }

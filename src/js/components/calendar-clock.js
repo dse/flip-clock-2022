@@ -1,16 +1,13 @@
 'use strict';
 
-import SplitFlap from './split-flap';
+import SplitFlap from './splitflap';
 import FlipClock2022 from './clock';
 import { MONTHS } from './utils';
 
 export default class CalendarClock2022 extends FlipClock2022 {
     initOptions() {
-        this.super();
+        super.initOptions();
         this.flickTimeoutMs = 5000;
-    }
-    initPreferences() {
-        this.super();
     }
     initElements() {
         this.elements.calendarMonth = this.element.querySelector('[data-clock-calendar-month]');

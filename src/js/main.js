@@ -114,7 +114,6 @@ function initCheckboxEvents() {
         enableSecondsTicking.checked = clock.enableSecondsTicking;
         enableSecondsTicking.addEventListener('change', function () {
             clock.setSecondsTicking(enableSecondsTicking.checked);
-            calendarClock.setSecondsTicking(enableSecondsTicking.checked);
         });
     }
 }
