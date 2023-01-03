@@ -667,24 +667,31 @@ body {
   font-family: "Times New Roman", "Times Roman", serif;
 }
 
-.font--helvetica-bold-condensed--apple body {
-  font-family: "Helvetica Neue";
-  font-stretch: condensed;
+@supports (font-stretch: condensed) {
+  .font--helvetica-bold-condensed--apple body {
+    font-family: "Helvetica Neue";
+    font-stretch: condensed;
+  }
+  .font--helvetica-bold-condensed--apple .clock__line--date {
+    font-weight: 700;
+  }
+  .font--helvetica-bold-condensed--apple .clock__line--time {
+    font-weight: 700;
+  }
+  .font--helvetica-bold-condensed--apple .clock__line--calendar-month-year {
+    font-weight: 700;
+  }
+  .font--helvetica-bold-condensed--apple .clock__line--calendar-week {
+    font-weight: 700;
+  }
+}
+@supports not (font-stretch: condensed) {
+  .font--helvetica-bold-condensed--apple body {
+    font-family: "HelveticaNeue-CondensedBold";
+  }
 }
 .font--helvetica-bold-condensed--apple .clock {
   font-size: 20vw;
-}
-.font--helvetica-bold-condensed--apple .clock__line--date {
-  font-weight: 700;
-}
-.font--helvetica-bold-condensed--apple .clock__line--time {
-  font-weight: 700;
-}
-.font--helvetica-bold-condensed--apple .clock__line--calendar-month-year {
-  font-weight: 700;
-}
-.font--helvetica-bold-condensed--apple .clock__line--calendar-week {
-  font-weight: 700;
 }
 .font--helvetica-bold-condensed--apple .clock__line--date {
   line-height: 1.1;

@@ -33,12 +33,22 @@
 }
 
 .font--helvetica-bold-condensed--apple {
-    body { font-family: 'Helvetica Neue'; font-stretch: condensed; }
+    @supports (font-stretch: condensed) {
+        body {
+            font-family: 'Helvetica Neue';
+            font-stretch: condensed;
+        }
+        .clock__line--date                { font-weight: 700; }
+        .clock__line--time                { font-weight: 700; }
+        .clock__line--calendar-month-year { font-weight: 700; }
+        .clock__line--calendar-week       { font-weight: 700; }
+    }
+    @supports not (font-stretch: condensed) {
+        body {
+            font-family: 'HelveticaNeue-CondensedBold';
+        }
+    }
     .clock { font-size: 20vw; }
-    .clock__line--date                { font-weight: 700; }
-    .clock__line--time                { font-weight: 700; }
-    .clock__line--calendar-month-year { font-weight: 700; }
-    .clock__line--calendar-week       { font-weight: 700; }
     .clock__line--date                { line-height: 1.1; }
     .clock__line--time                { line-height: 0.95; }
     .clock__line--calendar-month-year { line-height: 1.1; }
