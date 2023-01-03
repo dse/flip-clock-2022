@@ -97,6 +97,9 @@ function initLogs() {
             };
         });
     }
+    if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
+        console.debug(navigator.userAgent);
+    }
 }
 
 function initEvents() {
