@@ -99,6 +99,12 @@ function initLogs() {
     }
     if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
         console.debug(navigator.userAgent);
+        Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
+            stylesheet => console.log(stylesheet.getAttribute('href'))
+        );
+        Array.from(document.head.querySelectorAll('script')).forEach(
+            stylesheet => console.log(stylesheet.getAttribute('src'))
+        );
     }
 }
 
