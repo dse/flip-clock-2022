@@ -1,10 +1,11 @@
+// NOTE: sf9 does not support nested calc using intermd custom CSS props
 :root {
     --awesome-height: 0.75em;
     --awesome-checkbox-width: 1.5em;
     --awesome-range-width: 6em;
     --awesome-border: 2px;
     --awesome-diam: calc(var(--awesome-height) - var(--awesome-border) * 2);
-    --awesome-transform: calc(var(--awesome-checkbox-width) - var(--awesome-diam) - var(--awesome-border) * 2);
+    --awesome-transform: calc(var(--awesome-height) - var(--awesome-checkbox-width));
     --awesome-background-color: #bbb;
     --awesome-border-color: #eee;
 }
@@ -45,7 +46,7 @@
             border: 1px solid var(--awesome-border-color);
         }
         &::before, &::after {
-            transform: translateX(calc(-1 * var(--awesome-transform)));
+            transform: translateX(var(--awesome-transform));
             transition: transform 150ms;
         }
     }

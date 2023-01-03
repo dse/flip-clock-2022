@@ -858,7 +858,7 @@ body {
   --awesome-range-width: 6em;
   --awesome-border: 2px;
   --awesome-diam: calc(var(--awesome-height) - var(--awesome-border) * 2);
-  --awesome-transform: calc(var(--awesome-checkbox-width) - var(--awesome-diam) - var(--awesome-border) * 2);
+  --awesome-transform: calc(var(--awesome-height) - var(--awesome-checkbox-width));
   --awesome-background-color: #bbb;
   --awesome-border-color: #eee;
 }
@@ -902,9 +902,9 @@ body {
   border: 1px solid var(--awesome-border-color);
 }
 .checkbox--awesome + .checkbox__icon::before, .checkbox--awesome + .checkbox__icon::after {
-  -webkit-transform: translateX(calc(-1 * var(--awesome-transform)));
-      -ms-transform: translateX(calc(-1 * var(--awesome-transform)));
-          transform: translateX(calc(-1 * var(--awesome-transform)));
+  -webkit-transform: translateX(var(--awesome-transform));
+      -ms-transform: translateX(var(--awesome-transform));
+          transform: translateX(var(--awesome-transform));
   -webkit-transition: -webkit-transform 150ms;
   transition: -webkit-transform 150ms;
   -o-transition: transform 150ms;
