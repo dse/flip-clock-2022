@@ -51,19 +51,17 @@
     padding-bottom: var(--control-panel-padding);
     padding-left: calc(var(--control-panel-padding) + 1em * (var(--control-panel-line-height) - 1));
     padding-right: 4em;
-}
-.control-panel label {
-    white-space: nowrap;
-    margin-right: 0.666666em;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-}
-.control-panel input[type="range"] {
-    width: 6em;
-}
-.control-panel label:last-of-type {
-    margin-right: 0;
+    label {
+        white-space: nowrap;
+        margin-right: 0.666666em;
+        user-select: none; /* Standard syntax */
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+    input[type="range"] {
+        width: 6em;
+    }
 }
 .control-panel__logs {
     position: fixed;

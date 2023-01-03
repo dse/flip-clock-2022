@@ -1,23 +1,20 @@
 [type="checkbox"].checkbox--fa {
     display: none;
-}
-[type="checkbox"].checkbox--fa + .checkbox__icon::before {
-    font-weight: 900;           /* .fa-solid */
-    text-align: center;         /* .fa-fw */
-    width: 1.25em;              /* .fa-fw */
-    font-family: "Font Awesome 6 Free";
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: var(--fa-display,inline-block);
-    font-style: normal;
-    font-variant: normal;
-    line-height: 1;
-    text-rendering: auto;
-
-    content: '\f204';           /*fa-toggle-off*/
-}
-[type="checkbox"].checkbox--fa:checked + .checkbox__icon::before {
-    content: '\f205';           /*fa-toggle-on*/
+    + .checkbox__icon::before {
+        font-weight: 900;           /* .fa-solid */
+        text-align: center;         /* .fa-fw */
+        width: 1.25em;              /* .fa-fw */
+        font-family: "Font Awesome 6 Free";
+        display: var(--fa-display,inline-block);
+        font-style: normal;
+        font-variant: normal;
+        line-height: 1;
+        text-rendering: auto;
+        content: '\f204';           /*fa-toggle-off*/
+    }
+    &:checked + .checkbox__icon::before {
+        content: '\f205';           /*fa-toggle-on*/
+    }
 }
 
 :root {
@@ -27,102 +24,92 @@
     --awesome-border: 2px;
     --awesome-diam: calc(var(--awesome-height) - var(--awesome-border) * 2);
     --awesome-transform: calc(var(--awesome-checkbox-width) - var(--awesome-diam) - var(--awesome-border) * 2);
-
     --awesome-background-color: #bbb;
     --awesome-border-color: #eee;
 }
 .checkbox--awesome {
     display: none;
-}
-.checkbox--awesome + .checkbox__icon {
-    display: inline-block;
-    vertical-align: middle;
+    + .checkbox__icon {
+        display: inline-block;
+        vertical-align: middle;
 
-    border-radius: 1em;
-    background-color: black;
-    width: var(--awesome-checkbox-width);
-    height: var(--awesome-height);
-    position: relative;
-    overflow: hidden;
-    will-change: transform; /* fixes an issue where the border-radius intermittently disappears while an animated transform is taking place */
-    border: var(--awesome-border) solid black;
-}
-.checkbox--awesome + .checkbox__icon::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 1em;
-    background-color: #ff9900;
-    content: '';
-}
-.checkbox--awesome + .checkbox__icon::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: var(--awesome-diam);
-    height: var(--awesome-diam);
-    border-radius: 1em;
-    box-shadow: 0 0 0.5em 0 black;
-    content: '';
-    background-color: var(--awesome-background-color);
-    border: 1px solid var(--awesome-border-color);
-}
-.checkbox--awesome + .checkbox__icon::before,
-.checkbox--awesome + .checkbox__icon::after {
-    transform: translateX(calc(-1 * var(--awesome-transform)));
-    transition: transform 150ms;
-}
-.checkbox--awesome:checked + .checkbox__icon::before,
-.checkbox--awesome:checked + .checkbox__icon::after {
-    transform: translateX(0);
+        border-radius: 1em;
+        background-color: black;
+        width: var(--awesome-checkbox-width);
+        height: var(--awesome-height);
+        position: relative;
+        overflow: hidden;
+        will-change: transform; /* fixes an issue where the border-radius intermittently disappears while an animated transform is taking place */
+        border: var(--awesome-border) solid black;
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1em;
+            background-color: #ff9900;
+            content: '';
+        }
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: var(--awesome-diam);
+            height: var(--awesome-diam);
+            border-radius: 1em;
+            box-shadow: 0 0 0.5em 0 black;
+            content: '';
+            background-color: var(--awesome-background-color);
+            border: 1px solid var(--awesome-border-color);
+        }
+        &::before, &::after {
+            transform: translateX(calc(-1 * var(--awesome-transform)));
+            transition: transform 150ms;
+        }
+    }
+    &:checked {
+        + .checkbox__icon {
+            &::before, &::after {
+                transform: translateX(0);
+            }
+        }
+    }
 }
 
 .range--awesome {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
-
     display: inline-block;
     vertical-align: middle;
-
     border-radius: 1em;
     background-color: black;
     width: var(--awesome-checkbox-width);
     height: var(--awesome-height);
     border: var(--awesome-border) solid black;
-}
 
-.range--awesome::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-.range--awesome::-moz-range-track {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
+    &::-webkit-slider-runnable-track {
+        appearance: none;
+    }
+    &::-moz-range-track {
+        appearance: none;
+    }
 
-.range--awesome::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: var(--awesome-diam);
-    height: var(--awesome-diam);
-    border-radius: 1em;
-    background-color: var(--awesome-background-color);
-    border: 1px solid var(--awesome-border-color);
-}
-.range--awesome::-moz-range-thumb {
-    font-size: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: var(--awesome-diam);
-    height: var(--awesome-diam);
-    border-radius: 1em;
-    background-color: var(--awesome-background-color);
-    border: 1px solid var(--awesome-border-color);
+    &::-webkit-slider-thumb {
+        font-size: inherit;
+        appearance: none;
+        width: var(--awesome-diam);
+        height: var(--awesome-diam);
+        border-radius: 1em;
+        background-color: var(--awesome-background-color);
+        border: 1px solid var(--awesome-border-color);
+    }
+    &::-moz-range-thumb {
+        font-size: inherit;
+        appearance: none;
+        width: var(--awesome-diam);
+        height: var(--awesome-diam);
+        border-radius: 1em;
+        background-color: var(--awesome-background-color);
+        border: 1px solid var(--awesome-border-color);
+    }
 }
