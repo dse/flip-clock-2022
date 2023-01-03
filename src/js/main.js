@@ -50,6 +50,9 @@ function init() {
     if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
         useFontClass('font--helvetica-bold-condensed--apple');
     }
+    if (/(?:^|[?&])iPad(?:$|[?&=])/i.test(location.search)) {
+        useFontClass('font--helvetica-bold-condensed--apple');
+    }
 
     if (/(?:^|[?&])futura(?:$|[?&=])/i.test(location.search)) {
         useFontClass('font--futura');
@@ -88,24 +91,28 @@ function useFontClass(className) {
 function initLogs() {
     logs = document.getElementById('logs');
     if (/\b(?:iPhone|iPad|mac os x)\b/i.test(navigator.userAgent)) {
-        ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
-            const fn = console[level];
-            console[level] = function () {
-                fn.apply(console, arguments);
-                logs.innerHTML = logs.innerHTML + level.toUpperCase() +
-                    ': ' + Array.from(arguments).join(' ') + '\n';
-            };
-        });
+        hackConsoleMethods();
     }
     if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
         console.debug(navigator.userAgent);
         Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
             stylesheet => console.log(stylesheet.getAttribute('href'))
         );
-        Array.from(document.head.querySelectorAll('script')).forEach(
+        Array.from(document.head.querySelectorAll('script[src]')).forEach(
             stylesheet => console.log(stylesheet.getAttribute('src'))
         );
     }
+}
+
+function hackConsoleMethods() {
+    ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
+        const fn = console[level];
+        console[level] = function () {
+            fn.apply(console, arguments);
+            logs.innerHTML = logs.innerHTML + level.toUpperCase() +
+                ': ' + Array.from(arguments).join(' ') + '\n';
+        };
+    });
 }
 
 function initEvents() {

@@ -15,7 +15,7 @@
                 ('<link rel="stylesheet" href="css/main.css{cacheBuster}">'),
                 ('<script src="js/main.bundle.js{cacheBuster}"><' + '/script>'),
             ];
-            if (/(?:^|[?&])cacheBuster(?:$|[?&=])/.test(location.search)) {
+            if (/(?:^|[?&])cacheBuster|iPad(?:$|[?&=])/i.test(location.search)) {
                 document.write(resources.join("\n").replace(/\{cacheBuster\}/g, '?v=' + Date.now()));
             } else {
                 document.write(resources.join("\n").replace(/\{cacheBuster\}/g, ''));
