@@ -1,5 +1,6 @@
 'use strict';
-/*global clamp, isHidden */
+
+import { clamp, isHidden } from './utils';
 
 /**
  * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);

@@ -1,5 +1,7 @@
 'use strict';
-/*global AudioContext, clamp */
+/*global AudioContext */
+
+import { clamp } from './utils';
 
 // SAFARI NOTES
 //
@@ -34,7 +36,7 @@ export default class ClockTicker {
                 this.context.decodeAudioData(request.response, (buffer) => {
                     this.buffer = buffer;
                 });
-            });
+            };
             request.send();
         }
         this.workAroundNoAutoPlay();
@@ -53,12 +55,11 @@ export default class ClockTicker {
     setTickVolume(value = 1) {
         if (typeof value === 'string') {
             value = Number(value);
+            if (isNaN(value)) {
+                value = 1;
+            }
         }
-        if (typeof value !== 'number' || isNaN(value)) {
-            this.tickVolume = 1;
-        } else {
-            this.tickVolume = clamp(value, 0, 1);
-        }
+        this.tickVolume = clamp(value, 0, 1);
         if (this.gainNode) {
             this.gainNode.gain.value = this.tickVolume;
         }

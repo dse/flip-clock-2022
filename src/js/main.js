@@ -1,10 +1,13 @@
 'use strict';
-/*global ClockTicker, TimeClock2022, CalendarClock2022 */
 
-var tick;
-var clock;
-var calendarClock;
-var logs;
+import ClockTicker from './components/audio';
+import TimeClock2022 from './components/time-clock';
+import CalendarClock2022 from './components/calendar-clock';
+
+let tick;
+let clock;
+let calendarClock;
+let logs;
 
 if (document.readyState === 'complete') {
     init();
@@ -48,13 +51,12 @@ function init() {
 }
 
 function useFontClass(className) {
-    var classList = document.documentElement.classList;
-    var i;
-    var classes = [];
-    for (i = 0; i < classList.length; i += 1) {
+    const classList = document.documentElement.classList;
+    const classes = [];
+    for (let i = 0; i < classList.length; i += 1) {
         classes.push(classList.item(i));
     }
-    for (i = 0; i < classes.length; i += 1) {
+    for (let i = 0; i < classes.length; i += 1) {
         if (/^font--/.test(classes[i])) {
             classList.remove(classes[i]);
         }
@@ -66,7 +68,7 @@ function initLogs() {
     logs = document.getElementById('logs');
     if (/\b(?:iPhone|iPad|mac os x)\b/i.test(navigator.userAgent)) {
         ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
-            var fn = console[level];
+            const fn = console[level];
             console[level] = function () {
                 fn.apply(console, arguments);
                 logs.innerHTML = logs.innerHTML + level.toUpperCase() +
@@ -77,9 +79,9 @@ function initLogs() {
 }
 
 function initEvents() {
-    var toggle = document.getElementById('controlPanelToggle');
-    var logsToggle = document.getElementById('logsToggle');
-    var panel = document.getElementById('controlPanel');
+    const toggle = document.getElementById('controlPanelToggle');
+    const logsToggle = document.getElementById('logsToggle');
+    const panel = document.getElementById('controlPanel');
     toggle.addEventListener('click', function () {
         panel.classList.toggle('hide');
         if (panel.classList.contains('hide')) {
@@ -92,14 +94,14 @@ function initEvents() {
 }
 
 function initCheckboxEvents() {
-    var is24Hour = document.getElementById('is24Hour');
+    const is24Hour = document.getElementById('is24Hour');
     if (is24Hour) {
         is24Hour.checked = clock.is24Hour;
         is24Hour.addEventListener('change', function () {
             clock.set24Hour(is24Hour.checked);
         });
     }
-    var enableTicking = document.getElementById('enableTicking');
+    const enableTicking = document.getElementById('enableTicking');
     if (enableTicking) {
         enableTicking.checked = clock.enableTicking;
         enableTicking.addEventListener('change', function () {
@@ -107,7 +109,7 @@ function initCheckboxEvents() {
             calendarClock.setTicking(enableTicking.checked);
         });
     }
-    var enableSecondsTicking = document.getElementById('enableSecondsTicking');
+    const enableSecondsTicking = document.getElementById('enableSecondsTicking');
     if (enableSecondsTicking) {
         enableSecondsTicking.checked = clock.enableSecondsTicking;
         enableSecondsTicking.addEventListener('change', function () {
@@ -118,7 +120,7 @@ function initCheckboxEvents() {
 }
 
 function initVolumeSlider() {
-    var tickVolume = document.getElementById('tickVolume');
+    const tickVolume = document.getElementById('tickVolume');
     if (!tickVolume) {
         return;
     }

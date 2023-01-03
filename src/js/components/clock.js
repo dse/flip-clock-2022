@@ -1,5 +1,6 @@
 'use strict';
-/*global SplitFlap, clamp */
+
+import { clamp } from './utils';
 
 export default class FlipClock2022 {
     constructor(element, options = {}) {
@@ -27,7 +28,7 @@ export default class FlipClock2022 {
     }
     initPreferences() {
         this.enableTicking = JSON.parse(localStorage.getItem('FlipClock2022.enableTicking')) ?? false;
-        this.tickVolume = JSON.parse(localStorage.getItem('FlipClock2022.tickVolume')) ?? 1;
+        this.tickVolume    = JSON.parse(localStorage.getItem('FlipClock2022.tickVolume'))    ?? 1;
     }
     setTicking(flag = true) {
         this.enableTicking = flag;
@@ -60,17 +61,5 @@ export default class FlipClock2022 {
         this.updateSplitFlaps();
         const msecs = this.updateEveryMs - this.date.getMilliseconds() % this.updateEveryMs;
         this.timeout = setTimeout(this.run.bind(this), msecs);
-    }
-    static weekday3(weekday) {
-        // 0 = Sunday ... 6 = Saturday
-        return SplitFlap.WEEKDAYS[weekday].slice(0, 3);
-    }
-    static month3(month) {
-        // 0 = January ... 11 = December
-        return SplitFlap.MONTHS[month].slice(0, 3);
-    }
-    static h12(hour24) {
-        // 0 = January ... 11 = December
-        return SplitFlap.hour12(hour24, 'a', 'p');
     }
 }
