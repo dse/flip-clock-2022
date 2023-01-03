@@ -118,27 +118,13 @@ export default class SplitFlap {
         this.stateC = null;
         this.stateD = null;
 
-        if (this.delay == null) {
-            this.delay = 0;         // milliseconds
-        }
-        if (this.randomness == null) {
-            this.randomness = 2;
-        }
-        if (this.animation == null) {
-            this.animation = 2;
-        }
-        if (this.enableTicking == null) {
-            this.enableTicking = true;
-        }
-        if (this.duration == null) {
-            this.duration = 150;    // milliseconds
-        }
-        if (this.hurryFactor == null) {
-            this.hurryFactor = 0.75;
-        }
-        if (this.flickTimeoutMs == null) {
-            this.flickTimeoutMs = 2000;
-        }
+        this.delay          = this.delay          ?? 0; // milliseconds
+        this.randomness     = this.randomness     ?? 2;
+        this.animation      = this.animation      ?? 2;
+        this.enableTicking  = this.enableTicking  ?? true;
+        this.duration       = this.duration       ?? 150; // milliseconds
+        this.hurryFactor    = this.hurryFactor    ?? 0.75;
+        this.flickTimeoutMs = this.flickTimeoutMs ?? 2000;
 
         this.setupFlicking();
     }

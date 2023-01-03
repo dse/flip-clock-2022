@@ -27,85 +27,75 @@
             <div class="clock__font-size-adjust">
                 <div class="clock__panel">
                     <div class="clock__line clock__line--date">
-                        <span class="clock__view-master clock__view-master--weekday">
-                            <span id="splitFlap0" class="clock__split-flap" data-clock-weekday></span>
-                        </span>
-                        <span class="clock__view-master clock__view-master--day">
-                            <span id="splitFlap1" class="clock__split-flap" data-clock-day></span>
-                        </span>
-                        <span class="clock__view-master clock__view-master--month">
-                            <span id="splitFlap2" class="clock__split-flap" data-clock-month></span>
+                        <span class="clock__view-master clock__view-master--weekday-day-month">
+                            <span id="splitFlap0" class="clock__split-flap clock__split-flap--weekday" data-clock-weekday></span>
+                            <span id="splitFlap1" class="clock__split-flap clock__split-flap--day" data-clock-day></span>
+                            <span id="splitFlap2" class="clock__split-flap clock__split-flap--month" data-clock-month></span>
                         </span>
                     </div>
                     <div class="clock__line clock__line--time">
-                        <span class="clock__view-master clock__view-master--hour">
-                            <span id="splitFlap3" class="clock__split-flap" data-clock-hour></span>
-                        </span>
-                        <span class="clock__view-master clock__view-master--minute">
-                            <span id="splitFlap4" class="clock__split-flap" data-clock-minute></span>
-                        </span>
-                        <span class="clock__view-master clock__view-master--second">
-                            <span id="splitFlap5" class="clock__split-flap" data-clock-second></span>
+                        <span class="clock__view-master clock__view-master--hour-minute-second">
+                            <span id="splitFlap3" class="clock__split-flap clock__split-flap--hour" data-clock-hour></span>
+                            <span id="splitFlap4" class="clock__split-flap clock__split-flap--minute" data-clock-minute></span>
+                            <span id="splitFlap5" class="clock__split-flap clock__split-flap--second" data-clock-second></span>
                         </span>
                     </div>
-                    <div class="clock__calendar">
+                    <div class="clock__line clock__line--calendar clock__line--calendar-month-year">
+                        <span class="clock__view-master clock__view-master--calendar-month-year" style="text-transform: uppercase;">
+                            <span class="clock__split-flap clock__split-flap--calendar-month" data-clock-calendar-month></span>
+                            <span class="clock__split-flap clock__split-flap--calendar-year" data-clock-calendar-year></span>
+                        </span>
+                    </div>
+                    <div class="clock__calendar-grid">
                         <!-- BEGIN CALENDAR -->
-                        <div class="clock__line clock__line--calendar clock__line--calendar-month-year">
-                            <span class="clock__view-master clock__view-master--calendar-month" style="text-transform: uppercase;">
-                                <span class="clock__split-flap" data-clock-calendar-month></span>
-                            </span>
-                            <span class="clock__view-master clock__view-master--calendar-year">
-                                <span class="clock__split-flap" data-clock-calendar-year></span>
-                            </span>
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
                         </div>
                         <div class="clock__line clock__line--calendar clock__line--calendar-week">
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
                         </div>
                         <div class="clock__line clock__line--calendar clock__line--calendar-week">
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
                         </div>
                         <div class="clock__line clock__line--calendar clock__line--calendar-week">
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
                         </div>
                         <div class="clock__line clock__line--calendar clock__line--calendar-week">
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
                         </div>
                         <div class="clock__line clock__line--calendar clock__line--calendar-week">
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                        </div>
-                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
-                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
                             <span></span>
                             <span></span>
                             <span></span>

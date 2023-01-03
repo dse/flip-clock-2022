@@ -1,6 +1,10 @@
 @media (orientation: portrait), (max-aspect-ratio: 1/1) {
-    .clock__view-master--second.clock__view-master--second,
-    .clock__view-master--month.clock__view-master--month {
+    .clock__view-master--second,
+    .clock__view-master--month {
+        display: none;
+    }
+    .clock__split-flap--second,
+    .clock__split-flap--month {
         display: none;
     }
     .clock__font-size-adjust {

@@ -13,7 +13,7 @@
     --border-radius: 1.5vw;
     --split-flap-view-master-spacing: 1.5vw;
 }
-.clock__line--calendar {
+.clock__calendar-grid {
     --border-radius: 1vw;
     --split-flap-view-master-spacing: 1vw;
     --inter-margin: 1vw;
@@ -30,19 +30,22 @@ body {
 .clock {
     position: fixed;
     top: 0;
-    left: 5%;
-    right: 5%;
+    left: 0;
+    right: 0;
     bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .clock__panel {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-flow: column nowrap;
     row-gap: var(--inter-margin);
 }
-.clock__calendar {
+.clock__calendar-grid {
     display: flex;
     flex-flow: column nowrap;
     row-gap: calc(var(--inter-margin) * 0.5);
@@ -57,14 +60,31 @@ body {
     }
     &--calendar-month-year {
         > .clock__view-master--calendar-month {
-            flex: 0 1 calc(100% * 2/3);
+            flex: 0 1 calc(100% * 1/2);
         }
         > .clock__view-master--calendar-year {
-            flex: 0 1 calc(100% * 1/3);
+            flex: 0 1 calc(100% * 1/2);
         }
     }
     &--calendar-week > * {
         flex: 0 1 14.2857%;
+    }
+}
+.clock__view-master {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: var(--inter-margin);
+    > * {
+        flex: 1 1 auto;
+    }
+    &--calendar-month-year {
+        > .clock__split-flap--calendar-month {
+            flex: 0 1 calc(100% * 1/2);
+        }
+        > .clock__split-flap--calendar-year {
+            flex: 0 1 calc(100% * 1/2);
+        }
     }
 }
 
@@ -72,7 +92,6 @@ body {
  * Clock styles
  */
 .clock__view-master {
-    display: inline-block;
     padding: var(--split-flap-view-master-spacing);
     padding-bottom: calc(var(--split-flap-view-master-spacing) - 1px);
     border-radius: calc(var(--split-flap-view-master-spacing) + var(--border-radius) - 2px);
@@ -118,7 +137,7 @@ body {
  * Typography
  */
 .clock__line--date                { font-size: 33.3333%; }
-.clock__line--calendar-month-year { font-size: 25%; }
+.clock__line--calendar-month-year { font-size: 33.3333%; }
 .clock__line--calendar-week       { font-size: 20%; }
 .clock__ampm                      { font-size: 25%; }
 
@@ -126,25 +145,23 @@ body {
 .clock                            { font-size: 16vw; }
 
 .clock__line--date                { font-weight: 700; }
-.clock__line--time                { font-weight: 400; }
 .clock__line--calendar-month-year { font-weight: 700; }
+.clock__line--time                { font-weight: 400; }
 .clock__line--calendar-week       { font-weight: 400; }
 
-.clock__line--date                { line-height: 1.3; }
+.clock__line--date                { line-height: 1.4; }
 .clock__line--time                { line-height: 1.1; }
-.clock__line--calendar-month-year { line-height: 1.3; }
-.clock__line--calendar-week       { line-height: 1.3; }
+.clock__line--calendar-month-year { line-height: 1.4; }
+.clock__line--calendar-week       { line-height: 1.4; }
 
-.clock__ampm--am                  { top:    12%; }
-.clock__ampm--pm                  { bottom: 12%; }
+.clock__ampm     { position: absolute; }
+.clock__ampm     { left:   0.4em; }
+.clock__ampm--am { top:    0.2em; }
+.clock__ampm--pm { bottom: 0.2em; }
 
 /**
  * Miscellaneous
  */
 [data-clock-weekday], [data-clock-month] {
     text-transform: uppercase;
-}
-.clock__ampm {
-    position: absolute;
-    left: 4%;
 }

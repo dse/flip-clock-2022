@@ -24,11 +24,11 @@ export default class TimeClock2022 extends FlipClock2022 {
     initSplitFlaps() {
         const startYear = 1970;
         const endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
-        if (this.elements.year)    { this.splitFlaps.year    = new SplitFlap(this.elements.year,    'year',    startYear, endYear);           this.splitFlapArray.push({ splitFlap: this.splitFlaps.year });    }
-        if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   'month',   0, 11, month3);  this.splitFlapArray.push({ splitFlap: this.splitFlaps.month });   }
-        if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     'day',     1, 31);                        this.splitFlapArray.push({ splitFlap: this.splitFlaps.day });     }
-        if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 'weekday', 0, 6, weekday3); this.splitFlapArray.push({ splitFlap: this.splitFlaps.weekday }); }
-        if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    'hour',    0, 23, h12);     this.splitFlapArray.push({ splitFlap: this.splitFlaps.hour });    }
+        if (this.elements.year)    { this.splitFlaps.year    = new SplitFlap(this.elements.year,    'year',    startYear, endYear, { duration: 125 }); this.splitFlapArray.push({ splitFlap: this.splitFlaps.year });    }
+        if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   'month',   0, 11, month3, { duration: 125 });      this.splitFlapArray.push({ splitFlap: this.splitFlaps.month });   }
+        if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     'day',     1, 31, { duration: 125 });              this.splitFlapArray.push({ splitFlap: this.splitFlaps.day });     }
+        if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 'weekday', 0, 6, weekday3, { duration: 125 });     this.splitFlapArray.push({ splitFlap: this.splitFlaps.weekday }); }
+        if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    'hour',    0, 23, h12);         this.splitFlapArray.push({ splitFlap: this.splitFlaps.hour });    }
         if (this.elements.minute)  { this.splitFlaps.minute  = new SplitFlap(this.elements.minute,  'minute',  0, 59, pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.minute });  }
         if (this.elements.second)  { this.splitFlaps.second  = new SplitFlap(this.elements.second,  'second',  0, 59, pad00);       this.splitFlapArray.push({ splitFlap: this.splitFlaps.second });  }
     }
