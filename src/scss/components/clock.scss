@@ -43,33 +43,31 @@ body {
     margin-right: auto;
     display: flex;
     flex-flow: column nowrap;
-    row-gap: var(--inter-margin);
-    @supports not (row-gap: 1em) {
-        > *:not(:first-child) {
-            margin-top: var(--inter-margin);
-        }
+
+    // sf9 does not support gap
+    > *:not(:first-child) {
+        margin-top: var(--inter-margin);
     }
 }
 .clock__calendar-grid {
     display: flex;
     flex-flow: column nowrap;
-    row-gap: calc(var(--inter-margin) * 0.5);
-    @supports not (row-gap: 1em) {
-        > *:not(:first-child) {
-            margin-top: calc(var(--inter-margin) * 0.5);
-        }
+
+    // sf9 does not support gap
+    > *:not(:first-child) {
+        margin-top: calc(var(--inter-margin) * 0.5);
     }
 }
 .clock__line {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    column-gap: var(--inter-margin);
-    @supports not (column-gap: 1em) {
-        > *:not(:first-child) {
-            margin-left: var(--inter-margin);
-        }
+
+    // sf9 does not support gap
+    > *:not(:first-child) {
+        margin-left: var(--inter-margin);
     }
+
     > * {
         flex: 1 1 auto;
     }
@@ -89,12 +87,12 @@ body {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    column-gap: var(--inter-margin);
-    @supports not (column-gap: 1em) {
-        > *:not(:first-child) {
-            margin-left: var(--inter-margin);
-        }
+
+    // sf9 does not support gap
+    > *:not(:first-child) {
+        margin-left: var(--inter-margin);
     }
+
     > * {
         flex: 1 1 auto;
     }
