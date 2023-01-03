@@ -1490,6 +1490,12 @@ function initVolumeSlider() {
     calendarClock.setTickVolume(tickVolume.value);
   });
 }
+function reloadPage() {
+  var url = new URL(window.location.href);
+  url.searchParams.set('cacheBuster', Date.now());
+  window.location.assign(url.toString());
+}
+window.reloadPage = reloadPage;
 }();
 /******/ })()
 ;

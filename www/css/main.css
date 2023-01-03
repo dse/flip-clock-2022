@@ -819,7 +819,7 @@ body {
   padding-top: var(--control-panel-padding);
   padding-bottom: var(--control-panel-padding);
   padding-left: calc(var(--control-panel-padding) + 1em * (var(--control-panel-line-height) - 1));
-  padding-right: 4em;
+  padding-right: 6em;
 }
 .control-panel label {
   white-space: nowrap;
