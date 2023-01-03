@@ -1,6 +1,6 @@
 'use strict';
 
-function clamp(x, y, z) {
+export function clamp(x, y, z) {
     if (x < y) {
         return y;
     }
@@ -10,13 +10,12 @@ function clamp(x, y, z) {
     return x;
 }
 
-function isHidden(element) {
-    var style;
+export function isHidden(element) {
     if (!element) {
         return;
     }
     for (; element && element.style; element = element.parentNode) {
-        style = window.getComputedStyle(element);
+        const style = window.getComputedStyle(element);
         if (style.display === 'none' ||
             style.visibility === 'hidden' ||
             style.opacity === 0) {

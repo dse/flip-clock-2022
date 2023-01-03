@@ -4,7 +4,7 @@
  * The names of weekdays.  The first two characters of each are unique
  * abbreviations, as are the first three characters.
  */
-SplitFlap.WEEKDAYS = [
+export const WEEKDAYS = [
     'Sunday',
     'Monday',
     'Tuesday',
@@ -19,7 +19,7 @@ SplitFlap.WEEKDAYS = [
  * abbreviations.  For unique two-character abbreviations, use
  * SplitFlap.MONTHS_ABBR_2.
  */
-SplitFlap.MONTHS = [
+export const MONTHS = [
     'January',
     'February',
     'March',
@@ -39,7 +39,7 @@ SplitFlap.MONTHS = [
  * three-character abbreviations or the full months, use
  * SplitFlap.MONTHS.
  */
-SplitFlap.MONTHS_ABBR_2 = [
+export const MONTHS_ABBR_2 = [
     'Ja',
     'Fe',
     'Mr',
@@ -61,13 +61,13 @@ SplitFlap.MONTHS_ABBR_2 = [
  * Useful for minutes and seconds, this function generates '00'
  * through '59' for the numbers 0 through 59.
  */
-SplitFlap.pad00 = function (str) {
+export function pad00(str) {
     str = String(str);
     while (str.length < 2) {
         str = '0' + str;
     }
     return str;
-};
+}
 
 /**
  * Generates and returns an hour string for a 12-hour clock in the
@@ -117,19 +117,18 @@ SplitFlap.pad00 = function (str) {
  *     <span class="am">5 AM</span>
  *     <span class="pm">11 PM</span>
  */
-SplitFlap.hour12 = function (hour24, amString, pmString, format) {
-    if (format == null) {
-        format = '<span class="clock__hour12">{hour12}</span>' +
-            '<span class="clock__ampm clock__ampm--{ampmClass}">{ampmString}</span>';
-    }
-    if (amString == null) { amString = 'am'; }
-    if (pmString == null) { pmString = 'pm'; }
-    var hour12 = (hour24 + 11) % 12 + 1;
-    var ampmClass = hour24 < 12 ? 'am' : 'pm';
-    var ampmString = hour24 < 12 ? amString : pmString;
-    var str = format;
+
+const DEFAULT_FORMAT =
+      '<span class="clock__hour12">{hour12}</span>' +
+      '<span class="clock__ampm clock__ampm--{ampmClass}">{ampmString}</span>';
+
+export function hour12(hour24, amString = 'am', pmString = 'pm', format = DEFAULT_FORMAT) {
+    const hour12 = (hour24 + 11) % 12 + 1;
+    const ampmClass = hour24 < 12 ? 'am' : 'pm';
+    const ampmString = hour24 < 12 ? amString : pmString;
+    let str = format;
     str = str.replace(/{hour12}/g, String(hour12));
     str = str.replace(/{ampmClass}/g, ampmClass);
     str = str.replace(/{ampmString}/g, ampmString);
     return str;
-};
+}
