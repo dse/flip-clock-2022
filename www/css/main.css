@@ -384,6 +384,11 @@ body {
           flex-flow: column nowrap;
   row-gap: var(--inter-margin);
 }
+@supports not (row-gap: 1em) {
+  .clock__panel > *:not(:first-child) {
+    margin-top: var(--inter-margin);
+  }
+}
 
 .clock__calendar-grid {
   display: -webkit-box;
@@ -394,6 +399,11 @@ body {
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
   row-gap: calc(var(--inter-margin) * 0.5);
+}
+@supports not (row-gap: 1em) {
+  .clock__calendar-grid > *:not(:first-child) {
+    margin-top: calc(var(--inter-margin) * 0.5);
+  }
 }
 
 .clock__line {
@@ -407,7 +417,14 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  gap: var(--inter-margin);
+  -webkit-column-gap: var(--inter-margin);
+     -moz-column-gap: var(--inter-margin);
+          column-gap: var(--inter-margin);
+}
+@supports not ((-moz-column-gap: 1em) or (column-gap: 1em)) {
+  .clock__line > *:not(:first-child) {
+    margin-left: var(--inter-margin);
+  }
 }
 .clock__line > * {
   -webkit-box-flex: 1;
@@ -441,7 +458,14 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  gap: var(--inter-margin);
+  -webkit-column-gap: var(--inter-margin);
+     -moz-column-gap: var(--inter-margin);
+          column-gap: var(--inter-margin);
+}
+@supports not ((-moz-column-gap: 1em) or (column-gap: 1em)) {
+  .clock__view-master > *:not(:first-child) {
+    margin-left: var(--inter-margin);
+  }
 }
 .clock__view-master > * {
   -webkit-box-flex: 1;
@@ -646,18 +670,6 @@ body {
 .font--arial-black body {
   font-family: "Arial Black", sans-serif;
 }
-.font--arial-black .clock {
-  font-size: 14vw;
-}
-.font--arial-black .clock__line--date {
-  line-height: 1.4;
-}
-.font--arial-black .clock__line--calendar-month-year {
-  line-height: 1.5;
-}
-.font--arial-black .clock__line--calendar-week {
-  line-height: 1.6;
-}
 
 .font--inter body {
   font-family: "Inter", sans-serif;
@@ -670,9 +682,6 @@ body {
 .font--times body {
   font-family: "Times New Roman", "Times Roman", serif;
 }
-.font--times .clock {
-  font-size: 18vw;
-}
 
 .font--helvetica-bold-condensed--apple body {
   font-family: "Helvetica Neue";
@@ -682,16 +691,28 @@ body {
   font-size: 20vw;
 }
 .font--helvetica-bold-condensed--apple .clock__line--date {
-  font-weight: 900;
+  font-weight: 700;
 }
 .font--helvetica-bold-condensed--apple .clock__line--time {
   font-weight: 700;
 }
 .font--helvetica-bold-condensed--apple .clock__line--calendar-month-year {
-  font-weight: 900;
+  font-weight: 700;
 }
 .font--helvetica-bold-condensed--apple .clock__line--calendar-week {
   font-weight: 700;
+}
+.font--helvetica-bold-condensed--apple .clock__line--date {
+  line-height: 1.1;
+}
+.font--helvetica-bold-condensed--apple .clock__line--time {
+  line-height: 0.95;
+}
+.font--helvetica-bold-condensed--apple .clock__line--calendar-month-year {
+  line-height: 1.1;
+}
+.font--helvetica-bold-condensed--apple .clock__line--calendar-week {
+  line-height: 1.2;
 }
 
 .font--futura body {
