@@ -1377,11 +1377,11 @@ function init() {
   if (/(?:^|[?&])arial-?black(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--arial-black');
   }
-  if (/(?:^|[?&])poppins(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--poppins');
+  if (/(?:^|[?&])lato(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--lato');
   }
   if (/(?:^|[?&])poppins(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--lato');
+    useFontClass('font--poppins');
   }
   if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--times');
