@@ -16,25 +16,36 @@ export default class CalendarClock2022 extends FlipClock2022 {
     initSplitFlaps() {
         const startYear = 1970;
         const endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
+        const splitFlapOptions = {};
+        if (this.animation != null) {
+            splitFlapOptions.animation = this.animation;
+        }
         this.calendarSplitFlaps = {};
         this.calendarSplitFlapArray = [];
         if (this.elements.calendarMonth) {
             this.splitFlaps.calendarMonth = new SplitFlap(this.elements.calendarMonth, 'calendarMonth', 0, 11, month3,
-                                                          { duration: 100, flickTimeoutMs: this.flickTimeoutMs });
+                                                          { ...splitFlapOptions, duration: 100, flickTimeoutMs: this.flickTimeoutMs });
             this.calendarSplitFlapArray.push({ splitFlap: this.splitFlaps.calendarMonth });
         }
         if (this.elements.calendarYear) {
             this.splitFlaps.calendarYear = new SplitFlap(this.elements.calendarYear, 'calendarYear', startYear, endYear,
-                                                         { duration: 100, flickTimeoutMs: this.flickTimeoutMs });
+                                                         { ...splitFlapOptions, duration: 100, flickTimeoutMs: this.flickTimeoutMs });
             this.calendarSplitFlapArray.push({ splitFlap: this.splitFlaps.calendarYear });
         }
         const calendarDayElements = Array.from(document.querySelectorAll('[data-clock-calendar-day]'));
         this.elements.calendarDays = [];
         this.splitFlaps.calendarDays = [];
+        const calendarDaySplitFlapOptions = {
+            duration: 100,
+            flickTimeoutMs: this.flickTimeoutMs,
+        };
+        if (this.animation != null) {
+            calendarDaySplitFlapOptions.animation = this.animation;
+        }
         for (let i = 0; i < calendarDayElements.length; i += 1) {
             const elt = calendarDayElements[i];
             this.elements.calendarDays.push(elt);
-            const sf = new SplitFlap(elt, 0, 31, function (state) { return state ? state : ''; }, { duration: 100, flickTimeoutMs: this.flickTimeoutMs });
+            const sf = new SplitFlap(elt, 0, 31, function (state) { return state ? state : ''; }, calendarDaySplitFlapOptions);
             this.splitFlaps.calendarDays.push(sf);
             this.calendarSplitFlapArray.push({ splitFlap: sf });
         }

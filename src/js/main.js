@@ -18,11 +18,22 @@ if (document.readyState === 'complete') {
 function init() {
     tick = new ClockTicker('sounds/tick2.wav');
 
-    clock = new TimeClock2022(document.getElementById('clock'));
+    const timeClockOptions = {};
+    const calendarClockOptions = {};
+    if (/(?:^|[?&])anim(?:ation)?=?1(?:$|[?&=])/i.test(location.search)) {
+        timeClockOptions.animation = 1;
+        calendarClockOptions.animation = 1;
+    }
+    if (/(?:^|[?&])anim(?:ation)?=?0(?:$|[?&=])/i.test(location.search)) {
+        timeClockOptions.animation = 0;
+        calendarClockOptions.animation = 0;
+    }
+
+    clock = new TimeClock2022(document.getElementById('clock'), timeClockOptions);
     clock.setTicker(tick);
     clock.start();
 
-    calendarClock = new CalendarClock2022(document.getElementById('clock'));
+    calendarClock = new CalendarClock2022(document.getElementById('clock'), calendarClockOptions);
     calendarClock.setTicker(tick);
     calendarClock.start();
 
@@ -95,12 +106,12 @@ function initLogs() {
     }
     if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
         console.debug(navigator.userAgent);
-        Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
-            stylesheet => console.log(stylesheet.getAttribute('href'))
-        );
-        Array.from(document.head.querySelectorAll('script[src]')).forEach(
-            stylesheet => console.log(stylesheet.getAttribute('src'))
-        );
+        // Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
+        //     stylesheet => console.log(stylesheet.getAttribute('href'))
+        // );
+        // Array.from(document.head.querySelectorAll('script[src]')).forEach(
+        //     stylesheet => console.log(stylesheet.getAttribute('src'))
+        // );
     }
 }
 

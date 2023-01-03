@@ -134,6 +134,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -175,22 +178,26 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
     value: function initSplitFlaps() {
       var startYear = 1970;
       var endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
+      var splitFlapOptions = {};
+      if (this.animation != null) {
+        splitFlapOptions.animation = this.animation;
+      }
       this.calendarSplitFlaps = {};
       this.calendarSplitFlapArray = [];
       if (this.elements.calendarMonth) {
-        this.splitFlaps.calendarMonth = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarMonth, 'calendarMonth', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, {
+        this.splitFlaps.calendarMonth = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarMonth, 'calendarMonth', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
           duration: 100,
           flickTimeoutMs: this.flickTimeoutMs
-        });
+        }));
         this.calendarSplitFlapArray.push({
           splitFlap: this.splitFlaps.calendarMonth
         });
       }
       if (this.elements.calendarYear) {
-        this.splitFlaps.calendarYear = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarYear, 'calendarYear', startYear, endYear, {
+        this.splitFlaps.calendarYear = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarYear, 'calendarYear', startYear, endYear, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
           duration: 100,
           flickTimeoutMs: this.flickTimeoutMs
-        });
+        }));
         this.calendarSplitFlapArray.push({
           splitFlap: this.splitFlaps.calendarYear
         });
@@ -198,15 +205,19 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
       var calendarDayElements = Array.from(document.querySelectorAll('[data-clock-calendar-day]'));
       this.elements.calendarDays = [];
       this.splitFlaps.calendarDays = [];
+      var calendarDaySplitFlapOptions = {
+        duration: 100,
+        flickTimeoutMs: this.flickTimeoutMs
+      };
+      if (this.animation != null) {
+        calendarDaySplitFlapOptions.animation = this.animation;
+      }
       for (var i = 0; i < calendarDayElements.length; i += 1) {
         var elt = calendarDayElements[i];
         this.elements.calendarDays.push(elt);
         var sf = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](elt, 0, 31, function (state) {
           return state ? state : '';
-        }, {
-          duration: 100,
-          flickTimeoutMs: this.flickTimeoutMs
-        });
+        }, calendarDaySplitFlapOptions);
         this.splitFlaps.calendarDays.push(sf);
         this.calendarSplitFlapArray.push({
           splitFlap: sf
@@ -902,6 +913,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -953,52 +967,70 @@ var TimeClock2022 = /*#__PURE__*/function (_FlipClock) {
     value: function initSplitFlaps() {
       var startYear = 1970;
       var endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
+      var splitFlapOptions = {};
+      if (this.animation != null) {
+        splitFlapOptions.animation = this.animation;
+      }
       if (this.elements.year) {
-        this.splitFlaps.year = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.year, 'year', startYear, endYear, {
+        this.splitFlaps.year = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.year, 'year', startYear, endYear, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
           duration: 125
-        });
+        }));
+      }
+      if (this.elements.month) {
+        this.splitFlaps.month = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.month, 'month', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
+          duration: 125
+        }));
+      }
+      if (this.elements.day) {
+        this.splitFlaps.day = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.day, 'day', 1, 31, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
+          duration: 125
+        }));
+      }
+      if (this.elements.weekday) {
+        this.splitFlaps.weekday = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.weekday, 'weekday', 0, 6, _utils__WEBPACK_IMPORTED_MODULE_2__.weekday3, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
+          duration: 125
+        }));
+      }
+      if (this.elements.hour) {
+        this.splitFlaps.hour = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.hour, 'hour', 0, 23, _utils__WEBPACK_IMPORTED_MODULE_2__.h12, _objectSpread({}, splitFlapOptions));
+      }
+      if (this.elements.minute) {
+        this.splitFlaps.minute = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.minute, 'minute', 0, 59, _utils__WEBPACK_IMPORTED_MODULE_2__.pad00, _objectSpread({}, splitFlapOptions));
+      }
+      if (this.elements.second) {
+        this.splitFlaps.second = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.second, 'second', 0, 59, _utils__WEBPACK_IMPORTED_MODULE_2__.pad00, _objectSpread({}, splitFlapOptions));
+      }
+      if (this.elements.year) {
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.year
         });
       }
       if (this.elements.month) {
-        this.splitFlaps.month = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.month, 'month', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, {
-          duration: 125
-        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.month
         });
       }
       if (this.elements.day) {
-        this.splitFlaps.day = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.day, 'day', 1, 31, {
-          duration: 125
-        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.day
         });
       }
       if (this.elements.weekday) {
-        this.splitFlaps.weekday = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.weekday, 'weekday', 0, 6, _utils__WEBPACK_IMPORTED_MODULE_2__.weekday3, {
-          duration: 125
-        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.weekday
         });
       }
       if (this.elements.hour) {
-        this.splitFlaps.hour = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.hour, 'hour', 0, 23, _utils__WEBPACK_IMPORTED_MODULE_2__.h12);
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.hour
         });
       }
       if (this.elements.minute) {
-        this.splitFlaps.minute = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.minute, 'minute', 0, 59, _utils__WEBPACK_IMPORTED_MODULE_2__.pad00);
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.minute
         });
       }
       if (this.elements.second) {
-        this.splitFlaps.second = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.second, 'second', 0, 59, _utils__WEBPACK_IMPORTED_MODULE_2__.pad00);
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.second
         });
@@ -1354,10 +1386,20 @@ if (document.readyState === 'complete') {
 }
 function init() {
   tick = new _components_audio__WEBPACK_IMPORTED_MODULE_0__["default"]('sounds/tick2.wav');
-  clock = new _components_time_clock__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('clock'));
+  var timeClockOptions = {};
+  var calendarClockOptions = {};
+  if (/(?:^|[?&])anim(?:ation)?=?1(?:$|[?&=])/i.test(location.search)) {
+    timeClockOptions.animation = 1;
+    calendarClockOptions.animation = 1;
+  }
+  if (/(?:^|[?&])anim(?:ation)?=?0(?:$|[?&=])/i.test(location.search)) {
+    timeClockOptions.animation = 0;
+    calendarClockOptions.animation = 0;
+  }
+  clock = new _components_time_clock__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('clock'), timeClockOptions);
   clock.setTicker(tick);
   clock.start();
-  calendarClock = new _components_calendar_clock__WEBPACK_IMPORTED_MODULE_2__["default"](document.getElementById('clock'));
+  calendarClock = new _components_calendar_clock__WEBPACK_IMPORTED_MODULE_2__["default"](document.getElementById('clock'), calendarClockOptions);
   calendarClock.setTicker(tick);
   calendarClock.start();
   initEvents();
@@ -1424,14 +1466,15 @@ function initLogs() {
   }
   if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
     console.debug(navigator.userAgent);
-    Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(function (stylesheet) {
-      return console.log(stylesheet.getAttribute('href'));
-    });
-    Array.from(document.head.querySelectorAll('script[src]')).forEach(function (stylesheet) {
-      return console.log(stylesheet.getAttribute('src'));
-    });
+    // Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
+    //     stylesheet => console.log(stylesheet.getAttribute('href'))
+    // );
+    // Array.from(document.head.querySelectorAll('script[src]')).forEach(
+    //     stylesheet => console.log(stylesheet.getAttribute('src'))
+    // );
   }
 }
+
 function hackConsoleMethods() {
   ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
     var fn = console[level];
