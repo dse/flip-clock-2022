@@ -178,7 +178,8 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
       this.calendarSplitFlaps = {};
       this.calendarSplitFlapArray = [];
       if (this.elements.calendarMonth) {
-        this.splitFlaps.calendarMonth = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarMonth, 'calendarMonth', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.MONTHS, {
+        this.splitFlaps.calendarMonth = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarMonth, 'calendarMonth', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, {
+          duration: 100,
           flickTimeoutMs: this.flickTimeoutMs
         });
         this.calendarSplitFlapArray.push({
@@ -187,6 +188,7 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
       }
       if (this.elements.calendarYear) {
         this.splitFlaps.calendarYear = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](this.elements.calendarYear, 'calendarYear', startYear, endYear, {
+          duration: 100,
           flickTimeoutMs: this.flickTimeoutMs
         });
         this.calendarSplitFlapArray.push({
@@ -202,6 +204,7 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
         var sf = new _splitflap__WEBPACK_IMPORTED_MODULE_0__["default"](elt, 0, 31, function (state) {
           return state ? state : '';
         }, {
+          duration: 100,
           flickTimeoutMs: this.flickTimeoutMs
         });
         this.splitFlaps.calendarDays.push(sf);
@@ -213,7 +216,7 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
   }, {
     key: "initInterSplitFlapDelay",
     value: function initInterSplitFlapDelay() {
-      this.interSplitFlapDelay = 5;
+      this.interSplitFlapDelay = 3;
       for (var i = 0; i < this.calendarSplitFlapArray.length; i += 1) {
         var delay = 1 + this.interSplitFlapDelay * i;
         this.calendarSplitFlapArray[i].splitFlap.delay = delay;
@@ -478,6 +481,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
  */
 var SplitFlap = /*#__PURE__*/function () {
   function SplitFlap() {
+    var _this$delay, _this$randomness, _this$animation, _this$enableTicking, _this$duration, _this$hurryFactor, _this$flickTimeoutMs;
     _classCallCheck(this, SplitFlap);
     /**
      * Process command line arguments.
@@ -556,29 +560,13 @@ var SplitFlap = /*#__PURE__*/function () {
     this.stateB = 0;
     this.stateC = null;
     this.stateD = null;
-    if (this.delay == null) {
-      this.delay = 0; // milliseconds
-    }
-
-    if (this.randomness == null) {
-      this.randomness = 2;
-    }
-    if (this.animation == null) {
-      this.animation = 2;
-    }
-    if (this.enableTicking == null) {
-      this.enableTicking = true;
-    }
-    if (this.duration == null) {
-      this.duration = 150; // milliseconds
-    }
-
-    if (this.hurryFactor == null) {
-      this.hurryFactor = 0.75;
-    }
-    if (this.flickTimeoutMs == null) {
-      this.flickTimeoutMs = 2000;
-    }
+    this.delay = (_this$delay = this.delay) !== null && _this$delay !== void 0 ? _this$delay : 0; // milliseconds
+    this.randomness = (_this$randomness = this.randomness) !== null && _this$randomness !== void 0 ? _this$randomness : 2;
+    this.animation = (_this$animation = this.animation) !== null && _this$animation !== void 0 ? _this$animation : 2;
+    this.enableTicking = (_this$enableTicking = this.enableTicking) !== null && _this$enableTicking !== void 0 ? _this$enableTicking : true;
+    this.duration = (_this$duration = this.duration) !== null && _this$duration !== void 0 ? _this$duration : 150; // milliseconds
+    this.hurryFactor = (_this$hurryFactor = this.hurryFactor) !== null && _this$hurryFactor !== void 0 ? _this$hurryFactor : 0.75;
+    this.flickTimeoutMs = (_this$flickTimeoutMs = this.flickTimeoutMs) !== null && _this$flickTimeoutMs !== void 0 ? _this$flickTimeoutMs : 2000;
     this.setupFlicking();
   }
   _createClass(SplitFlap, [{
@@ -966,25 +954,33 @@ var TimeClock2022 = /*#__PURE__*/function (_FlipClock) {
       var startYear = 1970;
       var endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
       if (this.elements.year) {
-        this.splitFlaps.year = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.year, 'year', startYear, endYear);
+        this.splitFlaps.year = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.year, 'year', startYear, endYear, {
+          duration: 125
+        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.year
         });
       }
       if (this.elements.month) {
-        this.splitFlaps.month = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.month, 'month', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3);
+        this.splitFlaps.month = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.month, 'month', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, {
+          duration: 125
+        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.month
         });
       }
       if (this.elements.day) {
-        this.splitFlaps.day = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.day, 'day', 1, 31);
+        this.splitFlaps.day = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.day, 'day', 1, 31, {
+          duration: 125
+        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.day
         });
       }
       if (this.elements.weekday) {
-        this.splitFlaps.weekday = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.weekday, 'weekday', 0, 6, _utils__WEBPACK_IMPORTED_MODULE_2__.weekday3);
+        this.splitFlaps.weekday = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.weekday, 'weekday', 0, 6, _utils__WEBPACK_IMPORTED_MODULE_2__.weekday3, {
+          duration: 125
+        });
         this.splitFlapArray.push({
           splitFlap: this.splitFlaps.weekday
         });
@@ -1368,23 +1364,41 @@ function init() {
   initLogs();
   initCheckboxEvents();
   initVolumeSlider();
-  if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--helvetica-bold-condensed--apple');
-  }
   if (/(?:^|[?&])arial(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--arial');
   }
   if (/(?:^|[?&])arial-?black(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--arial-black');
   }
-  if (/(?:^|[?&])lato(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--lato');
-  }
-  if (/(?:^|[?&])poppins(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--poppins');
+  if (/(?:^|[?&])inter(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--inter');
   }
   if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--times');
+  }
+  if (/(?:^|[?&])noto-?sans(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--noto-sans');
+  }
+  if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--helvetica-bold-condensed--apple');
+  }
+  if (/(?:^|[?&])futura(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--futura');
+  }
+  if (/(?:^|[?&])gill-?sans(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--gill-sans');
+  }
+  if (/(?:^|[?&])optima(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--optima');
+  }
+  if (/(?:^|[?&])palatino(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--palatino');
+  }
+  if (/(?:^|[?&])rockwell(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--rockwell');
+  }
+  if (/(?:^|[?&])verdana(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--verdana');
   }
 }
 function useFontClass(className) {
