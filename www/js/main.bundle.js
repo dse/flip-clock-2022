@@ -331,6 +331,186 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
 
 /***/ }),
 
+/***/ "./src/js/components/clock-page.js":
+/*!*****************************************!*\
+  !*** ./src/js/components/clock-page.js ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ initClockPage; }
+/* harmony export */ });
+/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./audio */ "./src/js/components/audio.js");
+/* harmony import */ var _time_clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./time-clock */ "./src/js/components/time-clock.js");
+/* harmony import */ var _calendar_clock__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calendar-clock */ "./src/js/components/calendar-clock.js");
+
+
+
+
+
+var tick;
+var clock;
+var calendarClock;
+var logs;
+function initClockPage() {
+  tick = new _audio__WEBPACK_IMPORTED_MODULE_0__["default"]('sounds/tick2.wav');
+  var timeClockOptions = {};
+  var calendarClockOptions = {};
+  if (/(?:^|[?&])anim(?:ation)?=?1(?:$|[?&=])/i.test(location.search)) {
+    timeClockOptions.animation = 1;
+    calendarClockOptions.animation = 1;
+  }
+  if (/(?:^|[?&])anim(?:ation)?=?0(?:$|[?&=])/i.test(location.search)) {
+    timeClockOptions.animation = 0;
+    calendarClockOptions.animation = 0;
+  }
+  clock = new _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('clock'), timeClockOptions);
+  clock.setTicker(tick);
+  clock.start();
+  calendarClock = new _calendar_clock__WEBPACK_IMPORTED_MODULE_2__["default"](document.getElementById('clock'), calendarClockOptions);
+  calendarClock.setTicker(tick);
+  calendarClock.start();
+  initEvents();
+  initLogs();
+  initCheckboxEvents();
+  initVolumeSlider();
+  if (/(?:^|[?&])arial(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--arial');
+  }
+  if (/(?:^|[?&])arial-?black(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--arial-black');
+  }
+  if (/(?:^|[?&])inter(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--inter');
+  }
+  if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--times');
+  }
+  if (/(?:^|[?&])noto-?sans(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--noto-sans');
+  }
+  if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--helvetica-bold-condensed--apple');
+  }
+  if (/(?:^|[?&])iPad(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--helvetica-bold-condensed--apple');
+  }
+  if (/(?:^|[?&])futura(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--futura');
+  }
+  if (/(?:^|[?&])gill-?sans(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--gill-sans');
+  }
+  if (/(?:^|[?&])optima(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--optima');
+  }
+  if (/(?:^|[?&])palatino(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--palatino');
+  }
+  if (/(?:^|[?&])rockwell(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--rockwell');
+  }
+  if (/(?:^|[?&])verdana(?:$|[?&=])/i.test(location.search)) {
+    useFontClass('font--verdana');
+  }
+}
+function useFontClass(className) {
+  var classList = document.documentElement.classList;
+  var classes = [];
+  for (var i = 0; i < classList.length; i += 1) {
+    classes.push(classList.item(i));
+  }
+  for (var _i = 0; _i < classes.length; _i += 1) {
+    if (/^font--/.test(classes[_i])) {
+      classList.remove(classes[_i]);
+    }
+  }
+  classList.add(className);
+}
+function initLogs() {
+  logs = document.getElementById('logs');
+  if (/\b(?:iPhone|iPad|mac os x)\b/i.test(navigator.userAgent)) {
+    hackConsoleMethods();
+  }
+  if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
+    console.debug(navigator.userAgent);
+    // Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
+    //     stylesheet => console.log(stylesheet.getAttribute('href'))
+    // );
+    // Array.from(document.head.querySelectorAll('script[src]')).forEach(
+    //     stylesheet => console.log(stylesheet.getAttribute('src'))
+    // );
+  }
+}
+
+function hackConsoleMethods() {
+  ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
+    var fn = console[level];
+    console[level] = function () {
+      fn.apply(console, arguments);
+      logs.innerHTML = logs.innerHTML + level.toUpperCase() + ': ' + Array.from(arguments).join(' ') + '\n';
+    };
+  });
+}
+function initEvents() {
+  var toggle = document.getElementById('controlPanelToggle');
+  var logsToggle = document.getElementById('logsToggle');
+  var panel = document.getElementById('controlPanel');
+  toggle.addEventListener('click', function () {
+    panel.classList.toggle('hide');
+    if (panel.classList.contains('hide')) {
+      logs.classList.add('hide');
+    }
+  });
+  logsToggle.addEventListener('click', function () {
+    logs.classList.toggle('hide');
+  });
+}
+function initCheckboxEvents() {
+  var is24Hour = document.getElementById('is24Hour');
+  if (is24Hour) {
+    is24Hour.checked = clock.is24Hour;
+    is24Hour.addEventListener('change', function () {
+      clock.set24Hour(is24Hour.checked);
+    });
+  }
+  var enableTicking = document.getElementById('enableTicking');
+  if (enableTicking) {
+    enableTicking.checked = clock.enableTicking;
+    enableTicking.addEventListener('change', function () {
+      clock.setTicking(enableTicking.checked);
+      calendarClock.setTicking(enableTicking.checked);
+    });
+  }
+  var enableSecondsTicking = document.getElementById('enableSecondsTicking');
+  if (enableSecondsTicking) {
+    enableSecondsTicking.checked = clock.enableSecondsTicking;
+    enableSecondsTicking.addEventListener('change', function () {
+      clock.setSecondsTicking(enableSecondsTicking.checked);
+    });
+  }
+}
+function initVolumeSlider() {
+  var tickVolume = document.getElementById('tickVolume');
+  if (!tickVolume) {
+    return;
+  }
+  tickVolume.value = clock.tickVolume;
+  tickVolume.addEventListener('change', function () {
+    clock.setTickVolume(tickVolume.value);
+    calendarClock.setTickVolume(tickVolume.value);
+  });
+}
+function reloadPage() {
+  var url = new URL(window.location.href);
+  url.searchParams.set('cacheBuster', Date.now());
+  window.location.assign(url.toString());
+}
+window.reloadPage = reloadPage;
+
+/***/ }),
+
 /***/ "./src/js/components/clock.js":
 /*!************************************!*\
   !*** ./src/js/components/clock.js ***!
@@ -408,6 +588,7 @@ var FlipClock2022 = /*#__PURE__*/function () {
       if (this.isRunning) {
         return;
       }
+      this.keepAwake();
       this.isRunning = true;
       this.run();
     }
@@ -422,6 +603,7 @@ var FlipClock2022 = /*#__PURE__*/function () {
         clearTimeout(this.timeout);
         delete this.timeout;
       }
+      this.allowSleepAgain();
     }
   }, {
     key: "run",
@@ -1367,178 +1549,15 @@ var __webpack_exports__ = {};
   !*** ./src/js/main.js ***!
   \************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/audio */ "./src/js/components/audio.js");
-/* harmony import */ var _components_time_clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/time-clock */ "./src/js/components/time-clock.js");
-/* harmony import */ var _components_calendar_clock__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/calendar-clock */ "./src/js/components/calendar-clock.js");
+/* harmony import */ var _components_clock_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/clock-page */ "./src/js/components/clock-page.js");
 
 
 
-
-
-var tick;
-var clock;
-var calendarClock;
-var logs;
 if (document.readyState === 'complete') {
-  init();
+  (0,_components_clock_page__WEBPACK_IMPORTED_MODULE_0__["default"])();
 } else {
-  window.addEventListener('load', init);
+  window.addEventListener('load', _components_clock_page__WEBPACK_IMPORTED_MODULE_0__["default"]);
 }
-function init() {
-  tick = new _components_audio__WEBPACK_IMPORTED_MODULE_0__["default"]('sounds/tick2.wav');
-  var timeClockOptions = {};
-  var calendarClockOptions = {};
-  if (/(?:^|[?&])anim(?:ation)?=?1(?:$|[?&=])/i.test(location.search)) {
-    timeClockOptions.animation = 1;
-    calendarClockOptions.animation = 1;
-  }
-  if (/(?:^|[?&])anim(?:ation)?=?0(?:$|[?&=])/i.test(location.search)) {
-    timeClockOptions.animation = 0;
-    calendarClockOptions.animation = 0;
-  }
-  clock = new _components_time_clock__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('clock'), timeClockOptions);
-  clock.setTicker(tick);
-  clock.start();
-  calendarClock = new _components_calendar_clock__WEBPACK_IMPORTED_MODULE_2__["default"](document.getElementById('clock'), calendarClockOptions);
-  calendarClock.setTicker(tick);
-  calendarClock.start();
-  initEvents();
-  initLogs();
-  initCheckboxEvents();
-  initVolumeSlider();
-  if (/(?:^|[?&])arial(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--arial');
-  }
-  if (/(?:^|[?&])arial-?black(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--arial-black');
-  }
-  if (/(?:^|[?&])inter(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--inter');
-  }
-  if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--times');
-  }
-  if (/(?:^|[?&])noto-?sans(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--noto-sans');
-  }
-  if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--helvetica-bold-condensed--apple');
-  }
-  if (/(?:^|[?&])iPad(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--helvetica-bold-condensed--apple');
-  }
-  if (/(?:^|[?&])futura(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--futura');
-  }
-  if (/(?:^|[?&])gill-?sans(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--gill-sans');
-  }
-  if (/(?:^|[?&])optima(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--optima');
-  }
-  if (/(?:^|[?&])palatino(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--palatino');
-  }
-  if (/(?:^|[?&])rockwell(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--rockwell');
-  }
-  if (/(?:^|[?&])verdana(?:$|[?&=])/i.test(location.search)) {
-    useFontClass('font--verdana');
-  }
-}
-function useFontClass(className) {
-  var classList = document.documentElement.classList;
-  var classes = [];
-  for (var i = 0; i < classList.length; i += 1) {
-    classes.push(classList.item(i));
-  }
-  for (var _i = 0; _i < classes.length; _i += 1) {
-    if (/^font--/.test(classes[_i])) {
-      classList.remove(classes[_i]);
-    }
-  }
-  classList.add(className);
-}
-function initLogs() {
-  logs = document.getElementById('logs');
-  if (/\b(?:iPhone|iPad|mac os x)\b/i.test(navigator.userAgent)) {
-    hackConsoleMethods();
-  }
-  if (/\b(?:iPhone|iPad)\b/.test(navigator.userAgent)) {
-    console.debug(navigator.userAgent);
-    // Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).forEach(
-    //     stylesheet => console.log(stylesheet.getAttribute('href'))
-    // );
-    // Array.from(document.head.querySelectorAll('script[src]')).forEach(
-    //     stylesheet => console.log(stylesheet.getAttribute('src'))
-    // );
-  }
-}
-
-function hackConsoleMethods() {
-  ['debug', 'log', 'warn', 'info', 'error'].forEach(function (level) {
-    var fn = console[level];
-    console[level] = function () {
-      fn.apply(console, arguments);
-      logs.innerHTML = logs.innerHTML + level.toUpperCase() + ': ' + Array.from(arguments).join(' ') + '\n';
-    };
-  });
-}
-function initEvents() {
-  var toggle = document.getElementById('controlPanelToggle');
-  var logsToggle = document.getElementById('logsToggle');
-  var panel = document.getElementById('controlPanel');
-  toggle.addEventListener('click', function () {
-    panel.classList.toggle('hide');
-    if (panel.classList.contains('hide')) {
-      logs.classList.add('hide');
-    }
-  });
-  logsToggle.addEventListener('click', function () {
-    logs.classList.toggle('hide');
-  });
-}
-function initCheckboxEvents() {
-  var is24Hour = document.getElementById('is24Hour');
-  if (is24Hour) {
-    is24Hour.checked = clock.is24Hour;
-    is24Hour.addEventListener('change', function () {
-      clock.set24Hour(is24Hour.checked);
-    });
-  }
-  var enableTicking = document.getElementById('enableTicking');
-  if (enableTicking) {
-    enableTicking.checked = clock.enableTicking;
-    enableTicking.addEventListener('change', function () {
-      clock.setTicking(enableTicking.checked);
-      calendarClock.setTicking(enableTicking.checked);
-    });
-  }
-  var enableSecondsTicking = document.getElementById('enableSecondsTicking');
-  if (enableSecondsTicking) {
-    enableSecondsTicking.checked = clock.enableSecondsTicking;
-    enableSecondsTicking.addEventListener('change', function () {
-      clock.setSecondsTicking(enableSecondsTicking.checked);
-    });
-  }
-}
-function initVolumeSlider() {
-  var tickVolume = document.getElementById('tickVolume');
-  if (!tickVolume) {
-    return;
-  }
-  tickVolume.value = clock.tickVolume;
-  tickVolume.addEventListener('change', function () {
-    clock.setTickVolume(tickVolume.value);
-    calendarClock.setTickVolume(tickVolume.value);
-  });
-}
-function reloadPage() {
-  var url = new URL(window.location.href);
-  url.searchParams.set('cacheBuster', Date.now());
-  window.location.assign(url.toString());
-}
-window.reloadPage = reloadPage;
 }();
 /******/ })()
 ;
