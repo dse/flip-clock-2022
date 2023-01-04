@@ -62,7 +62,7 @@ function sassTask() {
 }
 
 function webpackTask() {
-    return gulp.src(['src/js/main.js'], { base: 'src/js', sourcemaps: true })
+    return gulp.src(['src/js/main.js', 'src/js/cordova-app.js'], { base: 'src/js', sourcemaps: true })
         .on('error', errorHandler('gulp.src'))
         .pipe(webpack(require('./webpack.config.js'), compiler))
         .on('error', errorHandler('webpack'))

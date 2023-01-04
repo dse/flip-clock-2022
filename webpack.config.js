@@ -4,10 +4,13 @@
 const path = require('path');
 
 const config = {
-    entry: './src/js/main.js',
+    entry: {
+        main:    './src/js/main.js',
+        cordova: './src/js/cordova-app.js',
+    },
     output: {
         path: path.resolve(__dirname + 'www/js'),
-        filename: 'main.bundle.js',
+        filename: '[name].bundle.js',
     },
     mode: 'development',
     module: {
