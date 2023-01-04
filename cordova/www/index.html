@@ -1,49 +1,141 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
+<html class="cordova">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
+             Customize this policy to fit your own app's needs. For more guidance, see:
+             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+             Some notes:
+             * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+             * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+             * Enable inline JS: add 'unsafe-inline' to default-src
         -->
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /><!-- default, black, and black-translucent -->
+        <meta name="apple-mobile-web-app-title" content="Flip Clock">
+
+        <title>Flip Clock 2022</title>
+
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <script src="js/cordova.bundle.js"></script>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div class="clock carbon-fiber-texture" id="clock">
+            <div class="clock__font-size-adjust">
+                <div class="clock__panel">
+                    <div class="clock__line clock__line--date">
+                        <span class="clock__view-master clock__view-master--weekday-day-month">
+                            <span id="splitFlap0" class="clock__split-flap clock__split-flap--weekday" data-clock-weekday></span>
+                            <span id="splitFlap1" class="clock__split-flap clock__split-flap--day" data-clock-day></span>
+                            <span id="splitFlap2" class="clock__split-flap clock__split-flap--month" data-clock-month></span>
+                        </span>
+                    </div>
+                    <div class="clock__line clock__line--time">
+                        <span class="clock__view-master clock__view-master--hour-minute-second">
+                            <span id="splitFlap3" class="clock__split-flap clock__split-flap--hour" data-clock-hour></span>
+                            <span id="splitFlap4" class="clock__split-flap clock__split-flap--minute" data-clock-minute></span>
+                            <span id="splitFlap5" class="clock__split-flap clock__split-flap--second" data-clock-second></span>
+                        </span>
+                    </div>
+                    <div class="clock__line clock__line--calendar clock__line--calendar-month-year">
+                        <span class="clock__view-master clock__view-master--calendar-month-year" style="text-transform: uppercase;">
+                            <span class="clock__split-flap clock__split-flap--calendar-month" data-clock-calendar-month></span>
+                            <span class="clock__split-flap clock__split-flap--calendar-year" data-clock-calendar-year></span>
+                        </span>
+                    </div>
+                    <div class="clock__calendar-grid">
+                        <!-- BEGIN CALENDAR -->
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                        </div>
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                        </div>
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                        </div>
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                        </div>
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                        </div>
+                        <div class="clock__line clock__line--calendar clock__line--calendar-week">
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <!-- END CALENDAR -->
+                    </div>
+                </div>
             </div>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <div class="control-panel brushed-metal-silver hide" id="controlPanel" style="text-transform: uppercase;">
+            <label>
+                <input class="checkbox checkbox--awesome" type="checkbox" name="is24Hour" id="is24Hour" value="1"><span class="checkbox__icon"></span>
+                24hr
+            </label>
+            <label>
+                <input class="checkbox checkbox--awesome" type="checkbox" name="enableTicking" id="enableTicking" value="1"><span class="checkbox__icon"></span>
+                Tick
+            </label>
+            <label>
+                <input class="checkbox checkbox--awesome" type="checkbox" name="enableSecondsTicking" id="enableSecondsTicking" value="1"><span class="checkbox__icon"></span>
+                Sec
+            </label>
+            <label>
+                <input class="range range--awesome" type="range" name="tickVolume" id="tickVolume" min="0" max="1" step="any" value="1"><span class="range__custom"></span>
+                Vol
+            </label>
+            <div class="control-panel__more-toggles">
+                <a id="logsToggle" href="javascript:void 0;" class="control-panel__toggle__control"><i class="fa-solid fa-toilet-paper fa-fw"></i></a>
+                <a id="reload" href="javascript:reloadPage();" class="control-panel__toggle__control"><i class="fa-solid fa-rotate fa-fw"></i></a>
+            </div>
+        </div>
+        <div class="control-panel__toggle">
+            <a id="controlPanelToggle" href="javascript:void 0;" class="control-panel__toggle__control"><i class="fa-solid fa-gears fa-fw"></i></a>
+        </div>
+        <div class="control-panel__logs hide" id="logs"></div>
     </body>
 </html>
