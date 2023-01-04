@@ -50,7 +50,7 @@ function bsEndTask(cb) {
 }
 
 function sassTask() {
-    return gulp.src(['src/scss/main.scss'], { base: 'src/scss', sourcemaps: true })
+    return gulp.src(['src/scss/*.scss'], { base: 'src/scss', sourcemaps: true })
         .on('error', errorHandler('gulp.src'))
         .pipe(sass())
         .on('error', errorHandler('sass'))
@@ -119,7 +119,18 @@ function watchTaskSetup(cb) {
 const watchTask = gulp.series(watchTaskSetup,
                               gulp.parallel(watchSassTask, watchWebpackTask));
 
+function copyFontAwesomeWebFonts() {
+    return gulp.src(['node_modules/@fortawesome/fontawesome-free/webfonts/**/*.*'],
+                    { base: 'node_modules/@fortawesome/fontawesome-free/webfonts' })
+        .pipe(gulp.dest('www/webfonts/fontawesome'));
+}
+
+const updateTask = gulp.series(
+    copyFontAwesomeWebFonts,
+);
+
 module.exports = {
+    update: updateTask,
     sass: sassTask,
     webpack: webpackTask,
     watch: watchTask,

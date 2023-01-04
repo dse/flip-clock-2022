@@ -1,4 +1,11 @@
-@import url('../fontawesome/css/all.min.css');
+// The actual FA stylesheet is separate.  See ./fontawesome.scss.
+$fa-font-path: '../webfonts/fontawesome';
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/functions.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/variables.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/mixins.scss";
+
+@import url('./fontawesome.css');
+
 @import 'components/normalize.scss';
 @import 'components/utils.scss';
 @import 'components/clock.scss';

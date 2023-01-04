@@ -1,0 +1,6 @@
+// Generates only the fontawesome CSS.  Main stylesheet only loads
+// fns/vars/mixins.
+$fa-font-path: '../webfonts/fontawesome';
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";

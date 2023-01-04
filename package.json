@@ -21,6 +21,7 @@
     "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
     "@colors/colors": "^1.5.0",
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.0",
     "browser-sync": "^2.27.11",
