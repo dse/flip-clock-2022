@@ -20,6 +20,7 @@ let compiler;
  */
 let isWatching = false;
 let continueOnError = false;
+let printStats = true;
 
 function errorHandler(type) {
     return function (error) {
@@ -81,7 +82,9 @@ function webpackTask() {
                 reject(new Error(warnings.map(w => w.message).join("\n\n")));
                 return;
             }
-            console.info(stats.toString());
+            if (printStats) {
+                console.info(stats.toString());
+            }
             resolve();
         });
     });
@@ -114,6 +117,7 @@ function browserSyncTask(cb) {
 
 function serveTaskSetup(cb) {
     server = browserSync.create();
+    printStats = false;
     isWatching = true;
     continueOnError = true;
     gulpWatchOptions.ignoreInitial = true;
@@ -126,6 +130,7 @@ const serveTask = gulp.series(serveTaskSetup,
                               gulp.parallel(watchSassTask, watchWebpackTask));
 
 function watchTaskSetup(cb) {
+    printStats = false;
     isWatching = true;
     continueOnError = true;
     gulpWatchOptions.ignoreInitial = false;
