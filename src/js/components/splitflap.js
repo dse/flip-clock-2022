@@ -113,8 +113,8 @@ export default class SplitFlap {
         this.state       = this.startValue;
         this.nextstate   = this.startValue;
         this.targetState = this.startValue;
-        this.stateA = 0;
-        this.stateB = 0;
+        this.stateA = this.startValue;
+        this.stateB = this.startValue;
         this.stateC = null;
         this.stateD = null;
 
@@ -178,8 +178,8 @@ export default class SplitFlap {
         this.state = this.targetState;
         this.nextState = this.targetState;
         this.targetState = this.targetState;
-        this.flapA.innerHTML = this.strings[this.stateA = this.state - this.startValue];
-        this.flapB.innerHTML = this.strings[this.stateB = this.state - this.startValue];
+        this.flapA.innerHTML = this.strings[(this.stateA = this.state) - this.startValue];
+        this.flapB.innerHTML = this.strings[(this.stateB = this.state) - this.startValue];
         this.stateC = null;
         this.flapC.innerHTML = '';
         this.flapC.style.display = 'none';
@@ -275,7 +275,7 @@ export default class SplitFlap {
         if (x > 0 && x < 0.5) {
             this.flapC.style.display = '';
             this.flapC.style.transform = 'scaleY(' + scaleY + ')';
-            this.flapC.innerHTML = this.strings[this.stateC = this.state - this.startValue];
+            this.flapC.innerHTML = this.strings[(this.stateC = this.state) - this.startValue];
         } else {
             this.stateC = null;
             this.flapC.innerHTML = '';
@@ -283,14 +283,14 @@ export default class SplitFlap {
             this.flapC.style.transform = '';
         }
         if (x > 0 && x < 1) {
-            this.flapA.innerHTML = this.strings[this.stateA = this.nextState - this.startValue];
+            this.flapA.innerHTML = this.strings[(this.stateA = this.nextState) - this.startValue];
         } else {
-            this.flapA.innerHTML = this.strings[this.stateA = this.state - this.startValue];
+            this.flapA.innerHTML = this.strings[(this.stateA = this.state) - this.startValue];
         }
         if (x > 0.5 && x < 1) {
             this.flapD.style.display = '';
             this.flapD.style.transform = 'scaleY(' + scaleY + ')';
-            this.flapD.innerHTML = this.strings[this.stateD = this.nextState - this.startValue];
+            this.flapD.innerHTML = this.strings[(this.stateD = this.nextState) - this.startValue];
         } else {
             this.stateD = null;
             this.flapD.innerHTML = '';
@@ -298,7 +298,7 @@ export default class SplitFlap {
             this.flapD.style.transform = '';
         }
         if (x === 1) {
-            this.flapB.innerHTML = this.strings[this.stateB = this.state - this.startValue];
+            this.flapB.innerHTML = this.strings[(this.stateB = this.state) - this.startValue];
         }
     }
     setStrings(arg) {
@@ -323,10 +323,10 @@ export default class SplitFlap {
         }
     }
     updateStrings() {
-        if (this.flapC != null) { this.flapC.innerHTML = this.strings[this.stateC]; }
-        if (this.flapA != null) { this.flapA.innerHTML = this.strings[this.stateA]; }
-        if (this.flapD != null) { this.flapD.innerHTML = this.strings[this.stateD]; }
-        if (this.flapB != null) { this.flapB.innerHTML = this.strings[this.stateB]; }
+        if (this.flapC != null) { this.flapC.innerHTML = this.strings[this.stateC - this.startValue]; }
+        if (this.flapA != null) { this.flapA.innerHTML = this.strings[this.stateA - this.startValue]; }
+        if (this.flapD != null) { this.flapD.innerHTML = this.strings[this.stateD - this.startValue]; }
+        if (this.flapB != null) { this.flapB.innerHTML = this.strings[this.stateB - this.startValue]; }
     }
     tick() {
         if (!this.ticker || !this.enableTicking) {
