@@ -346,7 +346,7 @@ template {
   }
 }
 .clock__calendar-grid {
-  --padding-x-calendar-grid: 0.5;
+  --padding-x-calendar-grid: 0.6;
 }
 
 body {
@@ -373,11 +373,6 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  --margin: calc(
-      var(--base-padding)
-      * var(--padding-x-calendar-grid, 1)
-      * var(--padding-x-no-seconds, 1)
-  );
 }
 
 .clock__panel {
@@ -393,7 +388,7 @@ body {
           flex-flow: column nowrap;
 }
 .clock__panel > *:not(:first-child) {
-  margin-top: var(--margin);
+  margin-top: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__calendar-grid {
@@ -406,7 +401,7 @@ body {
           flex-flow: column nowrap;
 }
 .clock__calendar-grid > *:not(:first-child) {
-  margin-top: calc(var(--margin) * 0.5);
+  margin-top: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__line {
@@ -422,7 +417,7 @@ body {
           justify-content: space-between;
 }
 .clock__line > *:not(:first-child) {
-  margin-left: var(--margin);
+  margin-left: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
 }
 .clock__line > * {
   -webkit-box-flex: 1;
@@ -458,7 +453,7 @@ body {
           justify-content: space-between;
 }
 .clock__view-master > *:not(:first-child) {
-  margin-left: var(--margin);
+  margin-left: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
 }
 .clock__view-master > * {
   -webkit-box-flex: 1;
@@ -480,19 +475,9 @@ body {
  * Clock styles
  */
 .clock__view-master {
-  --view-master-spacing: calc(
-      var(--base-padding)
-      * var(--padding-x-calendar-grid, 1)
-      * var(--padding-x-no-seconds, 1)
-  );
-  --border-radius: calc(
-      var(--base-padding)
-      * var(--padding-x-calendar-grid, 1)
-      * var(--padding-x-no-seconds, 1)
-  );
-  padding: var(--view-master-spacing);
-  padding-bottom: calc(var(--view-master-spacing) - 1px);
-  border-radius: calc(var(--view-master-spacing) + var(--border-radius) - 2px);
+  padding: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
+  padding-bottom: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1) - 1px);
+  border-radius: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1) * 2 - 2px);
   background-color: black;
   border-bottom: 1px solid var(--hiborder);
   -webkit-user-select: none;
@@ -511,7 +496,7 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
-  border-radius: var(--border-radius);
+  border-radius: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__top-flap {
