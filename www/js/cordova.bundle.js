@@ -393,7 +393,7 @@ function initClockPage() {
   if (/(?:^|[?&])times(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--times');
   }
-  if (/(?:^|[?&])noto-?sans(?:$|[?&=])/i.test(location.search)) {
+  if (/(?:^|[?&])noto(?:-?sans)?(?:$|[?&=])/i.test(location.search)) {
     useFontClass('font--noto-sans');
   }
   if (/(?:^|[?&])helv(?:etica)?-?bold-?cond(?:ensed)?(?:$|[?&=])/i.test(location.search)) {

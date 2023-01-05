@@ -335,15 +335,18 @@ template {
 }
 
 :root {
-  --inter-margin: 1.5vw;
-  --border-radius: 1.5vw;
-  --split-flap-view-master-spacing: 1.5vw;
+  --base-font-size: 22.5vw;
+  --base-padding: 1.5vw;
 }
 
+@media (min-aspect-ratio: 18/10) {
+  :root {
+    --base-font-size: 40.5vh;
+    --base-padding: 2.7vh;
+  }
+}
 .clock__calendar-grid {
-  --border-radius: 1vw;
-  --split-flap-view-master-spacing: 1vw;
-  --inter-margin: 1vw;
+  --padding-x-calendar-grid: 0.5;
 }
 
 body {
@@ -370,6 +373,11 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  --margin: calc(
+      var(--base-padding)
+      * var(--padding-x-calendar-grid, 1)
+      * var(--padding-x-no-seconds, 1)
+  );
 }
 
 .clock__panel {
@@ -385,7 +393,7 @@ body {
           flex-flow: column nowrap;
 }
 .clock__panel > *:not(:first-child) {
-  margin-top: var(--inter-margin);
+  margin-top: var(--margin);
 }
 
 .clock__calendar-grid {
@@ -398,7 +406,7 @@ body {
           flex-flow: column nowrap;
 }
 .clock__calendar-grid > *:not(:first-child) {
-  margin-top: calc(var(--inter-margin) * 0.5);
+  margin-top: calc(var(--margin) * 0.5);
 }
 
 .clock__line {
@@ -414,7 +422,7 @@ body {
           justify-content: space-between;
 }
 .clock__line > *:not(:first-child) {
-  margin-left: var(--inter-margin);
+  margin-left: var(--margin);
 }
 .clock__line > * {
   -webkit-box-flex: 1;
@@ -450,7 +458,7 @@ body {
           justify-content: space-between;
 }
 .clock__view-master > *:not(:first-child) {
-  margin-left: var(--inter-margin);
+  margin-left: var(--margin);
 }
 .clock__view-master > * {
   -webkit-box-flex: 1;
@@ -472,9 +480,19 @@ body {
  * Clock styles
  */
 .clock__view-master {
-  padding: var(--split-flap-view-master-spacing);
-  padding-bottom: calc(var(--split-flap-view-master-spacing) - 1px);
-  border-radius: calc(var(--split-flap-view-master-spacing) + var(--border-radius) - 2px);
+  --view-master-spacing: calc(
+      var(--base-padding)
+      * var(--padding-x-calendar-grid, 1)
+      * var(--padding-x-no-seconds, 1)
+  );
+  --border-radius: calc(
+      var(--base-padding)
+      * var(--padding-x-calendar-grid, 1)
+      * var(--padding-x-no-seconds, 1)
+  );
+  padding: var(--view-master-spacing);
+  padding-bottom: calc(var(--view-master-spacing) - 1px);
+  border-radius: calc(var(--view-master-spacing) + var(--border-radius) - 2px);
   background-color: black;
   border-bottom: 1px solid var(--hiborder);
   -webkit-user-select: none;
@@ -541,12 +559,8 @@ body {
   font-size: 20%;
 }
 
-.clock__ampm {
-  font-size: 25%;
-}
-
 .clock {
-  font-size: 16vw;
+  font-size: calc(var(--base-font-size) * var(--font-size-x-for-font, 1) * var(--font-size-x-no-seconds, 1));
 }
 
 .clock__line--date {
@@ -566,19 +580,23 @@ body {
 }
 
 .clock__line--date {
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .clock__line--time {
-  line-height: 1.1;
+  line-height: 1;
 }
 
 .clock__line--calendar-month-year {
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .clock__line--calendar-week {
-  line-height: 1.4;
+  line-height: 1.2;
+}
+
+.clock__ampm {
+  font-size: 20%;
 }
 
 .clock__ampm {
@@ -586,15 +604,15 @@ body {
 }
 
 .clock__ampm {
-  left: 0.4em;
+  left: 0.3em;
 }
 
 .clock__ampm--am {
-  top: 0.2em;
+  top: 0.1em;
 }
 
 .clock__ampm--pm {
-  bottom: 0.2em;
+  bottom: 0.3em;
 }
 
 /**
@@ -648,26 +666,44 @@ body {
   background-position: center;
 }
 
+.font--arial {
+  --font-size-x-for-font: 0.9;
+}
 .font--arial body {
   font-family: "Arial", sans-serif;
 }
 
+.font--arial-black {
+  --font-size-x-for-font: 0.75;
+}
 .font--arial-black body {
   font-family: "Arial Black", sans-serif;
 }
 
+.font--inter {
+  --font-size-x-for-font: 0.875;
+}
 .font--inter body {
   font-family: "Inter", sans-serif;
 }
 
+.font--noto-sans {
+  --font-size-x-for-font: 0.90;
+}
 .font--noto-sans body {
   font-family: "Noto Sans", sans-serif;
 }
 
+.font--times {
+  --font-size-x-for-font: 0.90;
+}
 .font--times body {
   font-family: "Times New Roman", "Times Roman", serif;
 }
 
+.font--helvetica-bold-condensed--apple {
+  --font-size-x-for-font: 1.05;
+}
 @supports (font-stretch: condensed) {
   .font--helvetica-bold-condensed--apple body {
     font-family: "Helvetica Neue";
@@ -690,9 +726,6 @@ body {
   .font--helvetica-bold-condensed--apple body {
     font-family: "HelveticaNeue-CondensedBold";
   }
-}
-.font--helvetica-bold-condensed--apple .clock {
-  font-size: 20vw;
 }
 .font--helvetica-bold-condensed--apple .clock__line--date {
   line-height: 1.1;
@@ -740,13 +773,9 @@ body {
   .clock__split-flap--month {
     display: none;
   }
-  .clock__font-size-adjust {
-    font-size: 150%;
-  }
   :root {
-    --inter-margin: 2vw;
-    --border-radius: 2vw;
-    --split-flap-view-master-spacing: 2vw;
+    --font-size-x-no-seconds: 1.5;
+    --padding-x-no-seconds: 1.5;
   }
 }
 @media (min-aspect-ratio: 10/16) {
