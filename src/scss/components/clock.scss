@@ -81,12 +81,8 @@ body {
         flex: 1 1 auto;
     }
     &--calendar-month-year {
-        > .clock__view-master--calendar-month {
-            flex: 0 1 calc(100% * 1/2);
-        }
-        > .clock__view-master--calendar-year {
-            flex: 0 1 calc(100% * 1/2);
-        }
+        > .clock__view-master--calendar-month { flex: 0 1 50%; }
+        > .clock__view-master--calendar-year { flex: 0 1 50%; }
     }
     &--calendar-week > * {
         flex: 0 1 14.2857%;
@@ -106,12 +102,8 @@ body {
         flex: 1 1 auto;
     }
     &--calendar-month-year {
-        > .clock__split-flap--calendar-month {
-            flex: 0 1 calc(100% * 1/2);
-        }
-        > .clock__split-flap--calendar-year {
-            flex: 0 1 calc(100% * 1/2);
-        }
+        > .clock__split-flap--calendar-month { flex: 0 1 50%; }
+        > .clock__split-flap--calendar-year { flex: 0 1 50%; }
     }
 }
 
