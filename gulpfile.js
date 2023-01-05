@@ -8,12 +8,12 @@ if (!process.stdout.isTTY || !process.stderr.isTTY) {
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('autoprefixer');
-const webpack = require('webpack-stream');
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync');
-const compiler = require('webpack');
+const webpack = require('webpack');
 
 let server;
+let compiler;
 
 /**
  * We set this to true if we're running a watch or serve task.
@@ -23,7 +23,7 @@ let continueOnError = false;
 
 function errorHandler(type) {
     return function (error) {
-        console.error(colors.brightYellow.bold(`${type}: ${error.message}`));
+        console.error(colors.brightYellow.bold(`[${error.type}] ${error.name}: ${error.message}`));
         if (continueOnError) {
             // this stops the stream so tasks can finish
             this.emit('end');
@@ -62,13 +62,24 @@ function sassTask() {
 }
 
 function webpackTask() {
-    return gulp.src(['src/js/main.js', 'src/js/cordova-app.js'], { base: 'src/js' })
-        .on('error', errorHandler('gulp.src'))
-        .pipe(webpack(require('./webpack.config.js'), compiler))
-        .on('error', errorHandler('webpack'))
-        .pipe(gulp.dest('www/js'))
-        .on('error', errorHandler('gulp.dest'))
-    ;
+    if (!compiler) {
+        compiler = webpack(require('./webpack.config.js'));
+    }
+    return new Promise((resolve, reject) => {
+        compiler.run(function (error, stats) {
+            if (error) {
+                reject(error);
+                return;
+            }
+            if (stats.hasErrors()) {
+                const errors = stats.toJson().errors;
+                reject(new Error(errors.map(e => e.message).join("\n\n")));
+                console.log('AAAAAAAAAAAAAAAAA');
+                return;
+            }
+            resolve();
+        });
+    });
 }
 
 const bsSassTask    = gulp.series(bsStartTask, sassTask, bsEndTask);
