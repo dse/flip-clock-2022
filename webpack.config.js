@@ -9,7 +9,7 @@ const config = {
         cordova: './src/js/cordova-app.js',
     },
     output: {
-        path: path.resolve(__dirname + 'www/js'),
+        path: path.resolve(__dirname, 'www/js'),
         filename: '[name].bundle.js',
     },
     mode: 'development',
