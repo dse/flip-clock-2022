@@ -7,13 +7,9 @@
     .clock__split-flap--month {
         display: none;
     }
-    .clock__font-size-adjust {
-        font-size: 150%;
-    }
     :root {
-        --inter-margin: 2vw;
-        --border-radius: 2vw;
-        --split-flap-view-master-spacing: 2vw;
+        --font-size-x-no-seconds: 1.5;
+        --padding-x-no-seconds: 1.5;
     }
 }
 @media (min-aspect-ratio: 10/16) {

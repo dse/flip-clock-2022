@@ -9,14 +9,18 @@
 }
 
 :root {
-    --inter-margin: 1.5vw;
-    --border-radius: 1.5vw;
-    --split-flap-view-master-spacing: 1.5vw;
+    --base-font-size: 22.5vw;
+    --base-padding: 1.5vw;
 }
+@media (min-aspect-ratio: 18/10) {
+    :root {
+        --base-font-size: 40.5vh;
+        --base-padding: 2.7vh;
+    }
+}
+
 .clock__calendar-grid {
-    --border-radius: 1vw;
-    --split-flap-view-master-spacing: 1vw;
-    --inter-margin: 1vw;
+    --padding-x-calendar-grid: 0.5;
 }
 
 body {
@@ -36,6 +40,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    --margin: calc(
+        var(--base-padding)
+        * var(--padding-x-calendar-grid, 1)
+        * var(--padding-x-no-seconds, 1)
+    );
 }
 .clock__panel {
     width: 90%;
@@ -46,7 +55,7 @@ body {
 
     // sf9 does not support gap
     > *:not(:first-child) {
-        margin-top: var(--inter-margin);
+        margin-top: var(--margin);
     }
 }
 .clock__calendar-grid {
@@ -55,7 +64,7 @@ body {
 
     // sf9 does not support gap
     > *:not(:first-child) {
-        margin-top: calc(var(--inter-margin) * 0.5);
+        margin-top: calc(var(--margin) * 0.5);
     }
 }
 .clock__line {
@@ -65,7 +74,7 @@ body {
 
     // sf9 does not support gap
     > *:not(:first-child) {
-        margin-left: var(--inter-margin);
+        margin-left: var(--margin);
     }
 
     > * {
@@ -90,7 +99,7 @@ body {
 
     // sf9 does not support gap
     > *:not(:first-child) {
-        margin-left: var(--inter-margin);
+        margin-left: var(--margin);
     }
 
     > * {
@@ -110,9 +119,23 @@ body {
  * Clock styles
  */
 .clock__view-master {
-    padding: var(--split-flap-view-master-spacing);
-    padding-bottom: calc(var(--split-flap-view-master-spacing) - 1px);
-    border-radius: calc(var(--split-flap-view-master-spacing) + var(--border-radius) - 2px);
+    --view-master-spacing: calc(
+        var(--base-padding)
+        * var(--padding-x-calendar-grid, 1)
+        * var(--padding-x-no-seconds, 1)
+    );
+    --border-radius: calc(
+        var(--base-padding)
+        * var(--padding-x-calendar-grid, 1)
+        * var(--padding-x-no-seconds, 1)
+    );
+    padding: var(--view-master-spacing);
+    padding-bottom: calc(
+        var(--view-master-spacing) - 1px
+    );
+    border-radius: calc(
+        var(--view-master-spacing) + var(--border-radius) - 2px
+    );
     background-color: black;
     border-bottom: 1px solid var(--hiborder);
     user-select: none; /* Standard syntax */
@@ -157,25 +180,28 @@ body {
 .clock__line--date                { font-size: 33.3333%; }
 .clock__line--calendar-month-year { font-size: 33.3333%; }
 .clock__line--calendar-week       { font-size: 20%; }
-.clock__ampm                      { font-size: 25%; }
 
-// usually configured
-.clock                            { font-size: 16vw; }
+.clock {
+    font-size: calc(var(--base-font-size) *
+                    var(--font-size-x-for-font, 1) *
+                    var(--font-size-x-no-seconds, 1));
+}
 
 .clock__line--date                { font-weight: 700; }
 .clock__line--calendar-month-year { font-weight: 700; }
 .clock__line--time                { font-weight: 400; }
 .clock__line--calendar-week       { font-weight: 400; }
 
-.clock__line--date                { line-height: 1.4; }
-.clock__line--time                { line-height: 1.1; }
-.clock__line--calendar-month-year { line-height: 1.4; }
-.clock__line--calendar-week       { line-height: 1.4; }
+.clock__line--date                { line-height: 1.2; }
+.clock__line--time                { line-height: 1.0; }
+.clock__line--calendar-month-year { line-height: 1.2; }
+.clock__line--calendar-week       { line-height: 1.2; }
 
+.clock__ampm     { font-size: 20%; }
 .clock__ampm     { position: absolute; }
-.clock__ampm     { left:   0.4em; }
-.clock__ampm--am { top:    0.2em; }
-.clock__ampm--pm { bottom: 0.2em; }
+.clock__ampm     { left:   0.3em; }
+.clock__ampm--am { top:    0.1em; }
+.clock__ampm--pm { bottom: 0.3em; }
 
 /**
  * Miscellaneous
