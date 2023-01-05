@@ -71,6 +71,7 @@ var ClockTicker = /*#__PURE__*/function () {
     key: "workAroundNoAutoPlay",
     value: function workAroundNoAutoPlay() {
       var _this2 = this;
+      // you have to interact with the page to play audio.
       var tempHandler = function tempHandler() {
         document.body.removeEventListener('click', tempHandler);
         document.body.removeEventListener('tap', tempHandler);
@@ -99,10 +100,15 @@ var ClockTicker = /*#__PURE__*/function () {
   }, {
     key: "play",
     value: function play() {
+      if (document.visibilityState !== 'visible') {
+        return;
+      }
       if (this.element) {
         // do nothing
       } else if (this.url) {
-        if (!this.context || this.context.suspended || !this.buffer) {
+        if (!this.context || this.context.state !== 'running' || !this.buffer) {
+          // don't play when audio context is not running as
+          // sound play operations apparently queue up.
           return;
         }
         var source = this.context.createBufferSource();
@@ -588,7 +594,6 @@ var FlipClock2022 = /*#__PURE__*/function () {
       if (this.isRunning) {
         return;
       }
-      this.keepAwake();
       this.isRunning = true;
       this.run();
     }
@@ -603,7 +608,6 @@ var FlipClock2022 = /*#__PURE__*/function () {
         clearTimeout(this.timeout);
         delete this.timeout;
       }
-      this.allowSleepAgain();
     }
   }, {
     key: "run",
@@ -749,8 +753,8 @@ var SplitFlap = /*#__PURE__*/function () {
     this.state = this.startValue;
     this.nextstate = this.startValue;
     this.targetState = this.startValue;
-    this.stateA = 0;
-    this.stateB = 0;
+    this.stateA = this.startValue;
+    this.stateB = this.startValue;
     this.stateC = null;
     this.stateD = null;
     this.delay = (_this$delay = this.delay) !== null && _this$delay !== void 0 ? _this$delay : 0; // milliseconds
@@ -822,8 +826,8 @@ var SplitFlap = /*#__PURE__*/function () {
       this.state = this.targetState;
       this.nextState = this.targetState;
       this.targetState = this.targetState;
-      this.flapA.innerHTML = this.strings[this.stateA = this.state - this.startValue];
-      this.flapB.innerHTML = this.strings[this.stateB = this.state - this.startValue];
+      this.flapA.innerHTML = this.strings[(this.stateA = this.state) - this.startValue];
+      this.flapB.innerHTML = this.strings[(this.stateB = this.state) - this.startValue];
       this.stateC = null;
       this.flapC.innerHTML = '';
       this.flapC.style.display = 'none';
@@ -926,7 +930,7 @@ var SplitFlap = /*#__PURE__*/function () {
       if (x > 0 && x < 0.5) {
         this.flapC.style.display = '';
         this.flapC.style.transform = 'scaleY(' + scaleY + ')';
-        this.flapC.innerHTML = this.strings[this.stateC = this.state - this.startValue];
+        this.flapC.innerHTML = this.strings[(this.stateC = this.state) - this.startValue];
       } else {
         this.stateC = null;
         this.flapC.innerHTML = '';
@@ -934,14 +938,14 @@ var SplitFlap = /*#__PURE__*/function () {
         this.flapC.style.transform = '';
       }
       if (x > 0 && x < 1) {
-        this.flapA.innerHTML = this.strings[this.stateA = this.nextState - this.startValue];
+        this.flapA.innerHTML = this.strings[(this.stateA = this.nextState) - this.startValue];
       } else {
-        this.flapA.innerHTML = this.strings[this.stateA = this.state - this.startValue];
+        this.flapA.innerHTML = this.strings[(this.stateA = this.state) - this.startValue];
       }
       if (x > 0.5 && x < 1) {
         this.flapD.style.display = '';
         this.flapD.style.transform = 'scaleY(' + scaleY + ')';
-        this.flapD.innerHTML = this.strings[this.stateD = this.nextState - this.startValue];
+        this.flapD.innerHTML = this.strings[(this.stateD = this.nextState) - this.startValue];
       } else {
         this.stateD = null;
         this.flapD.innerHTML = '';
@@ -949,7 +953,7 @@ var SplitFlap = /*#__PURE__*/function () {
         this.flapD.style.transform = '';
       }
       if (x === 1) {
-        this.flapB.innerHTML = this.strings[this.stateB = this.state - this.startValue];
+        this.flapB.innerHTML = this.strings[(this.stateB = this.state) - this.startValue];
       }
     }
   }, {
@@ -979,25 +983,22 @@ var SplitFlap = /*#__PURE__*/function () {
     key: "updateStrings",
     value: function updateStrings() {
       if (this.flapC != null) {
-        this.flapC.innerHTML = this.strings[this.stateC];
+        this.flapC.innerHTML = this.strings[this.stateC - this.startValue];
       }
       if (this.flapA != null) {
-        this.flapA.innerHTML = this.strings[this.stateA];
+        this.flapA.innerHTML = this.strings[this.stateA - this.startValue];
       }
       if (this.flapD != null) {
-        this.flapD.innerHTML = this.strings[this.stateD];
+        this.flapD.innerHTML = this.strings[this.stateD - this.startValue];
       }
       if (this.flapB != null) {
-        this.flapB.innerHTML = this.strings[this.stateB];
+        this.flapB.innerHTML = this.strings[this.stateB - this.startValue];
       }
     }
   }, {
     key: "tick",
     value: function tick() {
       if (!this.ticker || !this.enableTicking) {
-        return;
-      }
-      if (document.visibilityState !== 'visible') {
         return;
       }
       if ((0,_utils__WEBPACK_IMPORTED_MODULE_0__.isHidden)(this.element)) {
