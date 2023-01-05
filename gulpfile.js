@@ -62,11 +62,11 @@ function sassTask() {
 }
 
 function webpackTask() {
-    return gulp.src(['src/js/main.js', 'src/js/cordova-app.js'], { base: 'src/js', sourcemaps: true })
+    return gulp.src(['src/js/main.js', 'src/js/cordova-app.js'], { base: 'src/js' })
         .on('error', errorHandler('gulp.src'))
         .pipe(webpack(require('./webpack.config.js'), compiler))
         .on('error', errorHandler('webpack'))
-        .pipe(gulp.dest('www/js', { sourcemaps: '.' }))
+        .pipe(gulp.dest('www/js'))
         .on('error', errorHandler('gulp.dest'))
     ;
 }
