@@ -74,9 +74,14 @@ function webpackTask() {
             if (stats.hasErrors()) {
                 const errors = stats.toJson().errors;
                 reject(new Error(errors.map(e => e.message).join("\n\n")));
-                console.log('AAAAAAAAAAAAAAAAA');
                 return;
             }
+            if (stats.hasWarnings()) {
+                const warnings = stats.toJson().warnings;
+                reject(new Error(warnings.map(w => w.message).join("\n\n")));
+                return;
+            }
+            console.info(stats.toString());
             resolve();
         });
     });
