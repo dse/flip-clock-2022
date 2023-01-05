@@ -46,6 +46,7 @@ export default class ClockTicker {
         this.workAroundNoAutoPlay();
     }
     workAroundNoAutoPlay() {
+        // you have to interact with the page to play audio.
         const tempHandler = () => {
             document.body.removeEventListener('click', tempHandler);
             document.body.removeEventListener('tap', tempHandler);
@@ -69,6 +70,9 @@ export default class ClockTicker {
         }
     }
     play() {
+        if (document.visibilityState !== 'visible') {
+            return;
+        }
         if (this.element) {
             // do nothing
         } else if (this.url) {

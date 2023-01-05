@@ -332,9 +332,6 @@ export default class SplitFlap {
         if (!this.ticker || !this.enableTicking) {
             return;
         }
-        if (document.visibilityState !== 'visible') {
-            return;
-        }
         if (isHidden(this.element)) {
             return;
         }
