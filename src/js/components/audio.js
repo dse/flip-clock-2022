@@ -23,8 +23,12 @@ export default class ClockTicker {
         if (this.element) {
             // do nothing for now
         } else if (this.url) {
-            if (!window.AudioContext) { window.AudioContext = window.webkitAudioContext; }
-            if (!window.AudioContext) { return; }
+            if (!window.AudioContext) {
+                window.AudioContext = window.webkitAudioContext;
+            }
+            if (!window.AudioContext) {
+                return;
+            }
             this.context = new AudioContext();
             this.gainNode = this.context.createGain();
             this.gainNode.gain.value = 1;
@@ -68,10 +72,12 @@ export default class ClockTicker {
         if (this.element) {
             // do nothing
         } else if (this.url) {
-            if (!this.context || this.context.suspended || !this.buffer) {
+            if (!this.context || this.context.state !== 'running' || !this.buffer) {
+                // don't play when audio context is not running as
+                // sound play operations apparently queue up.
                 return;
             }
-            let source = this.context.createBufferSource();
+            const source = this.context.createBufferSource();
             source.connect(this.gainNode);
             source.buffer = this.buffer;
             source.start(0);
