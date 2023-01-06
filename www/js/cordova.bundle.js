@@ -1564,7 +1564,6 @@ var app = {
   // Bind any cordova events here. Common events are:
   // 'pause', 'resume', etc.
   onDeviceReady: function onDeviceReady() {
-    this.receivedEvent('deviceready');
     if (document.readyState === 'complete') {
       (0,_components_clock_page__WEBPACK_IMPORTED_MODULE_0__["default"])();
     } else {
