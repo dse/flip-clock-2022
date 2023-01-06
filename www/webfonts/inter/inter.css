@@ -1,0 +1,72 @@
+/* Inter Black */
+@font-face {
+    src: url('Inter-Black.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 900;
+    font-display: swap;
+}
+/* Inter Bold */
+@font-face {
+    src: url('Inter-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 700;
+    font-display: swap;
+}
+/* Inter ExtraBold */
+@font-face {
+    src: url('Inter-ExtraBold.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 800;
+    font-display: swap;
+}
+/* Inter ExtraLight */
+@font-face {
+    src: url('Inter-ExtraLight.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 200;
+    font-display: swap;
+}
+/* Inter Light */
+@font-face {
+    src: url('Inter-Light.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 300;
+    font-display: swap;
+}
+/* Inter Medium */
+@font-face {
+    src: url('Inter-Medium.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 500;
+    font-display: swap;
+}
+/* Inter Regular */
+@font-face {
+    src: url('Inter-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-display: swap;
+}
+/* Inter SemiBold */
+@font-face {
+    src: url('Inter-SemiBold.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-display: swap;
+}
+/* Inter Thin */
+@font-face {
+    src: url('Inter-Thin.woff2') format('woff2');
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 100;
+    font-display: swap;
+}
