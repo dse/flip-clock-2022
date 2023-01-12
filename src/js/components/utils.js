@@ -170,5 +170,5 @@ export function month3(month) {
 
 export function h12(hour24) {
     // 0 = January ... 11 = December
-    return hour12(hour24, 'a', 'p');
+    return hour12(hour24, 'AM', 'PM');
 }
