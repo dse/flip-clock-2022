@@ -2,7 +2,7 @@
 
 import FlipClock2022 from './clock';
 import SplitFlap from './splitflap';
-import { month3, weekday3, h12, pad00 } from './utils';
+import { month3, weekday3, h12, pad00, WEEKDAYS, MONTHS } from './utils';
 
 export default class TimeClock2022 extends FlipClock2022 {
     initOptions() {
@@ -28,10 +28,16 @@ export default class TimeClock2022 extends FlipClock2022 {
         if (this.animation != null) {
             splitFlapOptions.animation = this.animation;
         }
+
+        const monthFormat   = this.elements.month?.getAttribute('data-format');
+        const weekdayFormat = this.elements.weekday?.getAttribute('data-format');
+        const monthStrings   = monthFormat === 'MMMM' ? MONTHS   : month3;
+        const weekdayStrings = weekdayFormat === 'dddd' ? WEEKDAYS : weekday3;
+
         if (this.elements.year)    { this.splitFlaps.year    = new SplitFlap(this.elements.year,    'year',    startYear, endYear, { ...splitFlapOptions, duration: 125 }); }
-        if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   'month',   0, 11, month3,      { ...splitFlapOptions, duration: 125 }); }
+        if (this.elements.month)   { this.splitFlaps.month   = new SplitFlap(this.elements.month,   'month',   0, 11, monthStrings,      { ...splitFlapOptions, duration: 125 }); }
         if (this.elements.day)     { this.splitFlaps.day     = new SplitFlap(this.elements.day,     'day',     1, 31,              { ...splitFlapOptions, duration: 125 }); }
-        if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 'weekday', 0, 6, weekday3,     { ...splitFlapOptions, duration: 125 }); }
+        if (this.elements.weekday) { this.splitFlaps.weekday = new SplitFlap(this.elements.weekday, 'weekday', 0, 6, weekdayStrings,     { ...splitFlapOptions, duration: 125 }); }
         if (this.elements.hour)    { this.splitFlaps.hour    = new SplitFlap(this.elements.hour,    'hour',    0, 23, h12,         { ...splitFlapOptions }); }
         if (this.elements.minute)  { this.splitFlaps.minute  = new SplitFlap(this.elements.minute,  'minute',  0, 59, pad00,       { ...splitFlapOptions }); }
         if (this.elements.second)  { this.splitFlaps.second  = new SplitFlap(this.elements.second,  'second',  0, 59, pad00,       { ...splitFlapOptions }); }
