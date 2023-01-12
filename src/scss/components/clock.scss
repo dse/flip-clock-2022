@@ -78,18 +78,32 @@ body {
         margin-top: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
     }
 }
+.clock__line.clock__line--time {
+    > * {
+        flex: 0 1 0;
+    }
+    > *.clock__view-master {
+        flex: 1 1 auto;
+    }
+    .clock__colon {
+        font-family: 'Times New Roman', 'Times Roman', serif;
+        // for the circle colons
+        font-size: 50%;
+    }
+}
 .clock__line {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
 
     // sf9 does not support gap
-    > *:not(:first-child) {
+    > .clock__view-master + .clock__view-master {
         margin-left: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
     }
 
     > * {
         flex: 1 1 auto;
+        align-self: center;
     }
     &--calendar-month-year {
         > .clock__view-master--calendar-month { flex: 0 1 50%; }
