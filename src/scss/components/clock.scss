@@ -192,6 +192,15 @@ body {
 .clock__line--calendar-month-year { font-size: 33.3333%; }
 .clock__line--calendar-week       { font-size: 20%; }
 
+.clock__line--calendar-weekday-heading {
+    font-size: 12.5%;
+    text-transform: uppercase;
+    > * {
+        flex: 0 1 14.2857%;
+        text-align: center;
+    }
+}
+
 .clock {
     font-size: calc(var(--base-font-size) *
                     var(--font-size-x-for-font, 1) *
