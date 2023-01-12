@@ -25,6 +25,7 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.0",
     "browser-sync": "^2.27.11",
+    "dayjs": "^1.11.7",
     "gulp": "^4.0.2",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^5.1.0",
