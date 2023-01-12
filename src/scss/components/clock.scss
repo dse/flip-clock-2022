@@ -13,11 +13,13 @@
 :root {
     --base-font-size: 22.5vw;
     --base-padding: 1.5vw;
+    --base-margin: 1.5vw;
 }
 @media (min-aspect-ratio: 18/10) {
     :root {
         --base-font-size: 40.5vh;
         --base-padding: 2.7vh;
+        --base-margin: 2.7vh;
     }
 }
 
@@ -53,7 +55,7 @@ body {
     // sf9 does not support gap
     > *:not(:first-child) {
         margin-top: calc(
-            var(--base-padding)
+            var(--base-margin)
             * var(--padding-x-calendar-grid, 1)
             * var(--padding-x-no-seconds, 1)
         );
@@ -66,7 +68,7 @@ body {
     // sf9 does not support gap
     > *:not(:first-child) {
         margin-top: calc(
-            var(--base-padding)
+            var(--base-margin)
             * var(--padding-x-calendar-grid, 1)
             * var(--padding-x-no-seconds, 1)
         );
@@ -80,7 +82,7 @@ body {
     // sf9 does not support gap
     > *:not(:first-child) {
         margin-left: calc(
-            var(--base-padding)
+            var(--base-margin)
             * var(--padding-x-calendar-grid, 1)
             * var(--padding-x-no-seconds, 1)
         );
@@ -105,7 +107,7 @@ body {
     // sf9 does not support gap
     > *:not(:first-child) {
         margin-left: calc(
-            var(--base-padding)
+            var(--base-margin)
             * var(--padding-x-calendar-grid, 1)
             * var(--padding-x-no-seconds, 1)
         );
