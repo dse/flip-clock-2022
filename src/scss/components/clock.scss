@@ -8,6 +8,7 @@
     --split-flap-top-color: rgb(75%,75%,75%);
     --split-flap-bottom-background-color: rgb(12%,12%,12%);
     --split-flap-bottom-color: rgb(100%,100%,100%);
+    --view-master-highlight-border-width: 0.5vw;
 }
 
 :root {
@@ -143,9 +144,36 @@ body {
         * var(--padding-x-no-seconds, 1)
         * 2 - 2px
     );
-    background-color: black;
-    border-bottom: 1px solid var(--view-master-highlight-border-color);
+    background-color: var(--background-color);
+    background-image: linear-gradient(
+        to right,
+        rgba(100%, 100%, 100%, 0.1),
+        rgba(100%, 100%, 100%, 0.3),
+        rgba(100%, 100%, 100%, 0.5),
+        rgba(100%, 100%, 100%, 0.5),
+        rgba(100%, 100%, 100%, 0.3),
+        rgba(100%, 100%, 100%, 0.1)
+    );
+
+    border-bottom: var(--view-master-highlight-border-width) solid transparent;
     user-select: none; /* Standard syntax */
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: black;
+        border-radius: calc(
+            var(--base-padding)
+            * var(--padding-x-calendar-grid, 1)
+            * var(--padding-x-no-seconds, 1)
+            * 2 - 2px
+        );
+    }
 }
 .clock__flap {
     border-top:    1px solid transparent;
