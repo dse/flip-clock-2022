@@ -5,6 +5,7 @@
     --control-panel-font-size: 200%;
     --control-panel-padding: 0.5rem;
     --control-panel-line-height: 1.5;
+    --control-panel-highlight-border-color: rgba(100%, 100%, 100%, 0.5);
 }
 .control-panel__toggle {
     position: fixed;
@@ -43,7 +44,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    border-top: 1px solid var(--hiborder);
+    border-top: 1px solid var(--control-panel-highlight-border-color);
     font-size: var(--control-panel-font-size);
     line-height: var(--control-panel-line-height);
     min-height: calc(1em * var(--control-panel-line-height));
