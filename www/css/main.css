@@ -325,32 +325,52 @@ template {
 }
 
 :root {
-  --bg: rgb(10%,10%,10%);
-  --hi: rgb(11%,11%,11%);
-  --sh: rgb(9%,9%,9%);
-  --hiwhite: rgb(100%,100%,100%);
-  --shwhite: rgb(82%,82%,82%);
-  --hiborder: rgba(100%,100%,100%,0.5);
-  --shborder: rgba(0%,0%,0%,0.8);
+  --vw: 1vw;
+}
+@media (min-aspect-ratio: 18/10) {
+  :root {
+    --vw: 1.8vh;
+  }
 }
 
 :root {
   --base-font-size: 22.5vw;
-  --base-padding: 1.5vw;
 }
-
 @media (min-aspect-ratio: 18/10) {
   :root {
     --base-font-size: 40.5vh;
-    --base-padding: 2.7vh;
   }
 }
+
+:root {
+  --background-color: rgb(10%,10%,10%);
+  --split-flap-highlight-border-color: rgba(100%,100%,100%,0.2);
+  --split-flap-shadow-border-color: rgba(0%,0%,0%,0.8);
+  --view-master-highlight-border-color: rgba(100%,100%,100%,0.5);
+  --view-master-shadow-border-color: rgba(0%,0%,0%,0.8);
+  --split-flap-top-background-color: rgb(9%,9%,9%);
+  --split-flap-top-color: rgb(75%,75%,75%);
+  --split-flap-bottom-background-color: rgb(12%,12%,12%);
+  --split-flap-bottom-color: rgb(100%,100%,100%);
+  --split-flap-border-radius: 1;
+  --view-master-padding: 1;
+  --view-master-border-radius: 2;
+  --view-master-highlight-border-width: 0.666666;
+  --view-master-margin: 3;
+  --split-flap-margin: 1;
+}
+
 .clock__calendar-grid {
-  --padding-x-calendar-grid: 0.6;
+  --split-flap-border-radius: 0.5;
+  --view-master-padding: 0.75;
+  --view-master-border-radius: 1.25;
+  --view-master-highlight-border-width: 0.4;
+  --view-master-margin: 1.5;
+  --split-flap-margin: 0.75;
 }
 
 body {
-  background-color: var(--bg);
+  background-color: var(--background-color);
   color: white;
 }
 
@@ -388,7 +408,7 @@ body {
           flex-flow: column nowrap;
 }
 .clock__panel > *:not(:first-child) {
-  margin-top: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
+  margin-top: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__calendar-grid {
@@ -401,7 +421,7 @@ body {
           flex-flow: column nowrap;
 }
 .clock__calendar-grid > *:not(:first-child) {
-  margin-top: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
+  margin-top: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__line {
@@ -417,7 +437,7 @@ body {
           justify-content: space-between;
 }
 .clock__line > *:not(:first-child) {
-  margin-left: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
+  margin-left: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 .clock__line > * {
   -webkit-box-flex: 1;
@@ -453,7 +473,7 @@ body {
           justify-content: space-between;
 }
 .clock__view-master > *:not(:first-child) {
-  margin-left: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
+  margin-left: calc(var(--split-flap-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 .clock__view-master > * {
   -webkit-box-flex: 1;
@@ -475,15 +495,29 @@ body {
  * Clock styles
  */
 .clock__view-master {
-  padding: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
-  padding-bottom: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1) - 1px);
-  border-radius: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1) * 2 - 2px);
-  background-color: black;
-  border-bottom: 1px solid var(--hiborder);
+  padding: calc(var(--view-master-padding) * var(--vw) * var(--padding-x-no-seconds, 1));
+  padding-bottom: calc(var(--view-master-padding) * var(--vw) * var(--padding-x-no-seconds, 1));
+  border-radius: calc(var(--view-master-border-radius) * var(--vw) * var(--padding-x-no-seconds, 1));
+  background-color: var(--background-color);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.1)), color-stop(rgba(255, 255, 255, 0.3)), color-stop(rgba(255, 255, 255, 0.5)), color-stop(rgba(255, 255, 255, 0.5)), color-stop(rgba(255, 255, 255, 0.3)), to(rgba(255, 255, 255, 0.1)));
+  background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  border-bottom: calc(var(--view-master-highlight-border-width) * var(--vw)) solid transparent;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none; /* Standard syntax */
+  position: relative;
+}
+.clock__view-master::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  border-radius: calc(var(--view-master-border-radius) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__flap {
@@ -496,23 +530,23 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
-  border-radius: calc(var(--base-padding) * var(--padding-x-calendar-grid, 1) * var(--padding-x-no-seconds, 1));
+  border-radius: calc(var(--split-flap-border-radius) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 
 .clock__top-flap {
-  border-top-color: var(--hiborder);
+  border-top-color: var(--split-flap-highlight-border-color);
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
           clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
-  background-color: var(--sh);
-  color: var(--shwhite);
+  background-color: var(--split-flap-top-background-color);
+  color: var(--split-flap-top-color);
 }
 
 .clock__bottom-flap {
-  border-bottom-color: var(--shborder);
+  border-bottom-color: var(--split-flap-shadow-border-color);
   -webkit-clip-path: polygon(0% calc(50% + 1px), 100% calc(50% + 1px), 100% 100%, 0% 100%);
           clip-path: polygon(0% calc(50% + 1px), 100% calc(50% + 1px), 100% 100%, 0% 100%);
-  background-color: var(--hi);
-  color: var(--hiwhite);
+  background-color: var(--split-flap-bottom-background-color);
+  color: var(--split-flap-bottom-color);
 }
 
 .clock__split-flap {
@@ -782,6 +816,7 @@ body {
   --control-panel-font-size: 200%;
   --control-panel-padding: 0.5rem;
   --control-panel-line-height: 1.5;
+  --control-panel-highlight-border-color: rgba(100%, 100%, 100%, 0.5);
 }
 
 .control-panel__toggle {
@@ -827,7 +862,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  border-top: 1px solid var(--hiborder);
+  border-top: 1px solid var(--control-panel-highlight-border-color);
   font-size: var(--control-panel-font-size);
   line-height: var(--control-panel-line-height);
   min-height: calc(1em * var(--control-panel-line-height));
