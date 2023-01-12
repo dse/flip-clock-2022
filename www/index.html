@@ -29,18 +29,28 @@
         <div class="clock carbon-fiber-texture" id="clock">
             <div class="clock__font-size-adjust">
                 <div class="clock__panel">
-                    <div class="clock__line clock__line--date">
-                        <span class="clock__view-master clock__view-master--weekday-day-month">
-                            <span id="splitFlap0" class="clock__split-flap clock__split-flap--weekday" data-clock-weekday></span>
-                            <span id="splitFlap1" class="clock__split-flap clock__split-flap--day" data-clock-day></span>
-                            <span id="splitFlap2" class="clock__split-flap clock__split-flap--month" data-clock-month></span>
+                    <div class="clock__line clock__line--time">
+                        <span class="clock__view-master clock__view-master--hour">
+                            <span id="splitFlap3" class="clock__split-flap clock__split-flap--hour" data-clock-hour></span>
+                        </span>
+                        <span class="clock__colon clock__colon--hour-minute">:</span>
+                        <span class="clock__view-master clock__view-master--minute">
+                            <span id="splitFlap4" class="clock__split-flap clock__split-flap--minute" data-clock-minute></span>
+                        </span>
+                        <span class="clock__colon clock__colon--minute-second">:</span>
+                        <span class="clock__view-master clock__view-master--second">
+                            <span id="splitFlap5" class="clock__split-flap clock__split-flap--second" data-clock-second></span>
                         </span>
                     </div>
-                    <div class="clock__line clock__line--time">
-                        <span class="clock__view-master clock__view-master--hour-minute-second">
-                            <span id="splitFlap3" class="clock__split-flap clock__split-flap--hour" data-clock-hour></span>
-                            <span id="splitFlap4" class="clock__split-flap clock__split-flap--minute" data-clock-minute></span>
-                            <span id="splitFlap5" class="clock__split-flap clock__split-flap--second" data-clock-second></span>
+                    <div class="clock__line clock__line--date">
+                        <span class="clock__view-master clock__view-master--weekday">
+                            <span id="splitFlap0" class="clock__split-flap clock__split-flap--weekday" data-clock-weekday data-format="dddd"></span>
+                        </span>
+                        <span class="clock__view-master clock__view-master--day">
+                            <span id="splitFlap1" class="clock__split-flap clock__split-flap--day" data-clock-day></span>
+                        </span>
+                        <span class="clock__view-master clock__view-master--month">
+                            <span id="splitFlap2" class="clock__split-flap clock__split-flap--month" data-clock-month data-format="MMMM"></span>
                         </span>
                     </div>
                     <div class="clock__line clock__line--calendar clock__line--calendar-month-year">
@@ -50,6 +60,15 @@
                         </span>
                     </div>
                     <div class="clock__calendar-grid">
+                        <div class="clock__line clock__line--calendar clock__line--calendar-weekday-heading">
+                            <span class="clock__weekday-heading">Sun</span>
+                            <span class="clock__weekday-heading">Mon</span>
+                            <span class="clock__weekday-heading">Tue</span>
+                            <span class="clock__weekday-heading">Wed</span>
+                            <span class="clock__weekday-heading">Thu</span>
+                            <span class="clock__weekday-heading">Fri</span>
+                            <span class="clock__weekday-heading">Sat</span>
+                        </div>
                         <!-- BEGIN CALENDAR -->
                         <div class="clock__line clock__line--calendar clock__line--calendar-week">
                             <span class="clock__view-master clock__view-master--calendar-day"><span class="clock__split-flap clock__split-flap--calendar-day" data-clock-calendar-day></span></span>

@@ -202,12 +202,11 @@ body {
 /**
  * Typography
  */
-.clock__line--date                { font-size: 33.3333%; }
-.clock__line--calendar-month-year { font-size: 33.3333%; }
-.clock__line--calendar-week       { font-size: 20%; }
+.clock__line--date                { font-size: 25%; }
+.clock__line--calendar-month-year { font-size: 25%; }
 .clock__line--calendar-week       { font-size: 20%; }
 .clock__view-master--day {
-    font-size: 150%;
+    font-size: 200%;
     flex: 0 0 1.5em;
 }
 

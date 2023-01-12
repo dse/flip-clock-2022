@@ -7,6 +7,10 @@
     .clock__split-flap--month {
         display: none;
     }
+    .clock__colon--minute-second,
+    .clock__colon--day-month {
+        display: none;
+    }
     :root {
         --font-size-x-no-seconds: 1.5;
         --padding-x-no-seconds: 1.5;
