@@ -205,6 +205,11 @@ body {
 .clock__line--date                { font-size: 33.3333%; }
 .clock__line--calendar-month-year { font-size: 33.3333%; }
 .clock__line--calendar-week       { font-size: 20%; }
+.clock__line--calendar-week       { font-size: 20%; }
+.clock__view-master--day {
+    font-size: 150%;
+    flex: 0 0 1.5em;
+}
 
 .clock__line--calendar-weekday-heading {
     font-size: 12.5%;
@@ -231,11 +236,11 @@ body {
 .clock__line--calendar-month-year { line-height: 1.2; }
 .clock__line--calendar-week       { line-height: 1.2; }
 
-.clock__ampm     { font-size: 20%; }
+.clock__ampm     { font-size: 14%; }
 .clock__ampm     { position: absolute; }
 .clock__ampm     { left:   0.3em; }
-.clock__ampm--am { top:    0.1em; }
-.clock__ampm--pm { bottom: 0.3em; }
+.clock__ampm--am { top:    0.2em; }
+.clock__ampm--pm { bottom: 0.2em; }
 
 /**
  * Miscellaneous
