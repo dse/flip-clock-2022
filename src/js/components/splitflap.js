@@ -1,10 +1,11 @@
 'use strict';
 
 import { clamp, isHidden } from './utils';
+import { sprintf } from 'sprintf-js';
 
 /**
- * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);
- * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, [<options>]);
+ * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<options>]);
+ * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, [<stringFn>], [<options>]);
  *
  * <element> is a reference to a DOM element.  It can be a string id
  * or an HTMLElement object.
@@ -55,8 +56,8 @@ export default class SplitFlap {
         while (args.length) {
             if (Array.isArray(args[0])) {
                 this.strings = args.shift();
-                this.startValue = 0;
-                this.endValue = this.strings.length - 1;
+                this.startValue = this.startValue ?? 0;
+                this.endValue = this.endValue ?? this.strings.length - 1;
             } else if (args.length >= 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
                 this.startValue = args.shift();
                 this.endValue = args.shift();
@@ -85,7 +86,12 @@ export default class SplitFlap {
         }
         if (!this.strings) {
             this.strings = [];
-            if (this.stringFn) {
+            if (this.printf) {
+                this.stringFn = (value) => {
+                    return sprintf(this.printf, value);
+                };
+                this.setStrings(this.stringFn);
+            } else if (this.stringFn) {
                 this.setStrings(this.stringFn);
             } else {
                 this.setStrings();
