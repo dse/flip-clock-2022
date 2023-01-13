@@ -15,6 +15,10 @@
         --font-size-x-no-seconds: 1.5;
         --padding-x-no-seconds: 1.5;
     }
+    .clock__calendar-grid {
+        --font-size-x-no-seconds: 1.5;
+        --padding-x-no-seconds: 1.5;
+    }
 }
 @media (min-aspect-ratio: 10/16) {
     .clock__line--calendar {

@@ -24,6 +24,8 @@
 
 .font--helvetica-bold-condensed--apple {
     --font-size-x-for-font: 1.05;
+    --font-line-height-adjust: -0.1;
+    --font-line-height-bump: -0.05;
     @supports (font-stretch: condensed) {
         body {
             font-family: 'Helvetica Neue';
@@ -39,10 +41,6 @@
             font-family: 'HelveticaNeue-CondensedBold';
         }
     }
-    .clock__line--date                { line-height: 1.1; }
-    .clock__line--time                { line-height: 0.95; }
-    .clock__line--calendar-month-year { line-height: 1.1; }
-    .clock__line--calendar-week       { line-height: 1.2; }
 }
 
 .font--futura {

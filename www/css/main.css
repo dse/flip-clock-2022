@@ -324,20 +324,17 @@ template {
           box-sizing: border-box;
 }
 
-:root {
-  --vw: 1vw;
-}
-@media (min-aspect-ratio: 18/10) {
-  :root {
-    --vw: 1.8vh;
-  }
+.text-uppercase {
+  text-transform: uppercase;
 }
 
 :root {
+  --vw: 1vw;
   --base-font-size: 20vw;
 }
 @media (min-aspect-ratio: 18/10) {
   :root {
+    --vw: 1.8vh;
     --base-font-size: 36vh;
   }
 }
@@ -352,6 +349,9 @@ template {
   --split-flap-top-color: rgb(75%,75%,75%);
   --split-flap-bottom-background-color: rgb(12%,12%,12%);
   --split-flap-bottom-color: rgb(100%,100%,100%);
+}
+
+:root {
   --split-flap-border-radius: 1;
   --view-master-padding: 1;
   --view-master-border-radius: 2;
@@ -365,7 +365,7 @@ template {
   --view-master-padding: 0.75;
   --view-master-border-radius: 1.25;
   --view-master-highlight-border-width: 0.3;
-  --view-master-margin: 1.5;
+  --view-master-margin: 1;
   --split-flap-margin: 0.75;
 }
 
@@ -424,21 +424,6 @@ body {
   margin-top: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 
-.clock__line.clock__line--time > * {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 0px;
-          flex: 0 1 0;
-}
-.clock__line.clock__line--time > *.clock__view-master {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-}
-.clock__line.clock__line--time .clock__colon {
-  font-family: "Times New Roman", "Times Roman", serif;
-  font-size: 50%;
-}
-
 .clock__line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -450,11 +435,10 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-.clock__line > .clock__view-master + .clock__view-master {
-  margin-left: calc(var(--view-master-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
+  margin-left: calc(-1 * var(--view-master-margin) * var(--vw));
 }
 .clock__line > * {
+  margin-left: calc(var(--view-master-margin) * var(--vw));
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
@@ -471,10 +455,25 @@ body {
       -ms-flex: 0 1 50%;
           flex: 0 1 50%;
 }
-.clock__line--calendar-week > * {
+.clock__line--time .clock__colon {
   -webkit-box-flex: 0;
-      -ms-flex: 0 1 14.2857%;
-          flex: 0 1 14.2857%;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-family: "Times New Roman", "Times Roman", serif;
+  font-size: 50%;
+  margin-left: 0;
+}
+.clock__line--time .clock__colon + * {
+  margin-left: 0;
+}
+.clock__line--calendar-grid > * {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 calc(14.2857% - var(--view-master-margin) * var(--vw));
+          flex: 0 1 calc(14.2857% - var(--view-master-margin) * var(--vw));
 }
 
 .clock__view-master {
@@ -489,13 +488,13 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.clock__view-master > *:not(:first-child) {
-  margin-left: calc(var(--split-flap-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
-}
 .clock__view-master > * {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
+}
+.clock__view-master > *:not(:first-child) {
+  margin-left: calc(var(--split-flap-margin) * var(--vw) * var(--padding-x-no-seconds, 1));
 }
 .clock__view-master--calendar-month-year > .clock__split-flap--calendar-month {
   -webkit-box-flex: 0;
@@ -506,6 +505,24 @@ body {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 50%;
           flex: 0 1 50%;
+}
+
+.clock__blank-space {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.clock__blank-space > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
 }
 
 /**
@@ -583,33 +600,44 @@ body {
 /**
  * Typography
  */
+.clock__line {
+  --base-line-height: 1.0;
+}
+
 .clock__line--date {
+  --base-line-height: 1.2;
   font-size: 25%;
 }
 
 .clock__line--calendar-month-year {
+  --base-line-height: 1.2;
   font-size: 25%;
 }
 
 .clock__line--calendar-week {
+  --base-line-height: 1.2;
   font-size: 20%;
 }
 
 .clock__view-master--day {
+  --base-line-height: 1.1;
   font-size: 200%;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 1.5em;
           flex: 0 0 1.5em;
 }
 
+.clock__view-master {
+  line-height: calc(var(--base-line-height, 1.2) + var(--font-line-height-adjust, 0));
+}
+.clock__view-master .clock__flap {
+  line-height: calc(var(--base-line-height, 1.2) + var(--font-line-height-adjust, 0) + var(--font-line-height-bump, 0));
+}
+
 .clock__line--calendar-weekday-heading {
   font-size: 12.5%;
-  text-transform: uppercase;
 }
 .clock__line--calendar-weekday-heading > * {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 14.2857%;
-          flex: 0 1 14.2857%;
   text-align: center;
 }
 
@@ -633,22 +661,6 @@ body {
   font-weight: 400;
 }
 
-.clock__line--date {
-  line-height: 1.2;
-}
-
-.clock__line--time {
-  line-height: 1;
-}
-
-.clock__line--calendar-month-year {
-  line-height: 1.2;
-}
-
-.clock__line--calendar-week {
-  line-height: 1.2;
-}
-
 .clock__ampm {
   font-size: 14%;
 }
@@ -667,13 +679,6 @@ body {
 
 .clock__ampm--pm {
   bottom: 0.2em;
-}
-
-/**
- * Miscellaneous
- */
-[data-clock-weekday], [data-clock-month] {
-  text-transform: uppercase;
 }
 
 .pattern1.pattern1 {
@@ -757,6 +762,8 @@ body {
 
 .font--helvetica-bold-condensed--apple {
   --font-size-x-for-font: 1.05;
+  --font-line-height-adjust: -0.1;
+  --font-line-height-bump: -0.05;
 }
 @supports (font-stretch: condensed) {
   .font--helvetica-bold-condensed--apple body {
@@ -780,18 +787,6 @@ body {
   .font--helvetica-bold-condensed--apple body {
     font-family: "HelveticaNeue-CondensedBold";
   }
-}
-.font--helvetica-bold-condensed--apple .clock__line--date {
-  line-height: 1.1;
-}
-.font--helvetica-bold-condensed--apple .clock__line--time {
-  line-height: 0.95;
-}
-.font--helvetica-bold-condensed--apple .clock__line--calendar-month-year {
-  line-height: 1.1;
-}
-.font--helvetica-bold-condensed--apple .clock__line--calendar-week {
-  line-height: 1.2;
 }
 
 .font--futura body {
@@ -832,6 +827,10 @@ body {
     display: none;
   }
   :root {
+    --font-size-x-no-seconds: 1.5;
+    --padding-x-no-seconds: 1.5;
+  }
+  .clock__calendar-grid {
     --font-size-x-no-seconds: 1.5;
     --padding-x-no-seconds: 1.5;
   }
