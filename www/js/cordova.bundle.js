@@ -1,5 +1,4 @@
 /******/ (function() { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/components/audio.js":
@@ -8,6 +7,7 @@
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ ClockTicker; }
@@ -130,6 +130,7 @@ var ClockTicker = /*#__PURE__*/function () {
   \*********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ CalendarClock2022; }
@@ -343,6 +344,7 @@ var CalendarClock2022 = /*#__PURE__*/function (_FlipClock) {
   \*****************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ initClockPage; }
@@ -523,6 +525,7 @@ window.reloadPage = reloadPage;
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ FlipClock2022; }
@@ -629,11 +632,14 @@ var FlipClock2022 = /*#__PURE__*/function () {
   \****************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ SplitFlap; }
 /* harmony export */ });
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/components/utils.js");
+/* harmony import */ var sprintf_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sprintf-js */ "./node_modules/sprintf-js/src/sprintf.js");
+/* harmony import */ var sprintf_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sprintf_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -644,9 +650,10 @@ function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _ty
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
+
 /**
- * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<stringFn>], [<options>]);
- * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, [<options>]);
+ * const splitFlap = new SplitFlap(<element>, <arrayOfString>, [<options>]);
+ * const splitFlap = new SplitFlap(<element>, <startValue>, <endValue>, [<stringFn>], [<options>]);
  *
  * <element> is a reference to a DOM element.  It can be a string id
  * or an HTMLElement object.
@@ -678,7 +685,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
  */
 var SplitFlap = /*#__PURE__*/function () {
   function SplitFlap() {
-    var _this$delay, _this$randomness, _this$animation, _this$enableTicking, _this$duration, _this$hurryFactor, _this$flickTimeoutMs;
+    var _this = this,
+      _this$delay,
+      _this$randomness,
+      _this$animation,
+      _this$enableTicking,
+      _this$duration,
+      _this$hurryFactor,
+      _this$flickTimeoutMs;
     _classCallCheck(this, SplitFlap);
     /**
      * Process command line arguments.
@@ -697,9 +711,10 @@ var SplitFlap = /*#__PURE__*/function () {
     }
     while (args.length) {
       if (Array.isArray(args[0])) {
+        var _this$startValue, _this$endValue;
         this.strings = args.shift();
-        this.startValue = 0;
-        this.endValue = this.strings.length - 1;
+        this.startValue = (_this$startValue = this.startValue) !== null && _this$startValue !== void 0 ? _this$startValue : 0;
+        this.endValue = (_this$endValue = this.endValue) !== null && _this$endValue !== void 0 ? _this$endValue : this.strings.length - 1;
       } else if (args.length >= 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
         this.startValue = args.shift();
         this.endValue = args.shift();
@@ -727,7 +742,12 @@ var SplitFlap = /*#__PURE__*/function () {
     }
     if (!this.strings) {
       this.strings = [];
-      if (this.stringFn) {
+      if (this.printf) {
+        this.stringFn = function (value) {
+          return (0,sprintf_js__WEBPACK_IMPORTED_MODULE_1__.sprintf)(_this.printf, value);
+        };
+        this.setStrings(this.stringFn);
+      } else if (this.stringFn) {
         this.setStrings(this.stringFn);
       } else {
         this.setStrings();
@@ -1086,6 +1106,7 @@ var SplitFlap = /*#__PURE__*/function () {
   \*****************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ TimeClock2022; }
@@ -1148,19 +1169,24 @@ var TimeClock2022 = /*#__PURE__*/function (_FlipClock) {
   }, {
     key: "initSplitFlaps",
     value: function initSplitFlaps() {
+      var _this$elements$month, _this$elements$weekda;
       var startYear = 1970;
       var endYear = Math.floor((new Date().getFullYear() + 10) / 10) * 10 + 9;
       var splitFlapOptions = {};
       if (this.animation != null) {
         splitFlapOptions.animation = this.animation;
       }
+      var monthFormat = (_this$elements$month = this.elements.month) === null || _this$elements$month === void 0 ? void 0 : _this$elements$month.getAttribute('data-format');
+      var weekdayFormat = (_this$elements$weekda = this.elements.weekday) === null || _this$elements$weekda === void 0 ? void 0 : _this$elements$weekda.getAttribute('data-format');
+      var monthStrings = monthFormat === 'MMMM' ? _utils__WEBPACK_IMPORTED_MODULE_2__.MONTHS : _utils__WEBPACK_IMPORTED_MODULE_2__.month3;
+      var weekdayStrings = weekdayFormat === 'dddd' ? _utils__WEBPACK_IMPORTED_MODULE_2__.WEEKDAYS : _utils__WEBPACK_IMPORTED_MODULE_2__.weekday3;
       if (this.elements.year) {
         this.splitFlaps.year = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.year, 'year', startYear, endYear, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
           duration: 125
         }));
       }
       if (this.elements.month) {
-        this.splitFlaps.month = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.month, 'month', 0, 11, _utils__WEBPACK_IMPORTED_MODULE_2__.month3, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
+        this.splitFlaps.month = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.month, 'month', 0, 11, monthStrings, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
           duration: 125
         }));
       }
@@ -1170,7 +1196,7 @@ var TimeClock2022 = /*#__PURE__*/function (_FlipClock) {
         }));
       }
       if (this.elements.weekday) {
-        this.splitFlaps.weekday = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.weekday, 'weekday', 0, 6, _utils__WEBPACK_IMPORTED_MODULE_2__.weekday3, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
+        this.splitFlaps.weekday = new _splitflap__WEBPACK_IMPORTED_MODULE_1__["default"](this.elements.weekday, 'weekday', 0, 6, weekdayStrings, _objectSpread(_objectSpread({}, splitFlapOptions), {}, {
           duration: 125
         }));
       }
@@ -1338,6 +1364,7 @@ var TimeClock2022 = /*#__PURE__*/function (_FlipClock) {
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MONTHS": function() { return /* binding */ MONTHS; },
@@ -1482,8 +1509,250 @@ function month3(month) {
 }
 function h12(hour24) {
   // 0 = January ... 11 = December
-  return hour12(hour24, 'a', 'p');
+  return hour12(hour24, 'AM', 'PM');
 }
+
+/***/ }),
+
+/***/ "./node_modules/sprintf-js/src/sprintf.js":
+/*!************************************************!*\
+  !*** ./node_modules/sprintf-js/src/sprintf.js ***!
+  \************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/* global window, exports, define */
+
+!function() {
+    'use strict'
+
+    var re = {
+        not_string: /[^s]/,
+        not_bool: /[^t]/,
+        not_type: /[^T]/,
+        not_primitive: /[^v]/,
+        number: /[diefg]/,
+        numeric_arg: /[bcdiefguxX]/,
+        json: /[j]/,
+        not_json: /[^j]/,
+        text: /^[^\x25]+/,
+        modulo: /^\x25{2}/,
+        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
+        key: /^([a-z_][a-z_\d]*)/i,
+        key_access: /^\.([a-z_][a-z_\d]*)/i,
+        index_access: /^\[(\d+)\]/,
+        sign: /^[+-]/
+    }
+
+    function sprintf(key) {
+        // `arguments` is not an array, but should be fine for this call
+        return sprintf_format(sprintf_parse(key), arguments)
+    }
+
+    function vsprintf(fmt, argv) {
+        return sprintf.apply(null, [fmt].concat(argv || []))
+    }
+
+    function sprintf_format(parse_tree, argv) {
+        var cursor = 1, tree_length = parse_tree.length, arg, output = '', i, k, ph, pad, pad_character, pad_length, is_positive, sign
+        for (i = 0; i < tree_length; i++) {
+            if (typeof parse_tree[i] === 'string') {
+                output += parse_tree[i]
+            }
+            else if (typeof parse_tree[i] === 'object') {
+                ph = parse_tree[i] // convenience purposes only
+                if (ph.keys) { // keyword argument
+                    arg = argv[cursor]
+                    for (k = 0; k < ph.keys.length; k++) {
+                        if (arg == undefined) {
+                            throw new Error(sprintf('[sprintf] Cannot access property "%s" of undefined value "%s"', ph.keys[k], ph.keys[k-1]))
+                        }
+                        arg = arg[ph.keys[k]]
+                    }
+                }
+                else if (ph.param_no) { // positional argument (explicit)
+                    arg = argv[ph.param_no]
+                }
+                else { // positional argument (implicit)
+                    arg = argv[cursor++]
+                }
+
+                if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
+                    arg = arg()
+                }
+
+                if (re.numeric_arg.test(ph.type) && (typeof arg !== 'number' && isNaN(arg))) {
+                    throw new TypeError(sprintf('[sprintf] expecting number but found %T', arg))
+                }
+
+                if (re.number.test(ph.type)) {
+                    is_positive = arg >= 0
+                }
+
+                switch (ph.type) {
+                    case 'b':
+                        arg = parseInt(arg, 10).toString(2)
+                        break
+                    case 'c':
+                        arg = String.fromCharCode(parseInt(arg, 10))
+                        break
+                    case 'd':
+                    case 'i':
+                        arg = parseInt(arg, 10)
+                        break
+                    case 'j':
+                        arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width) : 0)
+                        break
+                    case 'e':
+                        arg = ph.precision ? parseFloat(arg).toExponential(ph.precision) : parseFloat(arg).toExponential()
+                        break
+                    case 'f':
+                        arg = ph.precision ? parseFloat(arg).toFixed(ph.precision) : parseFloat(arg)
+                        break
+                    case 'g':
+                        arg = ph.precision ? String(Number(arg.toPrecision(ph.precision))) : parseFloat(arg)
+                        break
+                    case 'o':
+                        arg = (parseInt(arg, 10) >>> 0).toString(8)
+                        break
+                    case 's':
+                        arg = String(arg)
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 't':
+                        arg = String(!!arg)
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 'T':
+                        arg = Object.prototype.toString.call(arg).slice(8, -1).toLowerCase()
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 'u':
+                        arg = parseInt(arg, 10) >>> 0
+                        break
+                    case 'v':
+                        arg = arg.valueOf()
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg)
+                        break
+                    case 'x':
+                        arg = (parseInt(arg, 10) >>> 0).toString(16)
+                        break
+                    case 'X':
+                        arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase()
+                        break
+                }
+                if (re.json.test(ph.type)) {
+                    output += arg
+                }
+                else {
+                    if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
+                        sign = is_positive ? '+' : '-'
+                        arg = arg.toString().replace(re.sign, '')
+                    }
+                    else {
+                        sign = ''
+                    }
+                    pad_character = ph.pad_char ? ph.pad_char === '0' ? '0' : ph.pad_char.charAt(1) : ' '
+                    pad_length = ph.width - (sign + arg).length
+                    pad = ph.width ? (pad_length > 0 ? pad_character.repeat(pad_length) : '') : ''
+                    output += ph.align ? sign + arg + pad : (pad_character === '0' ? sign + pad + arg : pad + sign + arg)
+                }
+            }
+        }
+        return output
+    }
+
+    var sprintf_cache = Object.create(null)
+
+    function sprintf_parse(fmt) {
+        if (sprintf_cache[fmt]) {
+            return sprintf_cache[fmt]
+        }
+
+        var _fmt = fmt, match, parse_tree = [], arg_names = 0
+        while (_fmt) {
+            if ((match = re.text.exec(_fmt)) !== null) {
+                parse_tree.push(match[0])
+            }
+            else if ((match = re.modulo.exec(_fmt)) !== null) {
+                parse_tree.push('%')
+            }
+            else if ((match = re.placeholder.exec(_fmt)) !== null) {
+                if (match[2]) {
+                    arg_names |= 1
+                    var field_list = [], replacement_field = match[2], field_match = []
+                    if ((field_match = re.key.exec(replacement_field)) !== null) {
+                        field_list.push(field_match[1])
+                        while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
+                            if ((field_match = re.key_access.exec(replacement_field)) !== null) {
+                                field_list.push(field_match[1])
+                            }
+                            else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
+                                field_list.push(field_match[1])
+                            }
+                            else {
+                                throw new SyntaxError('[sprintf] failed to parse named argument key')
+                            }
+                        }
+                    }
+                    else {
+                        throw new SyntaxError('[sprintf] failed to parse named argument key')
+                    }
+                    match[2] = field_list
+                }
+                else {
+                    arg_names |= 2
+                }
+                if (arg_names === 3) {
+                    throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported')
+                }
+
+                parse_tree.push(
+                    {
+                        placeholder: match[0],
+                        param_no:    match[1],
+                        keys:        match[2],
+                        sign:        match[3],
+                        pad_char:    match[4],
+                        align:       match[5],
+                        width:       match[6],
+                        precision:   match[7],
+                        type:        match[8]
+                    }
+                )
+            }
+            else {
+                throw new SyntaxError('[sprintf] unexpected placeholder')
+            }
+            _fmt = _fmt.substring(match[0].length)
+        }
+        return sprintf_cache[fmt] = parse_tree
+    }
+
+    /**
+     * export to either browser or node.js
+     */
+    /* eslint-disable quote-props */
+    if (true) {
+        exports.sprintf = sprintf
+        exports.vsprintf = vsprintf
+    }
+    if (typeof window !== 'undefined') {
+        window['sprintf'] = sprintf
+        window['vsprintf'] = vsprintf
+
+        if (true) {
+            !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+                return {
+                    'sprintf': sprintf,
+                    'vsprintf': vsprintf
+                }
+            }).call(exports, __webpack_require__, exports, module),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+        }
+    }
+    /* eslint-enable quote-props */
+}(); // eslint-disable-line
+
 
 /***/ })
 
@@ -1514,6 +1783,18 @@ function h12(hour24) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -1544,8 +1825,9 @@ function h12(hour24) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 !function() {
+"use strict";
 /*!*******************************!*\
   !*** ./src/js/cordova-app.js ***!
   \*******************************/
