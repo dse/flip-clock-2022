@@ -11,121 +11,121 @@ const maxYear = Math.floor(new Date().getFullYear() / 10) * 10 + 19;
 // 2039 => 2049
 
 const FORMATS = {
-    'YY': {
+    'YY': {                     // 00..99
         min: 0,
         max: 99,
         dateToValueFn: d => d.getFullYear() % 100,
         printfFormat: '%02d',
     },
-    'YYYY': {
+    'YYYY': {                   // 1970..
         min: 1970,
         max: maxYear,
         dateToValueFn: d => d.getFullYear(),
         printfFormat: '%04d',
     },
-    'M': {
+    'M': {                      // 1..12
         min: 0,
         max: 11,
         dateToValueFn: d => d.getMonth(),
         strings: monthStrings('M'),
     },
-    'MM': {
+    'MM': {                     // 01..12
         min: 0,
         max: 11,
         dateToValueFn: d => d.getMonth(),
         strings: monthStrings('MM'),
     },
-    'MMM': {
+    'MMM': {                    // Jan..
         min: 0,
         max: 11,
         dateToValueFn: d => d.getMonth(),
         strings: monthStrings('MMM'),
     },
-    'MMMM': {
+    'MMMM': {                   // January...
         min: 0,
         max: 11,
         dateToValueFn: d => d.getMonth(),
         strings: monthStrings('MMMM'),
     },
-    'D': {
+    'D': {                      // 1..31
         min: 1,
         max: 31,
         dateToValueFn: d => d.getDate(),
         printfFormat: '%d',
     },
-    'DD': {
+    'DD': {                     // 01..31
         min: 1,
         max: 31,
         dateToValueFn: d => d.getDate(),
         printfFormat: '%02d',
     },
-    'd': {
+    'd': {                      // 0..6
         min: 0,
         max: 6,
         dateToValueFn: d => d.getDay(),
         strings: dayStrings('d'),
     },
-    'dd': {
+    'dd': {                     // Su..Sa
         min: 0,
         max: 6,
         dateToValueFn: d => d.getDay(),
         strings: dayStrings('dd'),
     },
-    'ddd': {
+    'ddd': {                    // Sun..Sat
         min: 0,
         max: 6,
         dateToValueFn: d => d.getDay(),
         strings: dayStrings('ddd'),
     },
-    'dddd': {
+    'dddd': {                   // Sunday..Saturday
         min: 0,
         max: 6,
         dateToValueFn: d => d.getDay(),
         strings: dayStrings('dddd'),
     },
-    'H': {
+    'H': {                      // 0..23
         min: 0,
         max: 23,
         dateToValueFn: d => d.getHours(),
         printfFormat: '%d',
     },
-    'HH': {
+    'HH': {                     // 00..23
         min: 0,
         max: 23,
         dateToValueFn: d => d.getHours(),
         printfFormat: '%02d',
     },
-    'h': {
+    'h': {                      // 1..12
         min: 0,
         max: 23,
         dateToValueFn: d => d.getHours(),
         printfFormat: '%d',
     },
-    'hh': {
+    'hh': {                     // 01..12
         min: 0,
         max: 23,
         dateToValueFn: d => d.getHours(),
         printfFormat: '%02d',
     },
-    'm': {
+    'm': {                      // 0..59
         min: 0,
         max: 59,
         dateToValueFn: d => d.getMinutes(),
         printfFormat: '%d',
     },
-    'mm': {
+    'mm': {                     // 00..59
         min: 0,
         max: 59,
         dateToValueFn: d => d.getMinutes(),
         printfFormat: '%02d',
     },
-    's': {
+    's': {                      // 0..59
         min: 0,
         max: 59,
         dateToValueFn: d => d.getSeconds(),
         printfFormat: '%d',
     },
-    'ss': {
+    'ss': {                     // 00..59
         min: 0,
         max: 59,
         dateToValueFn: d => d.getSeconds(),
