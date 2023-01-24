@@ -15,6 +15,8 @@
 }
 .font--noto-sans {
     --font-size-x-for-font: 0.90;
+    --font-line-height-adjust: 0.1;
+    --font-line-height-bump: -0.05;
     body { font-family: 'Noto Sans', sans-serif; }
 }
 .font--times {
