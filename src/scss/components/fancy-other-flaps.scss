@@ -3,29 +3,29 @@
 }
 .clock--fancy--other-flaps {
     --view-master-vertical-padding: 2;
-    .clock__view-master {
+    .clock__view-master:not(.clock__view-master--plain) {
         padding-top:    calc(var(--view-master-vertical-padding, 1rem) * var(--vw) * var(--padding-x-no-seconds, 1));
         padding-bottom: calc(var(--view-master-vertical-padding, 1rem) * var(--vw) * var(--padding-x-no-seconds, 1));
-    }
-    .clock__flap--other-flap {
-        display: block;
-        &::before {
-            // backing layer
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: black;
-            border-radius: calc(var(--split-flap-border-radius) * var(--vw) * var(--padding-x-no-seconds, 1));
+        .clock__flap--other-flap {
+            display: block;
+            &::before {
+                // backing layer
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: black;
+                border-radius: calc(var(--split-flap-border-radius) * var(--vw) * var(--padding-x-no-seconds, 1));
+            }
         }
+        .clock__flap--other-flap--top--1    { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.75)); }
+        .clock__flap--other-flap--top--2    { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.40)); }
+        .clock__flap--other-flap--bottom--1 { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) *  0.75)); }
+        .clock__flap--other-flap--bottom--2 { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) *  0.40)); }
+        .clock__flap--other-flap--top--1    { opacity: 0.40; }
+        .clock__flap--other-flap--top--2    { opacity: 0.75; }
+        .clock__flap--other-flap--bottom--1 { opacity: 0.40; }
+        .clock__flap--other-flap--bottom--2 { opacity: 0.75; }
     }
-    .clock__flap--other-flap--top--1    { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.75)); }
-    .clock__flap--other-flap--top--2    { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.40)); }
-    .clock__flap--other-flap--bottom--1 { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) *  0.75)); }
-    .clock__flap--other-flap--bottom--2 { transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) *  0.40)); }
-    .clock__flap--other-flap--top--1    { opacity: 0.40; }
-    .clock__flap--other-flap--top--2    { opacity: 0.75; }
-    .clock__flap--other-flap--bottom--1 { opacity: 0.40; }
-    .clock__flap--other-flap--bottom--2 { opacity: 0.75; }
 }
