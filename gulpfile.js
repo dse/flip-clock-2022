@@ -51,7 +51,10 @@ function bsEndTask(cb) {
 }
 
 function sassTask() {
-    return gulp.src(['src/scss/*.scss'], { base: 'src/scss', sourcemaps: true })
+    const globs = ['src/scss/*.scss', '!**/_*.scss'];
+    const options = { base: 'src/scss', sourcemaps: true };
+    console.warn(`Compiling ${globs} ...`);
+    return gulp.src(globs, options)
         .on('error', errorHandler('gulp.src'))
         .pipe(sass())
         .on('error', errorHandler('sass'))
@@ -98,11 +101,15 @@ const gulpWatchOptions = {
 };
 
 function watchSassTask() {
-    return gulp.watch(['src/scss/**/*.scss'], gulpWatchOptions, server ? bsSassTask : sassTask);
+    const globs = ['src/scss/**/*.scss'];
+    console.warn(`Watching ${globs} ...`);
+    return gulp.watch(globs, gulpWatchOptions, server ? bsSassTask : sassTask);
 }
 
 function watchWebpackTask() {
-    return gulp.watch(['src/js/**/*.js'], gulpWatchOptions, server ? bsWebpackTask : webpackTask);
+    const globs = ['src/js/**/*.js'];
+    console.warn(`Watching ${globs} ...`);
+    return gulp.watch(globs, gulpWatchOptions, server ? bsWebpackTask : webpackTask);
 }
 
 function browserSyncTask(cb) {
