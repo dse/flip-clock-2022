@@ -103,6 +103,32 @@ export default class SplitFlap {
         this.flapB = document.createElement('span');
         this.flapC = document.createElement('span');
         this.flapD = document.createElement('span');
+
+        this.otherFlaps = [];
+        this.otherFlaps.push(document.createElement('span'));
+        this.otherFlaps.push(document.createElement('span'));
+        this.otherFlaps.push(document.createElement('span'));
+        this.otherFlaps.push(document.createElement('span'));
+
+        let i = 0;
+        for (i = 0; i < this.otherFlaps.length / 2; i += 1) {
+            this.otherFlaps[i].classList.add('clock__flap',
+                                             'clock__top-flap',
+                                             'clock__flap--other-flap',
+                                             'clock__flap--other-flap--top',
+                                             'clock__flap--other-flap--top--' + String(i + 1));
+        }
+        for (let j = i; i < this.otherFlaps.length; i += 1) {
+            this.otherFlaps[i].classList.add('clock__flap',
+                                             'clock__bottom-flap',
+                                             'clock__flap--other-flap',
+                                             'clock__flap--other-flap--bottom',
+                                             'clock__flap--other-flap--bottom--' + String(i - j + 1));
+        }
+        for (const otherFlap of this.otherFlaps) {
+            this.element.appendChild(otherFlap);
+        }
+
         this.flapA.classList.add('clock__flap', 'clock__top-flap');
         this.flapB.classList.add('clock__flap', 'clock__bottom-flap');
         this.flapC.classList.add('clock__flap', 'clock__top-flap', 'clock__top-flap--temp');
