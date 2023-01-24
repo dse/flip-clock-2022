@@ -328,12 +328,23 @@ template {
   text-transform: uppercase;
 }
 
-:root {
+.html--clock-layout-1 {
   --vw: 1vw;
   --base-font-size: 20vw;
 }
 @media (min-aspect-ratio: 18/10) {
-  :root {
+  .html--clock-layout-1 {
+    --vw: 1.8vh;
+    --base-font-size: 36vh;
+  }
+}
+
+.html--clock-layout-2 {
+  --vw: 1vw;
+  --base-font-size: 20vw;
+}
+@media (min-aspect-ratio: 18/10) {
+  .html--clock-layout-2 {
     --vw: 1.8vh;
     --base-font-size: 36vh;
   }
@@ -600,26 +611,38 @@ body {
 /**
  * Typography
  */
-.clock__line {
+.html--clock-layout-1 .clock__line {
   --base-line-height: 1.0;
 }
-
-.clock__line--date {
-  --base-line-height: 1.2;
-  font-size: 25%;
+.html--clock-layout-1 .clock__line--date {
+  --base-line-height: 1.1;
+  font-size: 33.3333%;
 }
-
-.clock__line--calendar-month-year {
-  --base-line-height: 1.2;
-  font-size: 25%;
+.html--clock-layout-1 .clock__line--calendar-month-year {
+  --base-line-height: 1.1;
+  font-size: 33.3333%;
 }
-
-.clock__line--calendar-week {
+.html--clock-layout-1 .clock__line--calendar-week {
   --base-line-height: 1.2;
   font-size: 20%;
 }
 
-.clock__view-master--day {
+.html--clock-layout-2 .clock__line {
+  --base-line-height: 1.0;
+}
+.html--clock-layout-2 .clock__line--date {
+  --base-line-height: 1.2;
+  font-size: 25%;
+}
+.html--clock-layout-2 .clock__line--calendar-month-year {
+  --base-line-height: 1.2;
+  font-size: 25%;
+}
+.html--clock-layout-2 .clock__line--calendar-week {
+  --base-line-height: 1.2;
+  font-size: 20%;
+}
+.html--clock-layout-2 .clock__view-master--day {
   --base-line-height: 1.1;
   font-size: 200%;
   -webkit-box-flex: 0;
@@ -748,6 +771,8 @@ body {
 
 .font--noto-sans {
   --font-size-x-for-font: 0.90;
+  --font-line-height-adjust: 0.1;
+  --font-line-height-bump: -0.05;
 }
 .font--noto-sans body {
   font-family: "Noto Sans", sans-serif;
