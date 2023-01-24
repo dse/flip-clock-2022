@@ -1,4 +1,12 @@
-:root {
+.html--clock-layout-1 {
+    --vw: 1vw;
+    --base-font-size: 20vw;
+    @media (min-aspect-ratio: 18/10) {
+        --vw: 1.8vh;
+        --base-font-size: 36vh;
+    }
+}
+.html--clock-layout-2 {
     --vw: 1vw;
     --base-font-size: 20vw;
     @media (min-aspect-ratio: 18/10) {
@@ -196,25 +204,44 @@ body {
 /**
  * Typography
  */
-.clock__line {
-    --base-line-height: 1.0;
+.html--clock-layout-1 {
+    .clock__line {
+        --base-line-height: 1.0;
+    }
+    .clock__line--date {
+        --base-line-height: 1.1;
+        font-size: 33.3333%;
+    }
+     .clock__line--calendar-month-year {
+        --base-line-height: 1.1;
+        font-size: 33.3333%;
+    }
+    .clock__line--calendar-week {
+        --base-line-height: 1.2;
+        font-size: 20%;
+    }
 }
-.clock__line--date {
-    --base-line-height: 1.2;
-    font-size: 25%;
-}
-.clock__line--calendar-month-year {
-    --base-line-height: 1.2;
-    font-size: 25%;
-}
-.clock__line--calendar-week {
-    --base-line-height: 1.2;
-    font-size: 20%;
- }
-.clock__view-master--day {
-    --base-line-height: 1.1;
-    font-size: 200%;
-    flex: 0 0 1.5em;
+.html--clock-layout-2 {
+    .clock__line {
+        --base-line-height: 1.0;
+    }
+    .clock__line--date {
+        --base-line-height: 1.2;
+        font-size: 25%;
+    }
+    .clock__line--calendar-month-year {
+        --base-line-height: 1.2;
+        font-size: 25%;
+    }
+    .clock__line--calendar-week {
+        --base-line-height: 1.2;
+        font-size: 20%;
+    }
+    .clock__view-master--day {
+        --base-line-height: 1.1;
+        font-size: 200%;
+        flex: 0 0 1.5em;
+    }
 }
 .clock__view-master {
     line-height: calc(var(--base-line-height, 1.2) +
