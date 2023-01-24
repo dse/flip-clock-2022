@@ -1080,4 +1080,60 @@ html.cordova body {
   -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
   -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
 }
+
+.clock__flap--other-flap {
+  display: none;
+}
+
+.clock--fancy--other-flaps {
+  --view-master-vertical-padding: 2;
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) {
+  padding-top: calc(var(--view-master-vertical-padding, 1rem) * var(--vw) * var(--padding-x-no-seconds, 1));
+  padding-bottom: calc(var(--view-master-vertical-padding, 1rem) * var(--vw) * var(--padding-x-no-seconds, 1));
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap {
+  display: block;
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  border-radius: calc(var(--split-flap-border-radius) * var(--vw) * var(--padding-x-no-seconds, 1));
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--top--1 {
+  -webkit-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.75));
+      -ms-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.75));
+          transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.75));
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--top--2 {
+  -webkit-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.4));
+      -ms-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.4));
+          transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * -0.4));
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--bottom--1 {
+  -webkit-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * 0.75));
+      -ms-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * 0.75));
+          transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * 0.75));
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--bottom--2 {
+  -webkit-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * 0.4));
+      -ms-transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * 0.4));
+          transform: translateY(calc(var(--view-master-vertical-padding) * var(--vw) * var(--padding-x-no-seconds, 1) * 0.4));
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--top--1 {
+  opacity: 0.4;
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--top--2 {
+  opacity: 0.75;
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--bottom--1 {
+  opacity: 0.4;
+}
+.clock--fancy--other-flaps .clock__view-master:not(.clock__view-master--plain) .clock__flap--other-flap--bottom--2 {
+  opacity: 0.75;
+}
 /*# sourceMappingURL=main.css.map */
